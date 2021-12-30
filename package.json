@@ -12,6 +12,7 @@
     "dev:start": "node --require dotenv/config ./node_modules/@remix-run/dev/cli.js"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.2",
     "@remix-run/react": "^1.1.1",
     "@remix-run/serve": "^1.1.1",
     "@remix-run/vercel": "^1.1.1",

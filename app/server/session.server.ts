@@ -34,3 +34,17 @@ export async function requireUser(request: Request) {
     throw redirect("/", { status: 401 });
   }
 }
+
+export async function getUserInfo(request: Request) {
+  try {
+    const user = await makeApiRequest<User>(request, "/v1/users", "get");
+
+    if (!user) {
+      return null;
+    }
+
+    return user;
+  } catch (err) {
+    return null;
+  }
+}
