@@ -12,7 +12,12 @@ import type { MetaFunction } from "remix";
 import styles from "./tailwind.css";
 
 export const meta: MetaFunction = () => {
-  return { title: "New Remix App" };
+  return {
+    title: "Payload",
+    description:
+      "TF2-oriented Discord bot that brings services like logs.tf or the fun pushcart leaderboard directly in your Discord server.",
+    "theme-color": "#0074D9",
+  };
 };
 
 export const links: LinksFunction = () => {
