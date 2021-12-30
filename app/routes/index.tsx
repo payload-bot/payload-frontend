@@ -1,5 +1,5 @@
 import { LoaderFunction, useLoaderData } from "remix";
-import Header from "~/components/Header";
+import LandingHeader from "~/components/LandingHeader";
 import { getUserInfo } from "~/server/session.server";
 import { User } from "~/utils/contracts";
 
@@ -14,9 +14,9 @@ export default function Index() {
 
   return (
     <>
-      <Header user={user} />
+      <LandingHeader user={user} />
       <main className="flex flex-col gap-7 items-center justify-center md:max-w-2xl max-w-md mx-auto my-10 text-center px-2">
-        <h1 className="text-2xl sm:text-3xl md:text-5xl text-gray-700 font-bold">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl text-gray-700 font-bold">
           TF2 Integration with <span className="text-sky-500">Payload</span>
         </h1>
         <p className="text-md md:text-lg text-gray-500">
