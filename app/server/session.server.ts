@@ -1,4 +1,6 @@
-import { createCookieSessionStorage } from "remix";
+import { createCookieSessionStorage, redirect } from "remix";
+import { makeApiRequest } from "~/utils/api";
+import { User } from "~/utils/contracts";
 
 const sessionSecret = process.env.SESSION_SECRET;
 
@@ -19,6 +21,16 @@ export let { getSession, commitSession, destroySession } =
     },
   });
 
-export async function getUserSession(request: Request) {
-  return await getSession(request.headers.get("Cookie"));
+export async function requireUser(request: Request) {
+  try {
+    const user = await makeApiRequest<User>(request, "/v1/users", "get");
+
+    if (!user) {
+      throw redirect("/", { status: 401 });
+    }
+
+    return user;
+  } catch (err) {
+    throw redirect("/", { status: 401 });
+  }
 }
