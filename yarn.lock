@@ -366,7 +366,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^17.0.9":
+"@types/react-dom@npm:^17.0.11":
   version: 17.0.11
   resolution: "@types/react-dom@npm:17.0.11"
   dependencies:
@@ -375,7 +375,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^17.0.24":
+"@types/react@npm:*, @types/react@npm:^17.0.38":
   version: 17.0.38
   resolution: "@types/react@npm:17.0.38"
   dependencies:
@@ -3813,12 +3813,12 @@ __metadata:
     "@remix-run/react": ^1.1.1
     "@remix-run/serve": ^1.1.1
     "@remix-run/vercel": ^1.1.1
-    "@types/react": ^17.0.24
-    "@types/react-dom": ^17.0.9
+    "@types/react": ^17.0.38
+    "@types/react-dom": ^17.0.11
     react: ^17.0.2
     react-dom: ^17.0.2
     remix: ^1.1.1
-    typescript: ^4.1.2
+    typescript: ^4.5.4
   languageName: unknown
   linkType: soft
 
@@ -4298,7 +4298,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.1.2":
+"typescript@npm:^4.5.4":
   version: 4.5.4
   resolution: "typescript@npm:4.5.4"
   bin:
@@ -4308,7 +4308,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.1.2#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.5.4#~builtin<compat/typescript>":
   version: 4.5.4
   resolution: "typescript@patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"
   bin:
