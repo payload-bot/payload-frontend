@@ -27,13 +27,13 @@ export default function Index() {
           <a
             href="#"
             target="_blank"
-            className="w-full md:w-max md:px-10 py-2 text-lg shadow-md bg-sky-400 hover:bg-sky-500 rounded-md text-gray-700 font-semibold"
+            className="w-full md:w-max md:px-10 py-2 text-lg shadow-md shadow-sky-400/40 bg-sky-400 hover:bg-sky-500 rounded-md text-gray-700 font-semibold transition duration-75"
           >
             Invite Payload
           </a>
           <a
             href="#features"
-            className="w-full md:w-max md:px-10 py-2 text-lg shadow-md border border-gray-400 rounded-md font-semibold text-gray-700 hover:bg-gray-100"
+            className="w-full md:w-max md:px-10 py-2 text-lg shadow-md border border-gray-400 rounded-md font-semibold text-gray-700 hover:bg-gray-100 transition duration-75"
           >
             Features
           </a>
@@ -57,7 +57,7 @@ export default function Index() {
           <img
             src="/features/feature-image-1.svg"
             alt="pushcart leaderboard featurette"
-            className="md:max-h-72 rounded-lg shadow-2xl shadow-gray-500"
+            className="md:max-h-72 rounded-lg shadow-2xl shadow-gray-500 m-2"
           />
         </div>
       </section>
