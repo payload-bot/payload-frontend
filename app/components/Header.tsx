@@ -16,14 +16,14 @@ export default function Header({ user }: HeaderProps) {
           <a
             href="/"
             target="_blank"
-            className="text-gray-500 hover:text-gray-800 transition duration-100 font-medium p-2"
+            className="text-gray-500 hover:text-gray-800 transition duration-100 font-medium p-2 hidden md:block"
           >
             Discord
           </a>
           <a
             href="/"
             target="_blank"
-            className="text-gray-500 hover:text-gray-800 transition duration-100 font-medium p-2"
+            className="text-gray-500 hover:text-gray-800 transition duration-100 font-medium p-2 hidden md:block"
           >
             Github
           </a>
