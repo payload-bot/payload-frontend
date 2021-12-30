@@ -15,7 +15,7 @@ export default function Index() {
   return (
     <>
       <Header user={user} />
-      <main className="flex flex-col gap-4 items-center justify-center md:max-w-2xl max-w-md mx-auto my-10 text-center px-2">
+      <main className="flex flex-col gap-7 items-center justify-center md:max-w-2xl max-w-md mx-auto my-10 text-center px-2">
         <h1 className="text-5xl text-gray-700 font-bold">
           TF2 Integration with <span className="text-sky-500">Payload</span>
         </h1>
@@ -24,11 +24,25 @@ export default function Index() {
           TF2 services, including logs.tf, ETF2L, and more!
         </p>
         <section className="flex flex-row gap-5">
-          <button className="px-6 py-2 shadow-md  bg-sky-400 hover:bg-sky-500 rounded-md text-gray-700 font-semibold">Invite Payload</button>
-          <button className="px-6 py-2 shadow-md border border-gray-400 rounded-md font-semibold text-gray-700 hover:bg-gray-100">Features</button>
+          <a
+            href="#"
+            target="_blank"
+            className="px-10 py-2 text-lg shadow-md  bg-sky-400 hover:bg-sky-500 rounded-md text-gray-700 font-semibold"
+          >
+            Invite Payload
+          </a>
+          <a
+            href="#features"
+            className="px-10 py-2 text-lg shadow-md border border-gray-400 rounded-md font-semibold text-gray-700 hover:bg-gray-100"
+          >
+            Features
+          </a>
         </section>
 
-        <section></section>
+        <section id="features">
+          <div className="feature-one">Feature 1</div>
+          <div className="feature-two">Feature 2</div>
+        </section>
       </main>
       {/* <Footer /> */}
     </>
