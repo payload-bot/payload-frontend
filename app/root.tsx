@@ -53,16 +53,12 @@ export function ErrorBoundary({ error }: { error: Error }) {
         <Meta />
         <Links />
       </head>
-      <body className="bg-gray-100 flex flex-col space-y-4 items-center justify-center h-screen">
-        <p className="text-red-500 font-semibold text-2xl">
-          Something went horribly wrong while serving your request.
+      <body className="bg-red-100 flex flex-col gap-2 items-center justify-center h-screen">
+        <p className="text-red-500 font-semibold text-4xl">Yikes...</p>
+        <p className="text-red-500 font-normal text-xl">
+          Something went horribly wrong while serving your request. Please
+          refresh the page.
         </p>
-        <Link
-          className="py-1 px-2 rounded-xl shadow-gray-500 shadow-md bg-gray-400 text-gray-600"
-          to="/"
-        >
-          Go back to Safety
-        </Link>
         <Scripts />
       </body>
     </html>
