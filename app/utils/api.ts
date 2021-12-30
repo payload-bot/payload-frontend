@@ -1,3 +1,5 @@
+import { ApiError } from "./errors";
+
 const BASE_URL = process.env.BASE_API_URL ?? "http://localhost:8080/api";
 
 export async function makeApiRequest<T>(
@@ -15,8 +17,14 @@ export async function makeApiRequest<T>(
   });
 
   if (!response.ok) {
-    throw new Error(await response.json());
+    throw new ApiError(await response.json());
   }
 
   return (await response.json()) as T;
 }
+
+export type ApiErrorResponse = {
+  statusCode: number;
+  message: string;
+  error: string;
+};
