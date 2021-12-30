@@ -16,10 +16,10 @@ export default function Index() {
     <>
       <Header user={user} />
       <main className="flex flex-col gap-7 items-center justify-center md:max-w-2xl max-w-md mx-auto my-10 text-center px-2">
-        <h1 className="text-5xl text-gray-700 font-bold">
+        <h1 className="text-2xl sm:text-3xl md:text-5xl text-gray-700 font-bold">
           TF2 Integration with <span className="text-sky-500">Payload</span>
         </h1>
-        <p className="text-lg text-gray-500">
+        <p className="text-md md:text-lg text-gray-500">
           Enjoy built-in utilities and features to integrate your Discord with
           TF2 services, including logs.tf, ETF2L, and more!
         </p>
