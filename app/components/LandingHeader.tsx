@@ -32,6 +32,7 @@ export default function LandingHeader({ user }: LandingHeaderProps) {
           {user ? (
             <Link
               to="/dashboard"
+              prefetch="intent"
               className="py-2 px-4 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-lg transition duration-75"
             >
               Go to Dashboard

@@ -9,7 +9,7 @@ export default function Header({ user }: HeaderProps) {
   return (
     <nav className="bg-sky-500 ">
       <div className="max-w-6xl mx-auto flex justify-between items-center py-1 px-2 h-[60px]">
-        <Link to="/" className="text-xl font-bold text-gray-800">
+        <Link to="/" prefetch="intent" className="text-xl font-bold text-gray-800">
           Payload
         </Link>
 
