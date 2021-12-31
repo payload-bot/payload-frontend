@@ -8,7 +8,9 @@ export const loader: LoaderFunction = async ({ request }) => {
     throw redirect("/dashboard");
   } else {
     throw redirect(
-      process.env.BASE_API_URL + "/api/auth" ?? "http://localhost:8080/api/auth"
+      process.env.BASE_API_URL
+        ? process.env.BASE_API_URL + "/api/auth"
+        : "http://localhost:8080/api/auth"
     );
   }
 };
