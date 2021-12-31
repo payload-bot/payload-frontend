@@ -17,7 +17,7 @@ export default function Header({ user }: HeaderProps) {
           <img
             src={user.avatar}
             alt={`${user.username}'s discord avatar`}
-            className="rounded-full border border-gray-500 w-[50px] h-[50px]"
+            className="rounded-full ring-4 ring-gray-500 ring-inset w-12 h-12"
           />
         </div>
       </div>
