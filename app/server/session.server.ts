@@ -1,5 +1,5 @@
 import { createCookieSessionStorage, redirect } from "remix";
-import { makeApiRequest } from "~/utils/api";
+import { makeApiRequest } from "~/utils/api.server";
 import { User } from "~/utils/contracts";
 
 const sessionSecret = process.env.SESSION_SECRET;

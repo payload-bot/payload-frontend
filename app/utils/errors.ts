@@ -1,4 +1,4 @@
-import { ApiErrorResponse } from "./api";
+import { ApiErrorResponse } from "./api.server";
 
 export class ApiError extends Error {
   public json: ApiErrorResponse;

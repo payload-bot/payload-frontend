@@ -1,18 +1,11 @@
-import { LoaderFunction, useLoaderData } from "remix";
-import { requireUser } from "~/server/session.server";
+import * as React from "react";
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const user = await requireUser(request);
-
-  return { message: "you're logged in 😎", data: user };
-};
-
-export default function Index() {
-  const data = useLoaderData<{ message: string; data?: any }>();
+export default function User() {
   return (
     <div>
-      <p>{data.message}</p>
-      <p>{JSON.stringify(data.data)}</p>
+      <form action="/logout" method="post">
+        <button>logout</button>
+      </form>
     </div>
   );
 }
