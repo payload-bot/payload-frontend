@@ -1,4 +1,5 @@
 import {
+  Link,
   Links,
   LinksFunction,
   LiveReload,
@@ -6,7 +7,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  Link,
+  useCatch,
 } from "remix";
 import type { MetaFunction } from "remix";
 import styles from "./tailwind.css";
@@ -79,6 +80,39 @@ export function ErrorBoundary({ error }: { error: Error }) {
         <p className="text-red-500 font-normal text-xl">
           Something went horribly wrong while serving your request. Please
           refresh the page.
+        </p>
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
+export function CatchBoundary() {
+  const caught = useCatch();
+
+  return (
+    <html>
+      <head>
+        <title>
+          {caught.status} | {caught.statusText}
+        </title>
+        <Meta />
+        <Links />
+      </head>
+      <body className="bg-gray-50 flex flex-col gap-4 items-center justify-center h-screen">
+        <p className="text-gray-700 font-semibold text-4xl">
+          {caught.status} <span className="divide-x divide-gray-500"></span>{" "}
+          {caught.statusText}
+        </p>
+        <p className="text-gray-500 font-normal text-xl">
+          Something's off.{" "}
+          <Link
+            to="/"
+            prefetch="intent"
+            className="underline decoration-2 decoration-gray-500 hover:text-gray-600"
+          >
+            Bring me back to safety
+          </Link>
         </p>
         <Scripts />
       </body>
