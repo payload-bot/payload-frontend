@@ -12,8 +12,10 @@ export default function ServerAvatar({ icon, name }: ServerAvatarProps) {
       src={icon}
     />
   ) : (
-    <div className="rounded-full text-white bg-gray-500 h-10 w-10 shadow-md shadow-gray-300 ring-inset flex items-center justify-center">
-      {getServerAvatarNoSrc(name)}
+    <div className="flex sm:flex-1">
+      <div className="rounded-full text-white bg-gray-500 h-10 w-10 shadow-md shadow-gray-300 ring-inset flex items-center justify-center">
+        {getServerAvatarNoSrc(name)}
+      </div>
     </div>
   );
 }
