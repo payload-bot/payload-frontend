@@ -10,7 +10,7 @@ type SelectServerProps = {
 export default function SelectServer({ server }: SelectServerProps) {
   return (
     <div className="p-2 hover:bg-gray-100 rounded-lg flex items-center gap-2 justify-between">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 w-3/4">
         <ServerAvatar icon={server.icon} name={server.name} />
         <p className="text-gray-600 font-medium truncate w-1/2 sm:w-full">
           {server.name}
