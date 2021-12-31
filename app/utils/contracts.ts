@@ -13,3 +13,13 @@ export enum Role {
   Admin = "admin",
   BetaTester = "betatester",
 }
+
+export interface ServerList {
+  isPayloadIn: boolean;
+  owner: boolean;
+  id: string;
+  name: string;
+  permissions: string;
+  icon: string;
+  features: string[];
+}

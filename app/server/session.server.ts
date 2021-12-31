@@ -26,12 +26,12 @@ export async function requireUser(request: Request) {
     const user = await makeApiRequest<User>(request, "/v1/users", "get");
 
     if (!user) {
-      throw redirect("/", { status: 401 });
+      throw redirect("/");
     }
 
     return user;
   } catch (err) {
-    throw redirect("/", { status: 401 });
+    throw redirect("/");
   }
 }
 
