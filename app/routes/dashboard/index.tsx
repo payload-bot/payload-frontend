@@ -13,7 +13,7 @@ export default function Index() {
   const guilds = useLoaderData<ServerList[]>();
 
   return (
-    <div className="mt-5">
+    <div className="mt-3 py-4 pb-8">
       <h1 className="text-center font-bold text-lg md:text-2xl lg:text-3xl">
         Your Servers
       </h1>
