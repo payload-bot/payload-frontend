@@ -1,4 +1,5 @@
 import { LoaderFunction, useLoaderData } from "remix";
+import SelectServer from "~/components/SelectServer";
 import { makeApiRequest } from "~/utils/api.server";
 import { ServerList } from "~/utils/contracts";
 
@@ -12,8 +13,15 @@ export default function Index() {
   const guilds = useLoaderData<ServerList[]>();
 
   return (
-    <div>
-      <p>You've got {guilds.length} guilds waiting to be managed</p>
+    <div className="mt-5">
+      <h1 className="text-center font-bold text-lg md:text-2xl lg:text-3xl">
+        Your Servers
+      </h1>
+      <main className="mt-4 flex flex-col gap-5 max-w-sm md:max-w-xl lg:max-w-4xl mx-auto">
+        {guilds.map((guild) => (
+          <SelectServer key={guild.id} server={guild} />
+        ))}
+      </main>
     </div>
   );
 }
