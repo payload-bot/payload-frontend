@@ -42,7 +42,7 @@ export default function Index() {
 
       <section
         id="features"
-        className="mt-[150px] mx-auto max-w-screen-lg py-2 px-4 flex flex-wrap flex-row md:flex-col gap-10"
+        className="mt-[150px] mx-auto max-w-screen-lg py-2 px-4 flex flex-wrap flex-row md:flex-col gap-36"
       >
         <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="flex flex-col gap-2">
