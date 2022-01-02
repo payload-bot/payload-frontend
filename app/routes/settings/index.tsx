@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ActionFunction, json, useActionData, useLoaderData } from "remix";
+import Alert from "~/components/Alert";
 import { badRequest } from "~/utils/httpHelpers";
 import { useUser } from "../settings";
 
@@ -16,7 +17,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   const steamId = form.get("steamId");
 
-  if (steamId) {
+  if (typeof steamId !== "string") {
     errors.steamId = "Please enter in a correct SteamID";
   }
 
@@ -33,6 +34,14 @@ export default function User() {
 
   return (
     <div className="mt-8 max-w-5xl mx-auto px-8">
+      <div className="my-4">
+        {actionData?.success ? (
+          <Alert type="success" message="Successfully saved user data" />
+        ) : actionData?.success === false ? (
+          <Alert type="failed" message="Failed to save user data" />
+        ) : null}
+      </div>
+
       <h1 className="font-bold text-gray-800 text-2xl">Profile Settings</h1>
 
       <hr className="divide-x-2 my-6 sm:my-4" />
