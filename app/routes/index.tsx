@@ -104,7 +104,7 @@ export default function Index() {
       />
       <img
         src="/blob-secondary.svg"
-        className="absolute -bottom-1/4 -left-1/2 -z-10 opacity-30 h-full"
+        className="absolute -bottom-1/4 -left-1/4 sm:-left-3/4 -z-10 opacity-30 h-full"
       />
 
       {/* <Footer /> */}
