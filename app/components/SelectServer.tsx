@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronRightIcon } from "@heroicons/react/solid";
+import { ChevronRightIcon } from "@heroicons/react/outline";
 import { ServerList } from "~/utils/contracts";
 import ServerAvatar from "./ServerAvatar";
 
@@ -17,9 +17,9 @@ export default function SelectServer({ server }: SelectServerProps) {
         </p>
       </div>
       <ChevronRightIcon
-        height={50}
-        width={50}
-        className="p-1 rounded-full hover:bg-gray-300 dark:hover:bg-slate-700 cursor-pointer"
+        height={40}
+        width={40}
+        className="text-gray-400 dark:text-slate-200 p-1 rounded-full hover:bg-gray-300 dark:hover:bg-slate-500 cursor-pointer"
       />
     </div>
   );
