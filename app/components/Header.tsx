@@ -9,16 +9,35 @@ export default function Header({ user }: HeaderProps) {
   return (
     <nav className="bg-sky-500 ">
       <div className="max-w-6xl mx-auto flex justify-between items-center py-1 px-2 h-[60px]">
-        <Link to="/" prefetch="intent" className="text-xl font-bold text-gray-800">
+        <Link
+          to="/"
+          prefetch="intent"
+          className="text-xl font-bold text-slate-800"
+        >
           Payload
         </Link>
 
-        <div className="flex items-center gap-4">
-          <img
-            src={user.avatar}
-            alt={`${user.username}'s discord avatar`}
-            className="rounded-full ring-4 ring-gray-500 ring-inset w-12 h-12"
-          />
+        <div className="flex flex-row gap-2 items-center">
+          <Link
+            to="/dashboard"
+            className="text-slate-500 hover:text-slate-800 transition duration-100 font-medium p-2 hidden md:block"
+          >
+            Dashboard
+          </Link>
+          <Link
+            to="/settings"
+            className="text-slate-500 hover:text-slate-800 transition duration-100 font-medium p-2 hidden md:block"
+          >
+            Settings
+          </Link>
+
+          <div className="flex items-center gap-4">
+            <img
+              src={user.avatar}
+              alt={`${user.username}'s discord avatar`}
+              className="rounded-full ring-4 ring-gray-500 ring-inset w-12 h-12"
+            />
+          </div>
         </div>
       </div>
     </nav>
