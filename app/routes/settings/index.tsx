@@ -42,14 +42,18 @@ export default function User() {
         ) : null}
       </div>
 
-      <h1 className="font-bold text-gray-800 text-2xl">Profile Settings</h1>
+      <h1 className="font-bold text-gray-800 dark:text-white text-2xl">
+        Profile Settings
+      </h1>
 
       <hr className="divide-x-2 my-6 sm:my-4" />
 
       <div className="grid sm:grid-cols-2">
         <div className="space-y-4 sm:space-y-2 mb-4 sm:mb-0">
-          <h1 className="font-semibold text-gray-800 text-2xl">General</h1>
-          <p className="text-md text-gray-500 font-medium w-full sm:w-3/4">
+          <h1 className="font-semibold text-gray-800 text-2xl dark:text-slate-100">
+            General
+          </h1>
+          <p className="text-md text-gray-500 font-medium w-full sm:w-3/4 dark:text-slate-300">
             General account settings. Please note this information is public!
           </p>
         </div>
@@ -81,13 +85,15 @@ export default function User() {
       </div>
 
       <hr className="divide-x-2 my-6 sm:my-4" />
-      <h1 className="font-medium text-gray-800 text-2xl mb-2">Quick Actions</h1>
+      <h1 className="font-medium text-gray-800 dark:text-slate-100 text-2xl mb-2">
+        Quick Actions
+      </h1>
       <div className="flex flex-row-reverse sm:flex-row flex-wrap gap-2 sm:gap-4 w-full">
-        <button className="py-2 px-4 rounded-md w-full sm:w-max hover:bg-red-300 bg-red-200 border border-red-600 text-red-600 font-semibold transition duration-100">
+        <button className="py-2 px-4 rounded-md w-full sm:w-max hover:bg-red-300 dark:hover:bg-red-500/25 bg-red-200 dark:bg-red-500/20 border border-red-600 text-red-600 dark:text-red-500 font-semibold transition duration-100">
           Delete User Data
         </button>
         <form action="/logout" method="post" className="w-full sm:w-max">
-          <button className="py-2 px-4 rounded-md w-full sm:w-max hover:bg-red-100 bg-transparent border border-red-600 text-red-600 font-semibold transition duration-100">
+          <button className="py-2 px-4 rounded-md w-full sm:w-max hover:bg-red-100 dark:hover:bg-red-500/20 bg-transparent border border-red-600 text-red-600 dark:text-red-800 font-semibold transition duration-100">
             Logout
           </button>
         </form>

@@ -15,15 +15,15 @@ export default function Index() {
   return (
     <div className="mt-3 py-4 pb-8">
       {guilds.length > 0 ? (
-        <h1 className="text-gray-700 text-center font-bold text-lg md:text-2xl lg:text-3xl">
+        <h1 className="text-gray-700 dark:text-white text-center font-bold text-lg md:text-2xl lg:text-3xl">
           Your Servers
         </h1>
       ) : (
         <div className="w-full mx-auto max-w-lg text-lg space-y-2">
-          <h1 className="text-gray-700 text-center font-bold text-lg md:text-2xl lg:text-3xl">
+          <h1 className="text-gray-700 dark:text-white text-center font-bold text-lg md:text-2xl lg:text-3xl">
             No Servers
           </h1>
-          <p className="text-center text-gray-400">
+          <p className="text-center text-gray-400 dark:text-slate-200">
             You have no servers that you can manage. You should{" "}
             <a
               className="underline decoration-2 decoration-blue-500"

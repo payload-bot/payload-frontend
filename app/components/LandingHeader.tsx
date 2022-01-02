@@ -10,7 +10,7 @@ export default function LandingHeader({ user }: LandingHeaderProps) {
   return (
     <nav>
       <div className="max-w-6xl mx-auto flex justify-between items-center py-1 px-2 h-[60px]">
-        <Link to="/" className="text-xl font-bold text-gray-800">
+        <Link to="/" className="text-xl font-bold text-gray-800 dark:text-white">
           Payload
         </Link>
 
@@ -18,14 +18,14 @@ export default function LandingHeader({ user }: LandingHeaderProps) {
           <a
             href="/"
             target="_blank"
-            className="text-gray-500 hover:text-gray-800 transition duration-100 font-medium p-2 hidden md:block"
+            className="text-gray-500 hover:text-gray-800 dark:text-slate-300 dark:hover:text-slate-100 transition duration-100 font-medium p-2 hidden md:block"
           >
             Discord
           </a>
           <a
             href="/"
             target="_blank"
-            className="text-gray-500 hover:text-gray-800 transition duration-100 font-medium p-2 hidden md:block"
+            className="text-gray-500 hover:text-gray-800 dark:text-slate-300 dark:hover:text-slate-100 transition duration-100 font-medium p-2 hidden md:block"
           >
             Github
           </a>
