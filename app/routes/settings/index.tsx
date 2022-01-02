@@ -1,17 +1,35 @@
 import * as React from "react";
-import { ActionFunction, json, useLoaderData } from "remix";
+import { ActionFunction, json, useActionData, useLoaderData } from "remix";
+import { badRequest } from "~/utils/httpHelpers";
 import { useUser } from "../settings";
+
+type ActionErrors = {
+  steamId: string;
+};
+
+type ActionData = { success: boolean; errors: ActionErrors };
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
 
+  const errors = {} as ActionErrors;
+
   const steamId = form.get("steamId");
 
-  return { success: true, errors: {} };
+  if (steamId) {
+    errors.steamId = "Please enter in a correct SteamID";
+  }
+
+  if (Object.values(errors).some(Boolean)) {
+    return badRequest({ success: false, errors });
+  }
+
+  return json({ errors, success: true });
 };
 
 export default function User() {
   const user = useUser();
+  const actionData = useActionData<ActionData>();
 
   return (
     <div className="mt-8 max-w-5xl mx-auto px-8">
@@ -31,16 +49,22 @@ export default function User() {
           method="post"
           className="flex flex-col gap-2"
         >
-          <label htmlFor="steamId" className="text-gray-700 font-medium">
+          <label htmlFor="steamId-input" className="text-gray-700 font-medium">
             SteamID
           </label>
           <input
             className="rounded-lg focus:border-sky-500"
             type="text"
-            id="steamId"
+            name="steamId"
+            id="steamId-input"
             placeholder="Your SteamID"
             defaultValue={user.steamId ?? ""}
           />
+          {actionData?.errors?.steamId ? (
+            <p className="text-red-500 font-medium">
+              {actionData.errors.steamId}
+            </p>
+          ) : null}
           <button className="w-full mt-2 sm:mt-0 sm:w-max text-md sm:text-sm  py-2 px-4 rounded-md bg-sky-600 hover:bg-sky-700 border text-white border-sky-700 uppercase font-bold transition duration-150">
             Save
           </button>
