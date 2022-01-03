@@ -1,5 +1,11 @@
 import * as React from "react";
-import { ActionFunction, json, useActionData } from "remix";
+import {
+  ActionFunction,
+  Form,
+  json,
+  useActionData,
+  useTransition,
+} from "remix";
 import Alert from "~/components/Alert";
 import { makeApiRequest } from "~/utils/api.server";
 import { badRequest } from "~/utils/httpHelpers";
@@ -37,8 +43,11 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function User() {
-  const user = useUser();
+  const transition = useTransition();
   const actionData = useActionData<ActionData>();
+  const user = useUser();
+
+  const submitting = transition.state === "submitting";
 
   return (
     <div className="mt-8 max-w-5xl mx-auto px-8">
@@ -65,31 +74,35 @@ export default function User() {
             General account settings. Please note this information is public!
           </p>
         </div>
-        <form
-          action="settings?index"
-          method="post"
-          className="flex flex-col gap-2"
-        >
-          <label htmlFor="steamId-input" className="text-gray-700 dark:text-slate-300 font-medium">
+        <Form method="post" className="flex flex-col gap-2">
+          <label
+            htmlFor="steamId-input"
+            className="text-gray-700 dark:text-slate-300 font-medium"
+          >
             SteamID
           </label>
+
           <input
             className="rounded-lg focus:border-sky-500"
             type="text"
             name="steamId"
             id="steamId-input"
             placeholder="Your SteamID"
-            defaultValue={user.steamId ?? ""}
+            defaultValue={actionData?.errors?.steamId ? "" : user.steamId ?? ""}
           />
           {actionData?.errors?.steamId ? (
             <p className="text-red-500 font-medium">
               {actionData.errors.steamId}
             </p>
           ) : null}
-          <button className="w-full mt-2 sm:mt-0 sm:w-max text-md sm:text-sm  py-2 px-4 rounded-md bg-sky-600 hover:bg-sky-700 border text-white border-sky-700 uppercase font-bold transition duration-150">
+
+          <button
+            disabled={submitting}
+            className="w-full mt-2 sm:mt-0 sm:w-max text-md sm:text-sm py-2 px-4 rounded-md disabled:bg-sky-600/50 bg-sky-600 hover:bg-sky-700 border text-white disabled:text-white/50 border-sky-700 uppercase font-bold transition duration-150 disabled:cursor-not-allowed"
+          >
             Save
           </button>
-        </form>
+        </Form>
       </div>
 
       <hr className="divide-x-2 my-6 sm:my-4" />
