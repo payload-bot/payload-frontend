@@ -25,7 +25,7 @@ export default function Index() {
         </p>
         <section className="flex flex-col md:flex-row justify-center gap-3 md:gap-5 w-full">
           <a
-            href="#"
+            href="/invite"
             target="_blank"
             className="w-full md:w-max md:px-10 py-2 text-lg shadow-md shadow-sky-400/40 bg-sky-400 hover:bg-sky-500 rounded-md text-gray-700 font-semibold transition duration-75"
           >
