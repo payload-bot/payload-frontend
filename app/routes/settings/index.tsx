@@ -1,7 +1,9 @@
 import * as React from "react";
-import { ActionFunction, json, useActionData, useLoaderData } from "remix";
+import { ActionFunction, json, useActionData } from "remix";
 import Alert from "~/components/Alert";
+import { makeApiRequest } from "~/utils/api.server";
 import { badRequest } from "~/utils/httpHelpers";
+import { validateSteamId } from "~/utils/steamid.server";
 import { useUser } from "../settings";
 
 type ActionErrors = {
@@ -15,15 +17,23 @@ export const action: ActionFunction = async ({ request }) => {
 
   const errors = {} as ActionErrors;
 
-  const steamId = form.get("steamId");
+  const steamId = form.get("steamId") as string | null;
 
-  if (typeof steamId !== "string") {
+  const validatedId = validateSteamId(steamId);
+
+  if (!validatedId) {
     errors.steamId = "Please enter in a correct SteamID";
   }
 
   if (Object.values(errors).some(Boolean)) {
-    return badRequest({ success: false, errors });
+    return badRequest({ errors, success: false });
   }
+
+  console.log(validatedId);
+
+  const data = await makeApiRequest(request, "/v1/users", "patch", {
+    steamId: validatedId,
+  });
 
   return json({ errors, success: true });
 };
