@@ -70,7 +70,7 @@ export default function User() {
           method="post"
           className="flex flex-col gap-2"
         >
-          <label htmlFor="steamId-input" className="text-gray-700 font-medium">
+          <label htmlFor="steamId-input" className="text-gray-700 dark:text-slate-300 font-medium">
             SteamID
           </label>
           <input
