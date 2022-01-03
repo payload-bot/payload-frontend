@@ -4,16 +4,19 @@ export async function makeApiRequest<T>(
   request: Request,
   endpoint: string,
   method: Request["method"],
-  body?: any
+  body: any = null
 ) {
   const BASE_URL = process.env.BASE_API_URL ?? "http://localhost:8080/api";
 
+  body &&= JSON.stringify(body);
+
   const response = await fetch(BASE_URL + endpoint, {
     method,
+    body,
     headers: {
+      "Content-Type": "application/json",
       Cookie: request.headers.get("cookie") ?? "",
     },
-    body: body ? JSON.stringify(body) : undefined,
   });
 
   if (!response.ok) {
@@ -27,16 +30,19 @@ export async function makeApiRequestNoContent(
   request: Request,
   endpoint: string,
   method: Request["method"],
-  body?: any
+  body: any = null
 ): Promise<undefined> {
   const BASE_URL = process.env.BASE_API_URL ?? "http://localhost:8080/api";
 
+  body &&= JSON.stringify(body);
+
   const response = await fetch(BASE_URL + endpoint, {
     method,
+    body,
     headers: {
+      "Content-Type": "application/json",
       Cookie: request.headers.get("cookie") ?? "",
     },
-    body: body ? JSON.stringify(body) : undefined,
   });
 
   if (!response.ok) {
