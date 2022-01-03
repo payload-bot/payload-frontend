@@ -29,9 +29,7 @@ export const action: ActionFunction = async ({ request }) => {
     return badRequest({ errors, success: false });
   }
 
-  console.log(validatedId);
-
-  const data = await makeApiRequest(request, "/v1/users", "patch", {
+  await makeApiRequest(request, "/v1/users", "patch", {
     steamId: validatedId,
   });
 
