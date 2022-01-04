@@ -2,6 +2,7 @@ import React from "react";
 import { ChevronRightIcon } from "@heroicons/react/outline";
 import { ServerList } from "~/utils/contracts";
 import ServerAvatar from "./ServerAvatar";
+import { Link } from "remix";
 
 type SelectServerProps = {
   server: ServerList;
@@ -16,11 +17,13 @@ export default function SelectServer({ server }: SelectServerProps) {
           {server.name}
         </p>
       </div>
-      <ChevronRightIcon
-        height={40}
-        width={40}
-        className="text-gray-400 dark:text-slate-200 p-1 rounded-full hover:bg-gray-300 dark:hover:bg-slate-500 cursor-pointer"
-      />
+      <Link to={server.id}>
+        <ChevronRightIcon
+          height={40}
+          width={40}
+          className="text-gray-400 dark:text-slate-200 p-1 rounded-full hover:bg-gray-300 dark:hover:bg-slate-500 cursor-pointer"
+        />
+      </Link>
     </div>
   );
 }

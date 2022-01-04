@@ -23,3 +23,34 @@ export interface ServerList {
   icon: string;
   features: string[];
 }
+
+export interface Server {
+  name: string;
+  id: string;
+  icon: string | null;
+
+  botName: string;
+
+  enableSnipeForEveryone: boolean;
+  language: string;
+  prefix: string;
+  pushcartPoints: number;
+
+  webhook: Webhook;
+
+  channels: Array<{ id: string; name: string }>;
+
+  commands: GuildCommands;
+}
+
+export interface Webhook {
+  id: string;
+  value: string;
+  createdAt: Date;
+}
+
+export interface GuildCommands {
+  restrictions: string[];
+  commands: string[];
+  autoResponses: string[];
+}
