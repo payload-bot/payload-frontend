@@ -8,12 +8,12 @@ type ServerAvatarProps = {
 export default function ServerAvatar({ icon, name }: ServerAvatarProps) {
   return icon ? (
     <img
-      className="rounded-full h-10 w-10 shadow-md shadow-gray-300 dark:shadow-slate-800 ring-inset object-cover"
+      className="rounded-full h-10 w-10 shadow-md shadow-gray-300 dark:shadow-slate-900 ring-inset object-cover"
       src={icon}
     />
   ) : (
     <div className="flex sm:flex-1">
-      <div className="rounded-full text-white dark:bg-slate-800 bg-gray-500 h-10 w-10 shadow-md shadow-gray-300 dark:shadow-slate-800 ring-inset flex items-center justify-center">
+      <div className="rounded-full text-white dark:bg-slate-800 bg-gray-500 h-10 w-10 shadow-md shadow-gray-300 dark:shadow-slate-900 ring-inset flex items-center justify-center">
         {getServerAvatarNoSrc(name)}
       </div>
     </div>
