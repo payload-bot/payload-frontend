@@ -1,6 +1,5 @@
 import { LoaderFunction, Outlet, useLoaderData, useOutletContext } from "remix";
 import GuildManageLayout from "~/components/GuildManageLayout";
-import Header from "~/components/Header";
 import { requireUser } from "~/server/session.server";
 import { User } from "~/utils/contracts";
 
