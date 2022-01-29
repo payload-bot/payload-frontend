@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   ActionFunction,
-  Form,
   json,
   LoaderFunction,
   redirect,
-  useActionData,
+  useFetcher,
   useLoaderData,
-  useTransition,
+  useParams,
 } from "remix";
 import CommandToggle from "~/components/CommandToggle";
 import { makeApiRequest } from "~/utils/api.server";
@@ -29,29 +28,30 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   }
 };
 
-type ActionData = { success: boolean };
-
 export const action: ActionFunction = async ({ request, params }) => {
   const guildId = params.id;
   const form = await request.formData();
 
-  const botName = form.get("botName");
+  const commands = form.get("commands");
 
   await makeApiRequest(request, `/v1/guilds/${guildId}`, "patch", {
-    botName,
+    commandsToRestrict: commands,
   });
 
   return json({ success: true });
 };
 
 export default function Commands() {
+  const params = useParams();
   const server = useLoaderData<Server>();
-  const transition = useTransition();
+  const commands = useFetcher();
 
   const [commandsToRestrict, setCommandsToRestrict] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
 
   function notifyFunction(cmdName: string, checked: boolean) {
+    setSaving(true);
+
     if (checked) {
       setCommandsToRestrict([...commandsToRestrict, cmdName]);
     } else {
@@ -62,9 +62,14 @@ export default function Commands() {
     }
   }
 
-  useEffect(() => {
-    if (commandsToRestrict.length) setSaving(true);
-  }, [commandsToRestrict]);
+  function handleFormSubmission() {
+    commands.submit(
+      { commands: JSON.stringify(commandsToRestrict) },
+      { replace: true, method: "post" }
+    );
+
+    setSaving(false);
+  }
 
   return (
     <section className="mx-auto my-4 w-1/2 p-2">
@@ -103,20 +108,15 @@ export default function Commands() {
           <p className="text-md flex-1 font-medium text-gray-700 dark:text-white">
             Please save your changes!
           </p>
-          <div className="flex gap-4">
-            <button
-              className="text-gray-500 hover:text-gray-400 dark:text-slate-300 hover:dark:text-slate-200"
-              onClick={() => setSaving(false)}
-            >
-              Reset
-            </button>
+          <commands.Form className="flex gap-4">
             <button
               className="text-md rounded-md bg-green-500 py-1 px-3 font-medium text-green-700 transition duration-150 hover:bg-green-600 dark:text-green-900"
-              onClick={() => setSaving(false)}
+              disabled={commands.state === "submitting"}
+              onClick={handleFormSubmission}
             >
               Save
             </button>
-          </div>
+          </commands.Form>
         </div>
       ) : null}
     </section>
