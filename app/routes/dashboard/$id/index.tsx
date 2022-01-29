@@ -9,12 +9,9 @@ import {
   useLoaderData,
   useTransition,
 } from "remix";
-import GuildManageLayout from "~/components/GuildManageLayout";
 import { makeApiRequest } from "~/utils/api.server";
 import { Server } from "~/utils/contracts";
 import getServerAvatarNoSrc from "~/utils/getAvatarNoSource";
-import { badRequest } from "~/utils/httpHelpers";
-import { validateSteamId } from "~/utils/steamid.server";
 
 const LANGUAGES = {
   "en-US": "English",
@@ -23,6 +20,7 @@ const LANGUAGES = {
   "es-ES": "Spanish",
   "de-DE": "German",
   "fi-FI": "Finnish",
+  "ru-RU": "Russian",
 };
 
 export const loader: LoaderFunction = async ({ params, request }) => {
@@ -64,7 +62,6 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export default function Index() {
   const server = useLoaderData<Server>();
-  const actionData = useActionData<ActionData>();
   const transition = useTransition();
 
   const [prefix, setPrefix] = useState(server.prefix);
@@ -75,20 +72,20 @@ export default function Index() {
     <>
       <div className="mt-8 flex flex-col items-center justify-center">
         <Avatar name={server.name} icon={server.icon} />
-        <h1 className="text-2xl dark:text-white font-bold mt-4">
+        <h1 className="mt-4 text-2xl font-bold dark:text-white">
           {server.name}
         </h1>
 
-        <div className="rounded-lg p-6 mt-10 bg-gray-600 dark:bg-slate-700">
-          <h2 className="text-sm sm:text-lg uppercase my-4 text-gray-600 dark:text-white font-bold tracking-wide">
+        <div className="mt-10 rounded-lg bg-gray-600 p-6 dark:bg-slate-700">
+          <h2 className="my-4 text-sm font-bold uppercase tracking-wide text-gray-600 dark:text-white sm:text-lg">
             Server Settings
           </h2>
-          <Form method="post" className="p-5 grid gap-4 sm:grid-cols-3">
+          <Form method="post" className="grid gap-4 p-5 sm:grid-cols-3">
             <span className="col-span-2">
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="botName"
-                  className="text-gray-500 dark:text-white font-medium"
+                  className="font-medium text-gray-500 dark:text-white"
                 >
                   Bot Name
                 </label>
@@ -107,7 +104,7 @@ export default function Index() {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="prefix"
-                className="text-gray-500 dark:text-white font-medium"
+                className="font-medium text-gray-500 dark:text-white"
               >
                 Prefix
               </label>
@@ -121,7 +118,7 @@ export default function Index() {
                 value={prefix}
                 onChange={(e) => setPrefix(e.target.value)}
               />
-              <p className="text-gray-400 dark:text-slate-400 overflow-ellipsis max-w-[20ch]">
+              <p className="max-w-[20ch] overflow-ellipsis text-gray-400 dark:text-slate-400">
                 {prefix}commands
               </p>
             </div>
@@ -129,7 +126,7 @@ export default function Index() {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="language"
-                className="max-w-[20ch] text-gray-500 dark:text-white font-medium"
+                className="max-w-[20ch] font-medium text-gray-500 dark:text-white"
               >
                 Language
               </label>
@@ -148,7 +145,7 @@ export default function Index() {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="snipePermissions"
-                className="text-gray-500 dark:text-white font-medium"
+                className="font-medium text-gray-500 dark:text-white"
               >
                 Snipe Permissions
               </label>
@@ -165,7 +162,7 @@ export default function Index() {
             <span className="col-span-3 mt-2 -mb-2">
               <button
                 disabled={submitting}
-                className="w-full mt-2 sm:mt-0 sm:w-max text-md sm:text-sm py-2 px-4 rounded-md disabled:bg-sky-600/50 bg-sky-600 hover:bg-sky-700 border text-white disabled:text-white/50 border-sky-700 uppercase font-bold transition duration-150 disabled:cursor-not-allowed"
+                className="text-md mt-2 w-full rounded-md border border-sky-700 bg-sky-600 py-2 px-4 font-bold uppercase text-white transition duration-150 hover:bg-sky-700 disabled:cursor-not-allowed disabled:bg-sky-600/50 disabled:text-white/50 sm:mt-0 sm:w-max sm:text-sm"
               >
                 Save
               </button>
@@ -180,12 +177,12 @@ export default function Index() {
 function Avatar({ icon, name }: { icon: string | null; name: string }) {
   return icon ? (
     <img
-      className="rounded-full h-20 w-20 shadow-md shadow-gray-300 dark:shadow-slate-900 ring-inset object-cover"
+      className="h-20 w-20 rounded-full object-cover shadow-md shadow-gray-300 ring-inset dark:shadow-slate-900"
       src={icon}
     />
   ) : (
     <div className="flex sm:flex-1">
-      <div className="rounded-full text-white dark:bg-slate-800 bg-gray-500 h-20 w-20 shadow-md shadow-gray-300 dark:shadow-slate-900 ring-inset flex items-center justify-center">
+      <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-500 text-white shadow-md shadow-gray-300 ring-inset dark:bg-slate-800 dark:shadow-slate-900">
         {getServerAvatarNoSrc(name)}
       </div>
     </div>

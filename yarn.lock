@@ -4093,6 +4093,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prettier-plugin-tailwindcss@npm:^0.1.4":
+  version: 0.1.4
+  resolution: "prettier-plugin-tailwindcss@npm:0.1.4"
+  peerDependencies:
+    prettier: ">=2.2.0"
+  checksum: f624df7b7fbd00625dc2266e3f6b2c34a245042c96070f902a65396377cd31ad4b93a2131c03d08706fbb1bc50db81487f5a61deface27520fa9b38d2ecfb8db
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.5.1":
+  version: 2.5.1
+  resolution: "prettier@npm:2.5.1"
+  bin:
+    prettier: bin-prettier.js
+  checksum: 21b9408476ea1c544b0e45d51ceb94a84789ff92095abb710942d780c862d0daebdb29972d47f6b4d0f7ebbfb0ffbf56cc2cfa3e3e9d1cca54864af185b15b66
+  languageName: node
+  linkType: hard
+
 "pretty-ms@npm:^7.0.1":
   version: 7.0.1
   resolution: "pretty-ms@npm:7.0.1"
@@ -4375,6 +4393,8 @@ __metadata:
     "@types/react-dom": ^17.0.11
     concurrently: ^6.5.1
     dotenv: ^10.0.0
+    prettier: ^2.5.1
+    prettier-plugin-tailwindcss: ^0.1.4
     react: ^17.0.2
     react-dom: ^17.0.2
     remix: ^1.1.1
