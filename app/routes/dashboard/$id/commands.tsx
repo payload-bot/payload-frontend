@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ActionFunction,
   Form,
@@ -10,21 +10,8 @@ import {
   useTransition,
 } from "remix";
 import CommandToggle from "~/components/CommandToggle";
-import GuildManageLayout from "~/components/GuildManageLayout";
 import { makeApiRequest } from "~/utils/api.server";
 import { Server } from "~/utils/contracts";
-import getServerAvatarNoSrc from "~/utils/getAvatarNoSource";
-import { badRequest } from "~/utils/httpHelpers";
-import { validateSteamId } from "~/utils/steamid.server";
-
-const LANGUAGES = {
-  "en-US": "English",
-  "pl-PL": "Polish",
-  "fr-FR": "French",
-  "es-ES": "Spanish",
-  "de-DE": "German",
-  "fi-FI": "Finnish",
-};
 
 export const loader: LoaderFunction = async ({ params, request }) => {
   const guildId = params.id;
@@ -49,15 +36,9 @@ export const action: ActionFunction = async ({ request, params }) => {
   const form = await request.formData();
 
   const botName = form.get("botName");
-  const prefix = form.get("prefix");
-  const language = form.get("language");
-  const snipePermissions = form.get("snipePermissions");
 
   await makeApiRequest(request, `/v1/guilds/${guildId}`, "patch", {
     botName,
-    prefix,
-    language,
-    snipePermissions,
   });
 
   return json({ success: true });
@@ -65,14 +46,12 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export default function Commands() {
   const server = useLoaderData<Server>();
-  const actionData = useActionData<ActionData>();
   const transition = useTransition();
 
   const [commandsToRestrict, setCommandsToRestrict] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
 
   function notifyFunction(cmdName: string, checked: boolean) {
-    setSaving(true);
     if (checked) {
       setCommandsToRestrict([...commandsToRestrict, cmdName]);
     } else {
@@ -82,6 +61,10 @@ export default function Commands() {
       setCommandsToRestrict(elementsChecked);
     }
   }
+
+  useEffect(() => {
+    if (commandsToRestrict.length) setSaving(true);
+  }, [commandsToRestrict]);
 
   return (
     <section className="mx-auto my-4 w-1/2 p-2">
@@ -114,6 +97,28 @@ export default function Commands() {
             notifyFunction={notifyFunction}
           />
         ))}
+
+      {saving ? (
+        <div className="sticky inset-x-0 bottom-4 flex items-center rounded-lg bg-black px-2 py-4">
+          <p className="text-md flex-1 font-medium text-gray-700 dark:text-white">
+            Please save your changes!
+          </p>
+          <div className="flex gap-4">
+            <button
+              className="text-gray-500 hover:text-gray-400 dark:text-slate-300 hover:dark:text-slate-200"
+              onClick={() => setSaving(false)}
+            >
+              Reset
+            </button>
+            <button
+              className="text-md rounded-md bg-green-500 py-1 px-3 font-medium text-green-700 transition duration-150 hover:bg-green-600 dark:text-green-900"
+              onClick={() => setSaving(false)}
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }
