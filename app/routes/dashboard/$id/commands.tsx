@@ -84,8 +84,10 @@ export default function Commands() {
   }
 
   return (
-    <div>
-      <h2>Commands</h2>
+    <section className="mx-auto my-4 w-1/2 p-2">
+      <h2 className="text-2xl font-semibold text-gray-600 dark:text-white">
+        Commands
+      </h2>
       {server.commands.commands
         .filter((cmd) => !["restrict", "unrestrict"].includes(cmd))
         .sort()
@@ -98,7 +100,9 @@ export default function Commands() {
           />
         ))}
 
-      <h2>Auto Responses</h2>
+      <h2 className="my-4 text-2xl font-semibold text-gray-600 dark:text-white">
+        Auto Responses
+      </h2>
       {server.commands.autoResponses
         .filter((cmd) => !["restrict", "unrestrict"].includes(cmd))
         .sort()
@@ -110,6 +114,6 @@ export default function Commands() {
             notifyFunction={notifyFunction}
           />
         ))}
-    </div>
+    </section>
   );
 }
