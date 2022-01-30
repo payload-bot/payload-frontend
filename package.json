@@ -9,7 +9,8 @@
     "dev": "concurrently \"yarn dev:css\" \"yarn dev:start\"",
     "dev:css": "tailwindcss -i ./app/styles/tailwind.css -o ./app/tailwind.css --watch",
     "postinstall": "remix setup node",
-    "dev:start": "node --require dotenv/config ./node_modules/@remix-run/dev/cli.js"
+    "dev:start": "node --require dotenv/config ./node_modules/@remix-run/dev/cli.js",
+    "format": "prettier --write \"app/**/*.{ts,tsx}\""
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",

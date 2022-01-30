@@ -50,7 +50,7 @@ export default function User() {
   const submitting = transition.state === "submitting";
 
   return (
-    <div className="mt-8 max-w-5xl mx-auto px-8">
+    <div className="mx-auto mt-8 max-w-5xl px-8">
       <div className="my-4">
         {actionData?.success ? (
           <Alert type="success" message="Successfully saved user data" />
@@ -59,25 +59,25 @@ export default function User() {
         ) : null}
       </div>
 
-      <h1 className="font-bold text-gray-800 dark:text-white text-2xl">
+      <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
         Profile Settings
       </h1>
 
-      <hr className="divide-x-2 my-6 sm:my-4" />
+      <hr className="my-6 divide-x-2 sm:my-4" />
 
       <div className="grid sm:grid-cols-2">
-        <div className="space-y-4 sm:space-y-2 mb-4 sm:mb-0">
-          <h1 className="font-semibold text-gray-800 text-2xl dark:text-slate-100">
+        <div className="mb-4 space-y-4 sm:mb-0 sm:space-y-2">
+          <h1 className="text-2xl font-semibold text-gray-800 dark:text-slate-100">
             General
           </h1>
-          <p className="text-md text-gray-500 font-medium w-full sm:w-3/4 dark:text-slate-300">
+          <p className="text-md w-full font-medium text-gray-500 dark:text-slate-300 sm:w-3/4">
             General account settings. Please note this information is public!
           </p>
         </div>
         <Form method="post" className="flex flex-col gap-2">
           <label
             htmlFor="steamId-input"
-            className="text-gray-700 dark:text-slate-300 font-medium"
+            className="font-medium text-gray-700 dark:text-slate-300"
           >
             SteamID
           </label>
@@ -91,30 +91,30 @@ export default function User() {
             defaultValue={actionData?.errors?.steamId ? "" : user.steamId ?? ""}
           />
           {actionData?.errors?.steamId ? (
-            <p className="text-red-500 font-medium">
+            <p className="font-medium text-red-500">
               {actionData.errors.steamId}
             </p>
           ) : null}
 
           <button
             disabled={submitting}
-            className="w-full mt-2 sm:mt-0 sm:w-max text-md sm:text-sm py-2 px-4 rounded-md disabled:bg-sky-600/50 bg-sky-600 hover:bg-sky-700 border text-white disabled:text-white/50 border-sky-700 uppercase font-bold transition duration-150 disabled:cursor-not-allowed"
+            className="text-md mt-2 w-full rounded-md border border-sky-700 bg-sky-600 py-2 px-4 font-bold uppercase text-white transition duration-150 hover:bg-sky-700 disabled:cursor-not-allowed disabled:bg-sky-600/50 disabled:text-white/50 sm:mt-0 sm:w-max sm:text-sm"
           >
             Save
           </button>
         </Form>
       </div>
 
-      <hr className="divide-x-2 my-6 sm:my-4" />
-      <h1 className="font-medium text-gray-800 dark:text-slate-100 text-2xl mb-2">
+      <hr className="my-6 divide-x-2 sm:my-4" />
+      <h1 className="mb-2 text-2xl font-medium text-gray-800 dark:text-slate-100">
         Quick Actions
       </h1>
-      <div className="flex flex-row-reverse sm:flex-row flex-wrap gap-2 sm:gap-4 w-full">
-        <button className="py-2 px-4 rounded-md w-full sm:w-max hover:bg-red-300 dark:hover:bg-red-500/25 bg-red-200 dark:bg-red-500/20 border border-red-600 text-red-600 dark:text-red-500 font-semibold transition duration-100">
+      <div className="flex w-full flex-row-reverse flex-wrap gap-2 sm:flex-row sm:gap-4">
+        <button className="w-full rounded-md border border-red-600 bg-red-200 py-2 px-4 font-semibold text-red-600 transition duration-100 hover:bg-red-300 dark:bg-red-500/20 dark:text-red-500 dark:hover:bg-red-500/25 sm:w-max">
           Delete User Data
         </button>
         <form action="/logout" method="post" className="w-full sm:w-max">
-          <button className="py-2 px-4 rounded-md w-full sm:w-max hover:bg-red-100 dark:hover:bg-red-500/20 bg-transparent border border-red-600 text-red-600 dark:text-red-800 font-semibold transition duration-100">
+          <button className="w-full rounded-md border border-red-600 bg-transparent py-2 px-4 font-semibold text-red-600 transition duration-100 hover:bg-red-100 dark:text-red-800 dark:hover:bg-red-500/20 sm:w-max">
             Logout
           </button>
         </form>

@@ -75,9 +75,9 @@ export function ErrorBoundary({ error }: { error: Error }) {
         <Meta />
         <Links />
       </head>
-      <body className="bg-red-100 flex flex-col gap-2 items-center justify-center h-screen">
-        <p className="text-red-500 font-semibold text-4xl">Yikes...</p>
-        <p className="text-red-500 font-normal text-xl">
+      <body className="flex h-screen flex-col items-center justify-center gap-2 bg-red-100">
+        <p className="text-4xl font-semibold text-red-500">Yikes...</p>
+        <p className="text-xl font-normal text-red-500">
           Something went horribly wrong while serving your request. Please
           refresh the page.
         </p>
@@ -99,17 +99,17 @@ export function CatchBoundary() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-gray-50 flex flex-col gap-4 items-center justify-center h-screen">
-        <p className="text-gray-700 font-semibold text-4xl">
+      <body className="flex h-screen flex-col items-center justify-center gap-4 bg-gray-50">
+        <p className="text-4xl font-semibold text-gray-700">
           {caught.status} <span className="divide-x divide-gray-500"></span>{" "}
           {caught.statusText}
         </p>
-        <p className="text-gray-500 font-normal text-xl">
+        <p className="text-xl font-normal text-gray-500">
           Something's off.{" "}
           <Link
             to="/"
             prefetch="intent"
-            className="underline decoration-2 decoration-gray-500 hover:text-gray-600"
+            className="underline decoration-gray-500 decoration-2 hover:text-gray-600"
           >
             Bring me back to safety
           </Link>

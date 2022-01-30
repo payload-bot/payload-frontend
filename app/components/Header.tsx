@@ -8,7 +8,7 @@ type HeaderProps = {
 export default function Header({ user }: HeaderProps) {
   return (
     <nav className="bg-sky-500 dark:bg-sky-700">
-      <div className="max-w-6xl mx-auto flex justify-between items-center py-1 px-2 h-[60px]">
+      <div className="mx-auto flex h-[60px] max-w-6xl items-center justify-between py-1 px-2">
         <Link
           to="/"
           prefetch="intent"
@@ -17,16 +17,16 @@ export default function Header({ user }: HeaderProps) {
           Payload
         </Link>
 
-        <div className="flex flex-row gap-2 items-center">
+        <div className="flex flex-row items-center gap-2">
           <Link
             to="/dashboard"
-            className="text-slate-500 hover:text-slate-800 dark:text-slate-300 dark:hover:text-slate-100 transition duration-100 font-medium p-2 hidden md:block"
+            className="hidden p-2 font-medium text-slate-500 transition duration-100 hover:text-slate-800 dark:text-slate-300 dark:hover:text-slate-100 md:block"
           >
             Dashboard
           </Link>
           <Link
             to="/settings"
-            className="text-slate-500 hover:text-slate-800 dark:text-slate-300 dark:hover:text-slate-100 transition duration-100 font-medium p-2 hidden md:block"
+            className="hidden p-2 font-medium text-slate-500 transition duration-100 hover:text-slate-800 dark:text-slate-300 dark:hover:text-slate-100 md:block"
           >
             Settings
           </Link>
@@ -35,7 +35,7 @@ export default function Header({ user }: HeaderProps) {
             <img
               src={user.avatar}
               alt={`${user.username}'s discord avatar`}
-              className="rounded-full ring-4 ring-gray-500 ring-inset w-12 h-12"
+              className="h-12 w-12 rounded-full ring-4 ring-inset ring-gray-500"
             />
           </div>
         </div>
