@@ -1,11 +1,9 @@
+import { ActionFunction, Form, LoaderFunction, useLoaderData } from "remix";
 import {
-  ActionFunction,
-  Form,
-  LoaderFunction,
-  redirect,
-  useLoaderData,
-} from "remix";
-import { makeApiRequest } from "~/utils/api.server";
+  BASE_URL,
+  makeApiRequest,
+  makeApiRequestNoContent,
+} from "~/utils/api.server";
 import { Webhook } from "~/utils/contracts";
 import getServerAvatarNoSrc from "~/utils/getAvatarNoSource";
 import { useGuild } from "../$id";
@@ -20,27 +18,51 @@ export const loader: LoaderFunction = async ({ params, request }) => {
       "get"
     );
 
-    console.log(guild);
-
     return guild;
   } catch (err) {
-    throw redirect("/dashboard");
+    return null;
   }
 };
 
 export const action: ActionFunction = async ({ request, params }) => {
   const guildId = params.id;
 
-  try {
-    const webhook = await makeApiRequest<Webhook>(
-      request,
-      `/v1/webhooks/guilds/${guildId}`,
-      "get"
-    );
+  const data = await request.formData();
 
-    return webhook;
-  } catch (err) {
-    throw redirect("/dashboard");
+  const { _action, ...values } = Object.fromEntries(data);
+
+  switch (_action) {
+    case "create": {
+      return await makeApiRequest<Webhook>(
+        request,
+        `/v1/webhooks/guilds/${guildId}`,
+        "post",
+        values
+      );
+    }
+
+    case "delete": {
+      await makeApiRequestNoContent(
+        request,
+        `/v1/webhooks/guilds/${guildId}`,
+        "delete"
+      );
+
+      return null;
+    }
+
+    case "test": {
+      const headers = new Headers();
+      headers.append("Authorization", values.secret as string);
+
+      await fetch(`${BASE_URL}/v1/webhooks/test`, {
+        headers,
+        method: "post",
+        credentials: "omit",
+      });
+
+      return null;
+    }
   }
 };
 
@@ -49,44 +71,59 @@ export default function Webhooks() {
   const { server } = useGuild();
 
   return (
-    <>
-      <div className="mt-8 flex flex-col items-center justify-center">
-        <Avatar name={server.name} icon={server.icon} />
-        <h1 className="mt-4 text-2xl font-bold dark:text-white">
-          {server.name}
-        </h1>
+    <div className="mt-8 flex flex-col items-center justify-center">
+      <Avatar name={server.name} icon={server.icon} />
+      <h1 className="mt-4 text-2xl font-bold dark:text-white">{server.name}</h1>
 
-        <div className="mt-10 w-1/2 rounded-lg bg-gray-600 p-6 dark:bg-slate-700">
-          {webhook ? (
-            <p>{webhook.id}</p>
-          ) : (
-            <div className="flex flex-col gap-6">
-              <div>
-                <h2 className="text-center text-2xl font-bold text-gray-600 dark:text-white">
-                  No Webhooks :(
-                </h2>
-                <p className="text-md text-center font-bold text-gray-500 dark:text-slate-400">
-                  Let's create one!
-                </p>
-              </div>
-              <Form className="flex flex-col gap-4">
-                <select id="webhook-channel" name="webhook-channel">
-                  {server.channels.map((c) => (
-                    <option value={c.id} label={c.name} key={c.id} />
-                  ))}
-                </select>
+      <div className="mt-10 w-1/2 rounded-lg bg-gray-600 p-6 dark:bg-slate-700">
+        {webhook?.id ? (
+          <>
+            <h2 className="text-center text-2xl font-bold text-gray-600 dark:text-white">
+              Manage Webhook
+            </h2>
+            <Form method="post">
+              <input type="hidden" name="secret" value={webhook.value} />
+              <button type="submit" name="_action" value="test">
+                Test Webhook
+              </button>
+            </Form>
 
-                <datalist id="available-channels"></datalist>
-
-                <button className="text-md justify-center rounded-md bg-green-500/90 px-2 py-3 font-medium text-green-900 transition duration-150 hover:bg-green-600">
-                  Create New Webhook
-                </button>
-              </Form>
+            <Form method="post">
+              <button type="submit" name="_action" value="delete">
+                Delete Webhook
+              </button>
+            </Form>
+          </>
+        ) : (
+          <div className="flex flex-col gap-6">
+            <div>
+              <h2 className="text-center text-2xl font-bold text-gray-600 dark:text-white">
+                No Webhooks :(
+              </h2>
+              <p className="text-md text-center font-bold text-gray-500 dark:text-slate-400">
+                Let's create one!
+              </p>
             </div>
-          )}
-        </div>
+            <Form method="post" className="flex flex-col gap-4">
+              <select id="webhook-channel" name="channelId">
+                {server.channels.map((c) => (
+                  <option value={c.id} label={c.name} key={c.id} />
+                ))}
+              </select>
+
+              <button
+                type="submit"
+                name="_action"
+                value="create"
+                className="text-md justify-center rounded-md bg-green-500/90 px-2 py-3 font-medium text-green-900 transition duration-150 hover:bg-green-600"
+              >
+                Create New Webhook
+              </button>
+            </Form>
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 }
 

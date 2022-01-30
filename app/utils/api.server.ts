@@ -1,13 +1,13 @@
 import { ApiError } from "./errors";
 
+export const BASE_URL = process.env.BASE_API_URL ?? "http://localhost:8080/api";
+
 export async function makeApiRequest<T>(
   request: Request,
   endpoint: string,
   method: Request["method"],
   body: any = null
 ) {
-  const BASE_URL = process.env.BASE_API_URL ?? "http://localhost:8080/api";
-
   body &&= JSON.stringify(body);
 
   const response = await fetch(BASE_URL + endpoint, {
@@ -32,8 +32,6 @@ export async function makeApiRequestNoContent(
   method: Request["method"],
   body: any = null
 ): Promise<undefined> {
-  const BASE_URL = process.env.BASE_API_URL ?? "http://localhost:8080/api";
-
   body &&= JSON.stringify(body);
 
   const response = await fetch(BASE_URL + endpoint, {
