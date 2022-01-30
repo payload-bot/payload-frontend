@@ -1,10 +1,7 @@
-import { useState } from "react";
 import {
   ActionFunction,
-  Form,
   LoaderFunction,
   redirect,
-  useActionData,
   useLoaderData,
   useTransition,
 } from "remix";
@@ -28,8 +25,6 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   }
 };
 
-type ActionData = { success: boolean };
-
 export const action: ActionFunction = async ({ request, params }) => {};
 
 export default function Webhooks() {
@@ -44,11 +39,19 @@ export default function Webhooks() {
           {server.name}
         </h1>
 
-        <div className="mt-10 rounded-lg bg-gray-600 p-6 dark:bg-slate-700">
-          <h2 className="text-sm font-bold uppercase tracking-wide text-gray-600 dark:text-white sm:text-lg">
-            Webhook Settings
-          </h2>
-          {server.webhook ? <p>{server.webhook.id}</p> : "No webhook set."}
+        <div className="mt-10 w-1/2 rounded-lg bg-gray-600 p-6 dark:bg-slate-700">
+          {server.webhook ? (
+            <p>{server.webhook.id}</p>
+          ) : (
+            <div className="flex flex-col gap-4">
+              <h2 className="text-center text-2xl font-bold text-gray-600 dark:text-white">
+                No Webhooks :(
+              </h2>
+              <button className="text-md justify-center rounded-md bg-green-500/90 px-2 py-3 font-medium text-green-900">
+                Create New Webhook
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>
