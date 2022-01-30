@@ -137,7 +137,7 @@ export default function Index() {
                 disabled={submitting}
                 className="text-md mt-2 w-full rounded-md border border-sky-700 bg-sky-600 py-2 px-4 font-bold uppercase text-white transition duration-150 hover:bg-sky-700 disabled:cursor-not-allowed disabled:bg-sky-600/50 disabled:text-white/50 sm:mt-0 sm:w-max sm:text-sm"
               >
-                Save
+                {submitting ? "Saving..." : "Save"}
               </button>
             </span>
           </Form>
