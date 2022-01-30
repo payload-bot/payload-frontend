@@ -1,4 +1,10 @@
-import { ActionFunction, Form, LoaderFunction, useLoaderData } from "remix";
+import {
+  ActionFunction,
+  Form,
+  LoaderFunction,
+  useLoaderData,
+  useTransition,
+} from "remix";
 import {
   BASE_URL,
   makeApiRequest,
@@ -68,7 +74,10 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export default function Webhooks() {
   const webhook = useLoaderData<Webhook>();
+  const transition = useTransition();
   const { server } = useGuild();
+
+  const submitting = transition.state === "submitting";
 
   return (
     <div className="mt-8 flex flex-col items-center justify-center">
@@ -81,18 +90,32 @@ export default function Webhooks() {
             <h2 className="text-center text-2xl font-bold text-gray-600 dark:text-white">
               Manage Webhook
             </h2>
-            <Form method="post">
-              <input type="hidden" name="secret" value={webhook.value} />
-              <button type="submit" name="_action" value="test">
-                Test Webhook
-              </button>
-            </Form>
+            <div className="mt-4 flex justify-center gap-2">
+              <Form method="post">
+                <input type="hidden" name="secret" value={webhook.value} />
+                <button
+                  type="submit"
+                  name="_action"
+                  disabled={submitting}
+                  value="test"
+                  className="rounded-lg border border-green-700 bg-green-500 px-1 py-2 font-medium text-green-900 transition  duration-200 hover:bg-green-600"
+                >
+                  {submitting ? "Testing Webhook..." : "Test Webhook"}
+                </button>
+              </Form>
 
-            <Form method="post">
-              <button type="submit" name="_action" value="delete">
-                Delete Webhook
-              </button>
-            </Form>
+              <Form method="post">
+                <button
+                  type="submit"
+                  name="_action"
+                  disabled={submitting}
+                  value="delete"
+                  className="rounded-lg border border-red-700 px-1 py-2 font-medium text-red-700 transition duration-200 hover:bg-red-500/25"
+                >
+                  {submitting ? "Deleting Webhook" : "Delete Webhook"}
+                </button>
+              </Form>
+            </div>
           </>
         ) : (
           <div className="flex flex-col gap-6">
