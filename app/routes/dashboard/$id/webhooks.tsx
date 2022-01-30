@@ -140,7 +140,7 @@ export default function Webhooks() {
                 value="create"
                 className="text-md justify-center rounded-md bg-green-500/90 px-2 py-3 font-medium text-green-900 transition duration-150 hover:bg-green-600"
               >
-                Create New Webhook
+                {submitting ? "Creating your webhook..." : "Create new Webhook"}
               </button>
             </Form>
           </div>
