@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { ActionFunction, json, useFetcher, useLoaderData } from "remix";
+import { ActionFunction, json, useFetcher } from "remix";
 import CommandToggle from "~/components/CommandToggle";
 import { makeApiRequest } from "~/utils/api.server";
-import { Server } from "~/utils/contracts";
 import { useGuild } from "../$id";
 
 export const action: ActionFunction = async ({ request, params }) => {
@@ -25,6 +24,8 @@ export const action: ActionFunction = async ({ request, params }) => {
 export default function Commands() {
   const { server } = useGuild();
   const commands = useFetcher();
+
+  const submitting = commands.state === "submitting";
 
   const [commandsToRestrict, setCommandsToRestrict] = useState<string[]>([
     ...server.commands.restrictions,
@@ -98,11 +99,11 @@ export default function Commands() {
           <commands.Form className="flex gap-4">
             <button
               className="text-md rounded-md bg-green-500 py-1 px-3 font-medium text-green-700 transition duration-150 hover:bg-green-600 disabled:bg-green-500/30 dark:text-green-900"
-              disabled={commands.state === "submitting"}
+              disabled={submitting}
               onClick={handleFormSubmission}
               type="submit"
             >
-              Save
+              {submitting ? "Saving your changes..." : "Save Changes"}
             </button>
           </commands.Form>
         </div>
