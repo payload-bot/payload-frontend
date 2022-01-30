@@ -77,7 +77,7 @@ export default function Index() {
         </h1>
 
         <div className="mt-10 rounded-lg bg-gray-600 p-6 dark:bg-slate-700">
-          <h2 className="my-4 text-sm font-bold uppercase tracking-wide text-gray-600 dark:text-white sm:text-lg">
+          <h2 className="text-sm font-bold uppercase tracking-wide text-gray-600 dark:text-white sm:text-lg">
             Server Settings
           </h2>
           <Form method="post" className="grid gap-4 p-5 sm:grid-cols-3">
