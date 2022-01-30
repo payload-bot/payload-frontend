@@ -20,10 +20,20 @@ export default function GuildManageLayout({
             </div>
           </Link>
           {SIDEBAR_LINKS.map((link) => (
-            <Link key={link.toLowerCase()} to={link.toLowerCase()}>
-              <div className="rounded-lg p-2 font-medium text-gray-700 transition duration-150 hover:bg-gray-500 dark:text-white dark:hover:bg-gray-600">
+            <Link
+              key={link.toLowerCase()}
+              to={link.toLowerCase()}
+              className="flex flex-row items-center rounded-lg p-2  hover:bg-gray-500 dark:hover:bg-gray-600"
+            >
+              <div className="flex-1 font-medium text-gray-700 transition duration-150  dark:text-white ">
                 {link}
               </div>
+
+              {link === "Webhooks" ? (
+                <div className="rounded-full bg-yellow-500 py-1 px-2 text-sm font-medium text-yellow-900">
+                  New!
+                </div>
+              ) : null}
             </Link>
           ))}
         </div>
