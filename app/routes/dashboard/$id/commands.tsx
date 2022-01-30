@@ -6,7 +6,6 @@ import {
   redirect,
   useFetcher,
   useLoaderData,
-  useParams,
 } from "remix";
 import CommandToggle from "~/components/CommandToggle";
 import { makeApiRequest } from "~/utils/api.server";
@@ -42,7 +41,6 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 export default function Commands() {
-  const params = useParams();
   const server = useLoaderData<Server>();
   const commands = useFetcher();
 
