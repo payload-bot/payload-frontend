@@ -1,23 +1,26 @@
 import {
   ActionFunction,
+  Form,
   LoaderFunction,
   redirect,
   useLoaderData,
-  useTransition,
 } from "remix";
 import { makeApiRequest } from "~/utils/api.server";
-import { Server } from "~/utils/contracts";
+import { Webhook } from "~/utils/contracts";
 import getServerAvatarNoSrc from "~/utils/getAvatarNoSource";
+import { useGuild } from "../$id";
 
 export const loader: LoaderFunction = async ({ params, request }) => {
   const guildId = params.id;
 
   try {
-    const guild = await makeApiRequest<Server>(
+    const guild = await makeApiRequest<Webhook>(
       request,
-      `/v1/guilds/${guildId}`,
+      `/v1/webhooks/guilds/${guildId}`,
       "get"
     );
+
+    console.log(guild);
 
     return guild;
   } catch (err) {
@@ -25,11 +28,25 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   }
 };
 
-export const action: ActionFunction = async ({ request, params }) => {};
+export const action: ActionFunction = async ({ request, params }) => {
+  const guildId = params.id;
+
+  try {
+    const webhook = await makeApiRequest<Webhook>(
+      request,
+      `/v1/webhooks/guilds/${guildId}`,
+      "get"
+    );
+
+    return webhook;
+  } catch (err) {
+    throw redirect("/dashboard");
+  }
+};
 
 export default function Webhooks() {
-  const server = useLoaderData<Server>();
-  const transition = useTransition();
+  const webhook = useLoaderData<Webhook>();
+  const { server } = useGuild();
 
   return (
     <>
@@ -40,16 +57,31 @@ export default function Webhooks() {
         </h1>
 
         <div className="mt-10 w-1/2 rounded-lg bg-gray-600 p-6 dark:bg-slate-700">
-          {server.webhook ? (
-            <p>{server.webhook.id}</p>
+          {webhook ? (
+            <p>{webhook.id}</p>
           ) : (
-            <div className="flex flex-col gap-4">
-              <h2 className="text-center text-2xl font-bold text-gray-600 dark:text-white">
-                No Webhooks :(
-              </h2>
-              <button className="text-md justify-center rounded-md bg-green-500/90 px-2 py-3 font-medium text-green-900">
-                Create New Webhook
-              </button>
+            <div className="flex flex-col gap-6">
+              <div>
+                <h2 className="text-center text-2xl font-bold text-gray-600 dark:text-white">
+                  No Webhooks :(
+                </h2>
+                <p className="text-md text-center font-bold text-gray-500 dark:text-slate-400">
+                  Let's create one!
+                </p>
+              </div>
+              <Form className="flex flex-col gap-4">
+                <select id="webhook-channel" name="webhook-channel">
+                  {server.channels.map((c) => (
+                    <option value={c.id} label={c.name} key={c.id} />
+                  ))}
+                </select>
+
+                <datalist id="available-channels"></datalist>
+
+                <button className="text-md justify-center rounded-md bg-green-500/90 px-2 py-3 font-medium text-green-900 transition duration-150 hover:bg-green-600">
+                  Create New Webhook
+                </button>
+              </Form>
             </div>
           )}
         </div>

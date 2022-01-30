@@ -1,24 +1,30 @@
 import { LoaderFunction, Outlet, useLoaderData, useOutletContext } from "remix";
 import GuildManageLayout from "~/components/GuildManageLayout";
 import { requireUser } from "~/server/session.server";
-import { User } from "~/utils/contracts";
+import { makeApiRequest } from "~/utils/api.server";
+import { Server, User } from "~/utils/contracts";
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const user = await requireUser(request);
+export const loader: LoaderFunction = async ({ params, request }) => {
+  const [user, server] = await Promise.all([
+    requireUser(request),
+    makeApiRequest<Server>(request, `/v1/guilds/${params.id}`, "get"),
+  ]);
 
-  return user;
+  return { user, server };
 };
 
+type GuildContext = { user: User; server: Server };
+
 export default function Index() {
-  const user = useLoaderData<User>();
+  const data = useLoaderData<User>();
 
   return (
     <GuildManageLayout>
-      <Outlet context={user} />
+      <Outlet context={data} />
     </GuildManageLayout>
   );
 }
 
-export function useUser() {
-  return useOutletContext<User>();
+export function useGuild() {
+  return useOutletContext<GuildContext>();
 }

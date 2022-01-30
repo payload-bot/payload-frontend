@@ -1,32 +1,9 @@
 import { useEffect, useState } from "react";
-import {
-  ActionFunction,
-  json,
-  LoaderFunction,
-  redirect,
-  useFetcher,
-  useLoaderData,
-  useParams,
-} from "remix";
+import { ActionFunction, json, useFetcher, useLoaderData } from "remix";
 import CommandToggle from "~/components/CommandToggle";
 import { makeApiRequest } from "~/utils/api.server";
 import { Server } from "~/utils/contracts";
-
-export const loader: LoaderFunction = async ({ params, request }) => {
-  const guildId = params.id;
-
-  try {
-    const guild = await makeApiRequest<Server>(
-      request,
-      `/v1/guilds/${guildId}`,
-      "get"
-    );
-
-    return guild;
-  } catch (err) {
-    throw redirect("/dashboard");
-  }
-};
+import { useGuild } from "../$id";
 
 export const action: ActionFunction = async ({ request, params }) => {
   const guildId = params.id;
@@ -46,8 +23,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 export default function Commands() {
-  const { id } = useParams();
-  const server = useLoaderData<Server>();
+  const { server } = useGuild();
   const commands = useFetcher();
 
   const [commandsToRestrict, setCommandsToRestrict] = useState<string[]>([

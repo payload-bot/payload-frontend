@@ -1,17 +1,8 @@
 import { useState } from "react";
-import {
-  ActionFunction,
-  Form,
-  json,
-  LoaderFunction,
-  redirect,
-  useActionData,
-  useLoaderData,
-  useTransition,
-} from "remix";
+import { ActionFunction, Form, json, useTransition } from "remix";
 import { makeApiRequest } from "~/utils/api.server";
-import { Server } from "~/utils/contracts";
 import getServerAvatarNoSrc from "~/utils/getAvatarNoSource";
+import { useGuild } from "../$id";
 
 const LANGUAGES = {
   "en-US": "English",
@@ -22,24 +13,6 @@ const LANGUAGES = {
   "fi-FI": "Finnish",
   "ru-RU": "Russian",
 };
-
-export const loader: LoaderFunction = async ({ params, request }) => {
-  const guildId = params.id;
-
-  try {
-    const guild = await makeApiRequest<Server>(
-      request,
-      `/v1/guilds/${guildId}`,
-      "get"
-    );
-
-    return guild;
-  } catch (err) {
-    throw redirect("/dashboard");
-  }
-};
-
-type ActionData = { success: boolean };
 
 export const action: ActionFunction = async ({ request, params }) => {
   const guildId = params.id;
@@ -61,7 +34,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 export default function Index() {
-  const server = useLoaderData<Server>();
+  const { server } = useGuild();
   const transition = useTransition();
 
   const [prefix, setPrefix] = useState(server.prefix);
