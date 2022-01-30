@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ActionFunction,
   json,
@@ -6,6 +6,7 @@ import {
   redirect,
   useFetcher,
   useLoaderData,
+  useParams,
 } from "remix";
 import CommandToggle from "~/components/CommandToggle";
 import { makeApiRequest } from "~/utils/api.server";
@@ -33,18 +34,26 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   const commands = form.get("commands");
 
-  await makeApiRequest(request, `/v1/guilds/${guildId}`, "patch", {
-    commandsToRestrict: commands,
-  });
+  try {
+    await makeApiRequest(request, `/v1/guilds/${guildId}`, "patch", {
+      commandRestrictions: JSON.parse(commands as any),
+    });
 
-  return json({ success: true });
+    return json({ success: true });
+  } catch (err) {
+    return json({ success: false });
+  }
 };
 
 export default function Commands() {
+  const { id } = useParams();
   const server = useLoaderData<Server>();
   const commands = useFetcher();
 
-  const [commandsToRestrict, setCommandsToRestrict] = useState<string[]>([]);
+  const [commandsToRestrict, setCommandsToRestrict] = useState<string[]>([
+    ...server.commands.restrictions,
+  ]);
+
   const [saving, setSaving] = useState(false);
 
   function notifyFunction(cmdName: string, checked: boolean) {
@@ -60,13 +69,17 @@ export default function Commands() {
     }
   }
 
+  useEffect(() => {
+    if (commands.type === "done") {
+      setSaving(false);
+    }
+  }, [commands]);
+
   function handleFormSubmission() {
     commands.submit(
       { commands: JSON.stringify(commandsToRestrict) },
       { replace: true, method: "post" }
     );
-
-    setSaving(false);
   }
 
   return (
@@ -108,9 +121,10 @@ export default function Commands() {
           </p>
           <commands.Form className="flex gap-4">
             <button
-              className="text-md rounded-md bg-green-500 py-1 px-3 font-medium text-green-700 transition duration-150 hover:bg-green-600 dark:text-green-900"
+              className="text-md rounded-md bg-green-500 py-1 px-3 font-medium text-green-700 transition duration-150 hover:bg-green-600 disabled:bg-green-500/30 dark:text-green-900"
               disabled={commands.state === "submitting"}
               onClick={handleFormSubmission}
+              type="submit"
             >
               Save
             </button>
