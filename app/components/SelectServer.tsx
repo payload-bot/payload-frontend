@@ -14,25 +14,25 @@ export default function SelectServer({ server }: SelectServerProps) {
   };
 
   return (
-    <div className="p-4 hover:bg-gray-200 dark:hover:bg-slate-600 rounded-lg flex items-center gap-2 justify-between">
-      <div className="flex items-center gap-2 w-3/5 sm:flex-1">
+    <div className="flex items-center justify-between gap-2 rounded-lg p-4 hover:bg-gray-200 dark:hover:bg-slate-600">
+      <div className="flex w-3/5 items-center gap-2 sm:flex-1">
         <ServerAvatar icon={server.icon} name={server.name} />
-        <p className="text-gray-600 dark:text-slate-200 font-medium truncate w-1/2 sm:w-full">
+        <p className="w-1/2 truncate font-medium text-gray-600 dark:text-slate-200 sm:w-full">
           {server.name}
         </p>
       </div>
       {server.isPayloadIn ? (
-        <Link to={server.id}>
+        <Link to={server.id} prefetch="intent">
           <ChevronRightIcon
             height={40}
             width={40}
-            className="text-gray-400 dark:text-slate-200 p-1 rounded-full hover:bg-gray-300 dark:hover:bg-slate-500 cursor-pointer"
+            className="cursor-pointer rounded-full p-1 text-gray-400 hover:bg-gray-300 dark:text-slate-200 dark:hover:bg-slate-500"
           />
         </Link>
       ) : (
         <button
           onClick={handleInvite}
-          className="w-max sm:mt-0 sm:w-max text-md sm:text-sm py-2 px-4 rounded-md bg-sky-600 hover:bg-sky-700 border text-white border-sky-700 uppercase font-bold transition duration-150"
+          className="text-md w-max rounded-md border border-sky-700 bg-sky-600 py-2 px-4 font-bold uppercase text-white transition duration-150 hover:bg-sky-700 sm:mt-0 sm:w-max sm:text-sm"
         >
           Invite
         </button>

@@ -15,18 +15,18 @@ export default function Index() {
   return (
     <div className="mt-3 py-4 pb-8">
       {guilds.length > 0 ? (
-        <h1 className="text-gray-700 dark:text-white text-center font-bold text-lg md:text-2xl lg:text-3xl">
+        <h1 className="text-center text-lg font-bold text-gray-700 dark:text-white md:text-2xl lg:text-3xl">
           Your Servers
         </h1>
       ) : (
-        <div className="w-full mx-auto max-w-lg text-lg space-y-2">
-          <h1 className="text-gray-700 dark:text-white text-center font-bold text-lg md:text-2xl lg:text-3xl">
+        <div className="mx-auto w-full max-w-lg space-y-2 text-lg">
+          <h1 className="text-center text-lg font-bold text-gray-700 dark:text-white md:text-2xl lg:text-3xl">
             No Servers
           </h1>
           <p className="text-center text-gray-400 dark:text-slate-200">
             You have no servers that you can manage. You should{" "}
             <a
-              className="underline decoration-2 decoration-blue-500"
+              className="underline decoration-blue-500 decoration-2"
               href="https://support.discord.com/hc/en-us/articles/204849977-How-do-I-create-a-server-"
               rel="noreferrer"
             >
@@ -37,7 +37,7 @@ export default function Index() {
         </div>
       )}
 
-      <main className="mt-4 flex flex-col gap-5 max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-4xl mx-auto">
+      <main className="mx-auto mt-4 flex max-w-sm flex-col gap-5 sm:max-w-lg md:max-w-xl lg:max-w-4xl">
         {guilds.length > 0
           ? guilds.map((guild) => (
               <SelectServer key={guild.id} server={guild} />
