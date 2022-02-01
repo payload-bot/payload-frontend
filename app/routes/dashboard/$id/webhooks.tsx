@@ -2,6 +2,7 @@ import {
   ActionFunction,
   Form,
   LoaderFunction,
+  useFetcher,
   useLoaderData,
   useTransition,
 } from "remix";
@@ -74,6 +75,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export default function Webhooks() {
   const webhook = useLoaderData<Webhook>();
+  const fetcher = useFetcher();
   const transition = useTransition();
   const { server } = useGuild();
 
@@ -91,7 +93,7 @@ export default function Webhooks() {
               Manage Webhook
             </h2>
             <div className="mt-4 flex justify-center gap-2">
-              <Form method="post">
+              <fetcher.Form replace method="post">
                 <input type="hidden" name="secret" value={webhook.value} />
                 <button
                   type="submit"
@@ -100,9 +102,11 @@ export default function Webhooks() {
                   value="test"
                   className="rounded-lg border border-green-700 bg-green-500 px-1 py-2 font-medium text-green-900 transition  duration-200 hover:bg-green-600"
                 >
-                  {submitting ? "Testing Webhook..." : "Test Webhook"}
+                  {fetcher.state === "submitting"
+                    ? "Testing Webhook..."
+                    : "Test Webhook"}
                 </button>
-              </Form>
+              </fetcher.Form>
 
               <Form method="post">
                 <button
