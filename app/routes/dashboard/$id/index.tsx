@@ -53,7 +53,7 @@ export default function Index() {
           <h2 className="text-sm font-bold uppercase tracking-wide text-gray-600 dark:text-white sm:text-lg">
             Server Settings
           </h2>
-          <Form method="post" className="grid gap-4 p-5 sm:grid-cols-3">
+          <Form replace method="post" className="grid gap-4 p-5 sm:grid-cols-3">
             <span className="col-span-2">
               <div className="flex flex-col gap-2">
                 <label
