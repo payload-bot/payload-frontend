@@ -12,9 +12,9 @@ export default function GuildManageLayout({
 }: GuildManageLayoutProps) {
   return (
     <div className="flex">
-      <aside className="sticky top-0 h-[calc(100vh-60px)] w-[240px] bg-slate-700">
+      <aside className="min-h-[calc(100vh-60px)] w-[240px] bg-slate-700">
         <div className="flex h-full flex-col gap-2 p-4">
-          <div className="flex-1">
+          <div className="sticky top-0">
             <Link to="." prefetch="intent">
               <div className="rounded-lg p-2 font-medium text-gray-700 transition duration-150 hover:bg-gray-500 dark:text-white dark:hover:bg-gray-600">
                 Basic
@@ -39,13 +39,15 @@ export default function GuildManageLayout({
               </Link>
             ))}
           </div>
-          <div className="flex-shrink">
-            <Link to=".." prefetch="intent">
-              <div className="rounded-lg p-2 font-medium text-gray-700 transition duration-150 hover:bg-gray-500 dark:text-white dark:hover:bg-gray-600">
-                Back to Dashboard
-              </div>
-            </Link>
-          </div>
+          <Link
+            to=".."
+            prefetch="intent"
+            className="absolute bottom-4 flex-shrink"
+          >
+            <div className="rounded-lg p-2 font-medium text-gray-700 transition duration-150 hover:bg-gray-500 dark:text-white dark:hover:bg-gray-600">
+              Back to Dashboard
+            </div>
+          </Link>
         </div>
       </aside>
       <main className="flex-1">{children}</main>
