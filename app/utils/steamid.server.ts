@@ -1,4 +1,4 @@
-import { ID, Type } from "@node-steam/id";
+import { ID } from "@node-steam/id";
 
 export function validateSteamId(id?: string | null) {
   if (!id) {
