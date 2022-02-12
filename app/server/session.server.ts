@@ -22,17 +22,13 @@ export let { getSession, commitSession, destroySession } =
   });
 
 export async function requireUser(request: Request) {
-  try {
-    const user = await makeApiRequest<User>(request, "/v1/users", "get");
+  const user = await getUserInfo(request);
 
-    if (!user) {
-      throw redirect("/");
-    }
-
-    return user;
-  } catch (err) {
+  if (!user) {
     throw redirect("/");
   }
+
+  return user;
 }
 
 export async function getUserInfo(request: Request) {
