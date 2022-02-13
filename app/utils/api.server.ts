@@ -26,6 +26,19 @@ export async function makeApiRequest<T>(
   return (await response.json()) as T;
 }
 
+export async function makeApiRequestNullable<T>(
+  request: Request,
+  endpoint: string,
+  method: Request["method"],
+  body: any = null
+): Promise<T | null> {
+  try {
+    return await makeApiRequest(request, endpoint, method, body);
+  } catch (err) {
+    return null;
+  }
+}
+
 export async function makeApiRequestNoContent(
   request: Request,
   endpoint: string,

@@ -4,10 +4,16 @@ import {
   Form,
   json,
   useActionData,
+  useFetcher,
   useTransition,
 } from "remix";
 import Alert from "~/components/Alert";
-import { makeApiRequest } from "~/utils/api.server";
+import {
+  BASE_URL,
+  makeApiRequest,
+  makeApiRequestNoContent,
+} from "~/utils/api.server";
+import { Webhook } from "~/utils/contracts";
 import { badRequest } from "~/utils/httpHelpers";
 import { validateSteamId } from "~/utils/steamid.server";
 import { useUser } from "../settings";
@@ -21,31 +27,66 @@ type ActionData = { success: boolean; errors: ActionErrors };
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
 
-  const errors = {} as ActionErrors;
+  const { _action, ...values } = Object.fromEntries(form);
 
-  const steamId = form.get("steamId") as string | null;
+  switch (_action) {
+    case "create": {
+      return await makeApiRequest<Webhook>(
+        request,
+        `/v1/webhooks/users`,
+        "post",
+        values
+      );
+    }
 
-  const validatedId = validateSteamId(steamId);
+    case "delete": {
+      await makeApiRequestNoContent(request, `/v1/webhooks/users`, "delete");
 
-  if (!validatedId) {
-    errors.steamId = "Please enter in a correct SteamID";
+      return null;
+    }
+
+    case "test": {
+      const headers = new Headers();
+      headers.append("Authorization", values.secret as string);
+
+      await fetch(`${BASE_URL}/v1/webhooks/test`, {
+        headers,
+        method: "post",
+        credentials: "omit",
+      });
+
+      return null;
+    }
+
+    default: {
+      const errors = {} as ActionErrors;
+
+      const steamId = form.get("steamId") as string | null;
+
+      const validatedId = validateSteamId(steamId);
+
+      if (!validatedId) {
+        errors.steamId = "Please enter in a correct SteamID";
+      }
+
+      if (Object.values(errors).some(Boolean)) {
+        return badRequest({ errors, success: false });
+      }
+
+      await makeApiRequest(request, "/v1/users", "patch", {
+        steamId: validatedId,
+      });
+
+      return json({ errors, success: true });
+    }
   }
-
-  if (Object.values(errors).some(Boolean)) {
-    return badRequest({ errors, success: false });
-  }
-
-  await makeApiRequest(request, "/v1/users", "patch", {
-    steamId: validatedId,
-  });
-
-  return json({ errors, success: true });
 };
 
 export default function User() {
   const transition = useTransition();
+  const fetcher = useFetcher();
   const actionData = useActionData<ActionData>();
-  const user = useUser();
+  const { user, webhook } = useUser();
 
   const submitting = transition.state === "submitting";
 
@@ -74,6 +115,7 @@ export default function User() {
             General account settings. Please note this information is public!
           </p>
         </div>
+
         <Form method="post" className="flex flex-col gap-2">
           <label
             htmlFor="steamId-input"
@@ -106,7 +148,81 @@ export default function User() {
       </div>
 
       <hr className="my-6 divide-x-2 sm:my-4" />
-      <h1 className="mb-2 text-2xl font-medium text-gray-800 dark:text-slate-100">
+
+      <div className="grid sm:grid-cols-2">
+        <div className="mb-4 space-y-4 sm:mb-0 sm:space-y-2">
+          <h1 className="text-2xl font-semibold text-gray-800 dark:text-slate-100">
+            User Webhook
+          </h1>
+          <p className="text-md w-full font-medium text-gray-500 dark:text-slate-300 sm:w-3/4">
+            Webhook settings. This is used to send log previews using the{" "}
+            <a
+              href="https://github.com/payload-bot/payload-logs-plugin"
+              rel="noreferrer"
+              className="underline decoration-blue-500 decoration-2"
+            >
+              logs plugin
+            </a>
+          </p>
+        </div>
+        {console.log(webhook)}
+        {webhook?.id ? (
+          <>
+            <div className="mt-4 flex justify-center gap-2">
+              <fetcher.Form replace method="post">
+                <input type="hidden" name="secret" value={webhook.value} />
+                <button
+                  type="submit"
+                  name="_action"
+                  disabled={submitting}
+                  value="test"
+                  className="rounded-lg border border-green-700 bg-green-500 px-1 py-2 font-medium text-green-900 transition  duration-200 hover:bg-green-600"
+                >
+                  {fetcher.state === "submitting"
+                    ? "Testing Webhook..."
+                    : "Test Webhook"}
+                </button>
+              </fetcher.Form>
+
+              <Form method="post">
+                <button
+                  type="submit"
+                  name="_action"
+                  disabled={submitting}
+                  value="delete"
+                  className="rounded-lg border border-red-700 px-1 py-2 font-medium text-red-700 transition duration-200 hover:bg-red-500/25"
+                >
+                  {submitting ? "Deleting Webhook" : "Delete Webhook"}
+                </button>
+              </Form>
+            </div>
+          </>
+        ) : (
+          <div className="flex flex-col gap-6">
+            <div>
+              <h2 className="text-center text-2xl font-bold text-gray-600 dark:text-white">
+                No Webhook!
+              </h2>
+              <p className="text-md text-center font-bold text-gray-500 dark:text-slate-400">
+                Want to Create One?
+              </p>
+            </div>
+            <Form method="post" className="flex flex-col gap-4">
+              <button
+                type="submit"
+                name="_action"
+                value="create"
+                className="text-md justify-center rounded-md bg-green-500/90 px-2 py-3 font-medium text-green-900 transition duration-150 hover:bg-green-600"
+              >
+                {submitting ? "Creating your webhook..." : "Create new Webhook"}
+              </button>
+            </Form>
+          </div>
+        )}
+      </div>
+
+      <hr className="my-6 divide-x-2 sm:my-4" />
+      <h1 className="mb-4 text-2xl font-medium text-gray-800 dark:text-slate-100">
         Quick Actions
       </h1>
       <div className="flex w-full flex-row-reverse flex-wrap gap-2 sm:flex-row sm:gap-4">
