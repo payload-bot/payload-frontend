@@ -39,7 +39,8 @@ export default function GuildManageLayout({
               </Link>
             ))}
           </div>
-          <Link
+          {/* come back when it's like not so garbage */}
+          {/* <Link
             to=".."
             prefetch="intent"
             className="absolute bottom-4 flex-shrink"
@@ -47,7 +48,7 @@ export default function GuildManageLayout({
             <div className="rounded-lg p-2 font-medium text-gray-700 transition duration-150 hover:bg-gray-500 dark:text-white dark:hover:bg-gray-600">
               Back to Dashboard
             </div>
-          </Link>
+          </Link> */}
         </div>
       </aside>
       <main className="flex-1">{children}</main>
