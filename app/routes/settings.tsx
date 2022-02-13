@@ -12,8 +12,6 @@ export const loader: LoaderFunction = async ({ request }) => {
     makeApiRequestNullable<Webhook>(request, "/v1/webhooks/users", "get"),
   ]);
 
-  console.log(webhook);
-
   return { user, webhook };
 };
 

@@ -90,6 +90,10 @@ export default function User() {
 
   const submitting = transition.state === "submitting";
 
+  const copyToken = async () => {
+    await navigator.clipboard.writeText(webhook.value);
+  };
+
   return (
     <div className="mx-auto mt-8 max-w-5xl px-8">
       <div className="my-4">
@@ -165,10 +169,19 @@ export default function User() {
             </a>
           </p>
         </div>
-        {console.log(webhook)}
+
         {webhook?.id ? (
           <>
             <div className="mt-4 flex justify-center gap-2">
+              <div>
+                <button
+                  onClick={copyToken}
+                  className="rounded-lg border border-slate-700 bg-slate-500 px-1 py-2 font-medium text-slate-900 transition  duration-200 hover:bg-slate-600"
+                >
+                  Copy Token
+                </button>
+              </div>
+
               <fetcher.Form replace method="post">
                 <input type="hidden" name="secret" value={webhook.value} />
                 <button
@@ -184,7 +197,7 @@ export default function User() {
                 </button>
               </fetcher.Form>
 
-              <Form method="post">
+              <Form replace method="post">
                 <button
                   type="submit"
                   name="_action"
@@ -207,7 +220,7 @@ export default function User() {
                 Want to Create One?
               </p>
             </div>
-            <Form method="post" className="flex flex-col gap-4">
+            <Form replace method="post" className="flex flex-col gap-4">
               <button
                 type="submit"
                 name="_action"
