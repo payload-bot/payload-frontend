@@ -79,6 +79,10 @@ export default function Webhooks() {
   const transition = useTransition();
   const { server } = useGuild();
 
+  const copyToken = async () => {
+    await navigator.clipboard.writeText(webhook.value);
+  };
+
   const submitting = transition.state === "submitting";
 
   return (
@@ -93,6 +97,15 @@ export default function Webhooks() {
               Manage Webhook
             </h2>
             <div className="mt-4 flex justify-center gap-2">
+              <div>
+                <button
+                  onClick={copyToken}
+                  className="rounded-lg border border-slate-700 bg-slate-500 px-1 py-2 font-medium text-slate-900 transition  duration-200 hover:bg-slate-600"
+                >
+                  Copy Token
+                </button>
+              </div>
+
               <fetcher.Form replace method="post">
                 <input type="hidden" name="secret" value={webhook.value} />
                 <button

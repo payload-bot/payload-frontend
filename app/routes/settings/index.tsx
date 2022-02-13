@@ -163,6 +163,7 @@ export default function User() {
             <a
               href="https://github.com/payload-bot/payload-logs-plugin"
               rel="noreferrer"
+              target="_blank"
               className="underline decoration-blue-500 decoration-2"
             >
               logs plugin
