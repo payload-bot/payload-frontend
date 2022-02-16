@@ -100,7 +100,7 @@ export default function Webhooks() {
               <div>
                 <button
                   onClick={copyToken}
-                  className="rounded-lg border border-slate-700 bg-slate-500 px-1 py-2 font-medium text-slate-900 transition  duration-200 hover:bg-slate-600"
+                  className="rounded-lg border border-slate-800 bg-slate-500 px-1 py-2 font-medium text-slate-900 transition  duration-200 hover:bg-slate-600"
                 >
                   Copy Token
                 </button>
