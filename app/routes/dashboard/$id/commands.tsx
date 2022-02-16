@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ActionFunction, json, useFetcher } from "remix";
+import { ActionFunction, Form, json, useTransition } from "remix";
 import CommandToggle from "~/components/CommandToggle";
 import { makeApiRequest } from "~/utils/api.server";
 import { useGuild } from "../$id";
@@ -8,11 +8,11 @@ export const action: ActionFunction = async ({ request, params }) => {
   const guildId = params.id;
   const form = await request.formData();
 
-  const commands = form.get("commands");
+  const commands = form.get("commands") as string;
 
   try {
     await makeApiRequest(request, `/v1/guilds/${guildId}`, "patch", {
-      commandRestrictions: JSON.parse(commands as any),
+      commandRestrictions: commands?.split(",") ?? [],
     });
 
     return json({ success: true });
@@ -23,9 +23,9 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export default function Commands() {
   const { server } = useGuild();
-  const commands = useFetcher();
+  const transition = useTransition();
 
-  const submitting = commands.state === "submitting";
+  const submitting = transition.state !== "idle";
 
   const [commandsToRestrict, setCommandsToRestrict] = useState<string[]>([
     ...server.commands.restrictions,
@@ -47,17 +47,10 @@ export default function Commands() {
   }
 
   useEffect(() => {
-    if (commands.type === "done") {
+    if (!submitting) {
       setSaving(false);
     }
-  }, [commands]);
-
-  function handleFormSubmission() {
-    commands.submit(
-      { commands: JSON.stringify(commandsToRestrict) },
-      { replace: true, method: "post" }
-    );
-  }
+  }, [transition, submitting]);
 
   return (
     <section className="mx-auto my-4 w-1/2 p-2">
@@ -96,16 +89,16 @@ export default function Commands() {
           <p className="text-md flex-1 font-medium text-gray-700 dark:text-white">
             Please save your changes!
           </p>
-          <commands.Form className="flex gap-4">
+          <Form replace method="post" className="flex gap-4">
+            <input type="hidden" name="commands" value={commandsToRestrict} />
             <button
               className="text-md rounded-md bg-green-500 py-1 px-3 font-medium text-green-700 transition duration-150 hover:bg-green-600 disabled:bg-green-500/30 dark:text-green-900"
               disabled={submitting}
-              onClick={handleFormSubmission}
               type="submit"
             >
               {submitting ? "Saving your changes..." : "Save Changes"}
             </button>
-          </commands.Form>
+          </Form>
         </div>
       ) : null}
     </section>
