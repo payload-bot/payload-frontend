@@ -65,7 +65,7 @@ export const action: ActionFunction = async ({ request }) => {
 
       const validatedId = validateSteamId(steamId);
 
-      if (!validatedId) {
+      if (steamId && !validatedId) {
         errors.steamId = "Please enter in a correct SteamID";
       }
 
@@ -74,7 +74,7 @@ export const action: ActionFunction = async ({ request }) => {
       }
 
       await makeApiRequest(request, "/v1/users", "patch", {
-        steamId: validatedId,
+        steamId: validatedId || "",
       });
 
       return json({ errors, success: true });
