@@ -121,7 +121,7 @@ export default function Webhooks() {
                 </button>
               </fetcher.Form>
 
-              <Form method="post">
+              <Form replace method="post">
                 <button
                   type="submit"
                   name="_action"
@@ -144,7 +144,7 @@ export default function Webhooks() {
                 Let's create one!
               </p>
             </div>
-            <Form method="post" className="flex flex-col gap-4">
+            <Form replace method="post" className="flex flex-col gap-4">
               <select id="webhook-channel" name="channelId">
                 {server.channels.map((c) => (
                   <option value={c.id} label={c.name} key={c.id} />

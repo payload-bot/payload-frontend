@@ -120,7 +120,7 @@ export default function User() {
           </p>
         </div>
 
-        <Form method="post" className="flex flex-col gap-2">
+        <Form replace method="post" className="flex flex-col gap-2">
           <label
             htmlFor="steamId-input"
             className="font-medium text-gray-700 dark:text-slate-300"
