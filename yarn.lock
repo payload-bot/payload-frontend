@@ -41,6 +41,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild-plugins/node-modules-polyfill@npm:^0.1.4":
+  version: 0.1.4
+  resolution: "@esbuild-plugins/node-modules-polyfill@npm:0.1.4"
+  dependencies:
+    escape-string-regexp: ^4.0.0
+    rollup-plugin-node-polyfills: ^0.2.1
+  peerDependencies:
+    esbuild: "*"
+  checksum: 39ff2a816139d71ebfbb78914c024565b6026da3146776aa10d27ee1330938ce78c7b2aad11c2d7768c7675d0942d1d1690dabfe60fa79e07dbb31cfbe396cec
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.0.1":
   version: 1.1.2
   resolution: "@gar/promisify@npm:1.1.2"
@@ -124,15 +136,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@remix-run/dev@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "@remix-run/dev@npm:1.1.3"
+"@remix-run/dev@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@remix-run/dev@npm:1.2.1"
   dependencies:
+    "@esbuild-plugins/node-modules-polyfill": ^0.1.4
+    "@remix-run/server-runtime": 1.2.1
     cacache: ^15.0.5
     chokidar: ^3.5.1
     esbuild: 0.13.14
     exit-hook: 2.2.1
     fs-extra: ^10.0.0
+    get-port: ^5.1.1
     lodash.debounce: ^4.0.8
     meow: ^7.1.1
     minimatch: ^3.0.4
@@ -144,27 +159,27 @@ __metadata:
     xdm: ^2.0.0
   bin:
     remix: cli.js
-  checksum: 18d59286d0373178e8e77fca866d3e8584e6b86c1efab1be1da9dd2f246bf4d885c23c92450e7bc14c57f6e9fb96d80ca4a37bb62437e0c55828aa461535eed6
+  checksum: 4874eca1945fdaab0f8477fb4befab2d36e9a26c53e3af6d720e3daa1b61d5d3cffb24fef9ce43311f3c32d8bd4e623f9b7b4c23dbbec3c374f904d52cc92846
   languageName: node
   linkType: hard
 
-"@remix-run/express@npm:1.1.3":
-  version: 1.1.3
-  resolution: "@remix-run/express@npm:1.1.3"
+"@remix-run/express@npm:1.2.1":
+  version: 1.2.1
+  resolution: "@remix-run/express@npm:1.2.1"
   dependencies:
-    "@remix-run/node": 1.1.3
-    "@remix-run/server-runtime": 1.1.3
+    "@remix-run/node": 1.2.1
+    "@remix-run/server-runtime": 1.2.1
   peerDependencies:
     express: ^4.17.1
-  checksum: 0a7d616419912ad486e2e608d63a5e24d41a8e8fe66dd81e974a477b39b489f828d413b9e6c30c197e67b9d2da937ddd64934baa9592fc2bbc208cb3aa453c2e
+  checksum: ecb13fd6aaedd34b1b1d3aa3a336edcd6e2f0e0355657e03e5ae4918f5290623280e24b0d4f5c144ff6fcf1e132c078e4c620d7b04f1272e565afe6af607781d
   languageName: node
   linkType: hard
 
-"@remix-run/node@npm:1.1.3":
-  version: 1.1.3
-  resolution: "@remix-run/node@npm:1.1.3"
+"@remix-run/node@npm:1.2.1":
+  version: 1.2.1
+  resolution: "@remix-run/node@npm:1.2.1"
   dependencies:
-    "@remix-run/server-runtime": 1.1.3
+    "@remix-run/server-runtime": 1.2.1
     "@types/busboy": ^0.3.1
     "@types/node-fetch": ^2.5.12
     "@web-std/file": ^3.0.0
@@ -175,39 +190,40 @@ __metadata:
     form-data: ^4.0.0
     node-fetch: ^2.6.1
     source-map: ^0.7.3
-  checksum: 652371bc95cc623c0ba125f2f760ffdbfae0d3a63ac2a24d34c7dd34484b0b745828723d578f38d0e23129431e121a45ce3fee5af06924cf81c9f98b782fcb08
+  checksum: 923f835fdda62782afe4525908db84fc3fa9d2bfccfc3348c9b047c1951ab80f3bbf6f4b9403861e5fa85641e883e9b156bffd255fbb19908c853eaa25123404
   languageName: node
   linkType: hard
 
-"@remix-run/react@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "@remix-run/react@npm:1.1.3"
+"@remix-run/react@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@remix-run/react@npm:1.2.1"
   dependencies:
+    history: ^5.2.0
     react-router-dom: ^6.2.1
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: 0498c0297e71b7a2675b931b8fb6638ae582cd241cbf3116f5c996f7b0f40982912e13c5a818f2ac59c488bf7b6880af1bed756cc48d3a7ba4fcc4d3c04e714b
+  checksum: 5cce88ada024d5691d273ac9e086d2016c2dd170042edc4f0b2edb502bd53ca6779ae3ce54f1cb013b7995ea2d3906367e9dd52836bdd12f1bf3d8025b6ff40e
   languageName: node
   linkType: hard
 
-"@remix-run/serve@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "@remix-run/serve@npm:1.1.3"
+"@remix-run/serve@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@remix-run/serve@npm:1.2.1"
   dependencies:
-    "@remix-run/express": 1.1.3
+    "@remix-run/express": 1.2.1
     compression: ^1.7.4
     express: ^4.17.1
     morgan: ^1.10.0
   bin:
     remix-serve: cli.js
-  checksum: f7ac988e9f9af60a60a50d80c23b074fd5c37795acce898fa016f05e1d784c79f989a9bd2cb08d6c76af7684bc83eef37a0628d3a3c48f5eb91a784122e24c52
+  checksum: 135f1eefe8e5646e4842c32f1bce5514616b49d97fb1a1e6929a807c1d8ff41c908b296eab77d75c37e6b35bc9ca044a047b0df42e5858286621c45107f51102
   languageName: node
   linkType: hard
 
-"@remix-run/server-runtime@npm:1.1.3":
-  version: 1.1.3
-  resolution: "@remix-run/server-runtime@npm:1.1.3"
+"@remix-run/server-runtime@npm:1.2.1":
+  version: 1.2.1
+  resolution: "@remix-run/server-runtime@npm:1.2.1"
   dependencies:
     "@types/cookie": ^0.4.0
     cookie: ^0.4.1
@@ -218,19 +234,19 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: 1b644c35b73590829e29bd5b9af81c66cc64e8178a8bab04a49045a6bed8156c7b518b052851333ab4e41c04a51eb89a7aa78ca58675964ceb25ef169754df9e
+  checksum: b3eb5f6f3b998415d005979022f0a16567ac85f84ce240f61ec72b1d7ca7920721f1ae6566708504dfb9abcfb7e11911910844b838fbd381c0809c1a965ca57a
   languageName: node
   linkType: hard
 
-"@remix-run/vercel@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "@remix-run/vercel@npm:1.1.3"
+"@remix-run/vercel@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@remix-run/vercel@npm:1.2.1"
   dependencies:
-    "@remix-run/node": 1.1.3
-    "@remix-run/server-runtime": 1.1.3
+    "@remix-run/node": 1.2.1
+    "@remix-run/server-runtime": 1.2.1
   peerDependencies:
     "@vercel/node": ^1.8.3
-  checksum: 3048505a1d9f41320244b41bd4cc647b748084c6294129ea96e43bad907db82fc25f67ef8949fc0b49e2f789b81edf53e839b7a8366cf8a6c3efd1b74b57a332
+  checksum: 962c2bfc0a7f37a1420d941b512c4005c4fb1c706043c857025ac01518656859d34ae9aaa012c16c2e305e546ef6088aaa119cc1eb0a80c87931af7edbe82954
   languageName: node
   linkType: hard
 
@@ -280,16 +296,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tailwindcss/typography@npm:^0.5.1":
-  version: 0.5.1
-  resolution: "@tailwindcss/typography@npm:0.5.1"
+"@tailwindcss/typography@npm:^0.5.2":
+  version: 0.5.2
+  resolution: "@tailwindcss/typography@npm:0.5.2"
   dependencies:
     lodash.castarray: ^4.4.0
     lodash.isplainobject: ^4.0.6
     lodash.merge: ^4.6.2
   peerDependencies:
     tailwindcss: "*"
-  checksum: 894bab9a14a5bc4071573618ca9fd6b5bbe53e3c26af8aa1de440b8be59a63cf105f9fb1b12611bf446b4b054c6a48e8ff5c7c85ff233c5f78d70ffb7e53b5d9
+  checksum: f6c27e32c9b48b0e906561d1e9dd3eec8fd5efc9792fd691269ceaa9d30d35bc715023215ec83ff8e5475c38af69e164d577672d935813b70e04b1c820b2ea8e
   languageName: node
   linkType: hard
 
@@ -1760,6 +1776,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"escape-string-regexp@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "escape-string-regexp@npm:4.0.0"
+  checksum: 98b48897d93060f2322108bf29db0feba7dd774be96cd069458d1453347b25ce8682ecc39859d4bca2203cc0ab19c237bcc71755eff49a0f8d90beadeeba5cc5
+  languageName: node
+  linkType: hard
+
 "estree-util-attach-comments@npm:^2.0.0":
   version: 2.0.0
   resolution: "estree-util-attach-comments@npm:2.0.0"
@@ -1810,6 +1833,13 @@ __metadata:
     "@types/estree-jsx": ^0.0.1
     "@types/unist": ^2.0.0
   checksum: 4facaa960d405f2f61978794282b3852b1c419bdf110b7f74f2b3f61c5c4ac1c08527ee30c29533b429dd246d7a0730ec398fdd8b34bbc7dd30971225bab3eca
+  languageName: node
+  linkType: hard
+
+"estree-walker@npm:^0.6.1":
+  version: 0.6.1
+  resolution: "estree-walker@npm:0.6.1"
+  checksum: 9d6f82a4921f11eec18f8089fb3cce6e53bcf45a8e545c42a2674d02d055fb30f25f90495f8be60803df6c39680c80dcee7f944526867eb7aa1fc9254883b23d
   languageName: node
   linkType: hard
 
@@ -2100,6 +2130,13 @@ __metadata:
     has: ^1.0.3
     has-symbols: ^1.0.1
   checksum: a9fe2ca8fa3f07f9b0d30fb202bcd01f3d9b9b6b732452e79c48e79f7d6d8d003af3f9e38514250e3553fdc83c61650851cb6870832ac89deaaceb08e3721a17
+  languageName: node
+  linkType: hard
+
+"get-port@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "get-port@npm:5.1.1"
+  checksum: 0162663ffe5c09e748cd79d97b74cd70e5a5c84b760a475ce5767b357fb2a57cb821cee412d646aa8a156ed39b78aab88974eddaa9e5ee926173c036c0713787
   languageName: node
   linkType: hard
 
@@ -2895,6 +2932,15 @@ __metadata:
   dependencies:
     yallist: ^4.0.0
   checksum: f97f499f898f23e4585742138a22f22526254fdba6d75d41a1c2526b3b6cc5747ef59c5612ba7375f42aca4f8461950e925ba08c991ead0651b4918b7c978297
+  languageName: node
+  linkType: hard
+
+"magic-string@npm:^0.25.3":
+  version: 0.25.7
+  resolution: "magic-string@npm:0.25.7"
+  dependencies:
+    sourcemap-codec: ^1.4.4
+  checksum: 727a1fb70f9610304fe384f1df0251eb7d1d9dd779c07ef1225690361b71b216f26f5d934bfb11c919b5b0e7ba50f6240c823a6f2e44cfd33d4a07d7747ca829
   languageName: node
   linkType: hard
 
@@ -4013,13 +4059,13 @@ __metadata:
     "@headlessui/react": ^1.4.3
     "@heroicons/react": ^1.0.5
     "@node-steam/id": ^1.2.0
-    "@remix-run/dev": ^1.1.3
-    "@remix-run/react": ^1.1.3
-    "@remix-run/serve": ^1.1.3
-    "@remix-run/vercel": ^1.1.3
+    "@remix-run/dev": ^1.2.1
+    "@remix-run/react": ^1.2.1
+    "@remix-run/serve": ^1.2.1
+    "@remix-run/vercel": ^1.2.1
     "@tailwindcss/aspect-ratio": ^0.4.0
     "@tailwindcss/forms": ^0.4.0
-    "@tailwindcss/typography": ^0.5.1
+    "@tailwindcss/typography": ^0.5.2
     "@types/react": ^17.0.39
     "@types/react-dom": ^17.0.11
     concurrently: ^7.0.0
@@ -4029,8 +4075,8 @@ __metadata:
     prettier-plugin-tailwindcss: ^0.1.7
     react: ^17.0.2
     react-dom: ^17.0.2
-    remix: ^1.1.3
-    tailwindcss: ^3.0.22
+    remix: ^1.2.1
+    tailwindcss: ^3.0.23
     typescript: ^4.5.5
   languageName: unknown
   linkType: soft
@@ -4406,12 +4452,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remix@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "remix@npm:1.1.3"
+"remix@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "remix@npm:1.2.1"
   dependencies:
     fs-extra: ^10.0.0
-  checksum: 5b485911f8cf282346f2e8b54451fc48f25d42e5881f2662fa1d87233ce679cc2be66d7f65686f2fc70c80933de18346549ac2524074c6bb30705fa8fd8350f0
+  checksum: bc2c14ec366e6ade9c7cda949ee9c718826d29ad6ac394925de6fe1a7d2d6620d08d391eaff447d653839cc305f9c360a80b841d534486864f38204d79f159b1
   languageName: node
   linkType: hard
 
@@ -4493,6 +4539,35 @@ __metadata:
   bin:
     rimraf: bin.js
   checksum: 87f4164e396f0171b0a3386cc1877a817f572148ee13a7e113b238e48e8a9f2f31d009a92ec38a591ff1567d9662c6b67fd8818a2dbbaed74bc26a87a2a4a9a0
+  languageName: node
+  linkType: hard
+
+"rollup-plugin-inject@npm:^3.0.0":
+  version: 3.0.2
+  resolution: "rollup-plugin-inject@npm:3.0.2"
+  dependencies:
+    estree-walker: ^0.6.1
+    magic-string: ^0.25.3
+    rollup-pluginutils: ^2.8.1
+  checksum: a014972c80fe34b8c8154056fa2533a8440066a31de831e3793fc21b15d108d92c22d8f7f472397bd5783d7c5e04d8cbf112fb72c5a26e997726e4eb090edad1
+  languageName: node
+  linkType: hard
+
+"rollup-plugin-node-polyfills@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "rollup-plugin-node-polyfills@npm:0.2.1"
+  dependencies:
+    rollup-plugin-inject: ^3.0.0
+  checksum: e84645212c443aca3cfae2ba69f01c6d8c5c250f0bf651416b69a4572b60aae9da7cdd687de3ab9b903f7a1ab96b06b71f0c4927d1b02a37485360d2b563937b
+  languageName: node
+  linkType: hard
+
+"rollup-pluginutils@npm:^2.8.1":
+  version: 2.8.2
+  resolution: "rollup-pluginutils@npm:2.8.2"
+  dependencies:
+    estree-walker: ^0.6.1
+  checksum: 339fdf866d8f4ff6e408fa274c0525412f7edb01dc46b5ccda51f575b7e0d20ad72965773376fb5db95a77a7fcfcab97bf841ec08dbadf5d6b08af02b7a2cf5e
   languageName: node
   linkType: hard
 
@@ -4688,6 +4763,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sourcemap-codec@npm:^1.4.4":
+  version: 1.4.8
+  resolution: "sourcemap-codec@npm:1.4.8"
+  checksum: b57981c05611afef31605732b598ccf65124a9fcb03b833532659ac4d29ac0f7bfacbc0d6c5a28a03e84c7510e7e556d758d0bb57786e214660016fb94279316
+  languageName: node
+  linkType: hard
+
 "space-separated-tokens@npm:^2.0.0":
   version: 2.0.1
   resolution: "space-separated-tokens@npm:2.0.1"
@@ -4870,9 +4952,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.0.22":
-  version: 3.0.22
-  resolution: "tailwindcss@npm:3.0.22"
+"tailwindcss@npm:^3.0.23":
+  version: 3.0.23
+  resolution: "tailwindcss@npm:3.0.23"
   dependencies:
     arg: ^5.0.1
     chalk: ^4.1.2
@@ -4901,7 +4983,7 @@ __metadata:
   bin:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
-  checksum: 52ec8c4e635d65b708ce762e93d327b3bed9e100db43749bb515e19d4b1af4fe1b0752b57a09939074c265ff63e5ee3451b6ceb7ab7e0da9aa02584cb33eef29
+  checksum: 2e7fdd11561e619770f656821c4b6850fdef633777c1f56fc815e566fc3fe6ec707df0966e90764ef9f452be0d0ee54daa0541002918eada590def3788a30f08
   languageName: node
   linkType: hard
 
