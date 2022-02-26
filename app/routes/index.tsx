@@ -33,7 +33,7 @@ export default function Index() {
           </a>
           <a
             href="#features"
-            className="w-full rounded-md border border-gray-400 py-2 text-lg font-semibold text-gray-700 shadow-md transition duration-75 hover:bg-gray-100 dark:border-slate-800 dark:text-slate-200 dark:hover:bg-slate-500 dark:hover:text-white md:w-max md:px-10"
+            className="w-full rounded-md border border-gray-400 py-2 text-lg font-semibold text-gray-700 shadow-md transition duration-75 hover:bg-gray-100 dark:border-slate-800 dark:bg-slate-600 dark:text-slate-200 dark:hover:bg-slate-500 dark:hover:text-white md:w-max md:px-10"
           >
             Features
           </a>
