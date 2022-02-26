@@ -1,4 +1,5 @@
 import { LoaderFunction, useLoaderData } from "remix";
+import Footer from "~/components/Footer";
 import LandingHeader from "~/components/LandingHeader";
 import { getUserInfo } from "~/server/session.server";
 import { User } from "~/utils/contracts";
@@ -97,6 +98,19 @@ export default function Index() {
         </div>
       </section>
 
+      <section className="my-16 flex w-full flex-col items-center justify-center gap-4">
+        <h1 className="text-2xl font-medium text-gray-200 dark:text-white md:text-4xl">
+          What are you waiting for? Invite now!
+        </h1>
+        <a
+          href="/invite"
+          target="_blank"
+          className=" rounded-md bg-slate-500 py-2 px-4 text-lg font-semibold text-gray-800 transition duration-200 hover:bg-slate-600"
+        >
+          Invite Payload
+        </a>
+      </section>
+
       {/* Blobs */}
       <img
         src="/blob-main.svg"
@@ -104,10 +118,10 @@ export default function Index() {
       />
       <img
         src="/blob-secondary.svg"
-        className="absolute -bottom-1/4 -left-1/4 -z-10 h-full opacity-30 sm:-left-3/4"
+        className="absolute top-1/4 -left-1/4 -z-10 h-1/2 md:h-3/4 opacity-30 sm:-left-3/4"
       />
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
