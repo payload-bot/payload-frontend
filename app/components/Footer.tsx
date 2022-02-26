@@ -2,7 +2,7 @@ import { Link } from "remix";
 
 export default function Footer() {
   return (
-    <footer className="relative bottom-0 flex flex-col divide-y divide-gray-700 overflow-y-hidden bg-gray-700 p-4 dark:divide-slate-500 dark:bg-slate-700">
+    <footer className="static bottom-0 w-full left-0 flex flex-col divide-y divide-gray-700 overflow-y-hidden bg-gray-700 p-4 dark:divide-slate-500 dark:bg-slate-700">
       {/* Top */}
       <div className="mb-4 grid grid-cols-2 gap-6 md:mx-auto md:w-3/4">
         {/* Left */}

@@ -1,4 +1,5 @@
 import { LoaderFunction, Outlet, useLoaderData, useOutletContext } from "remix";
+import Footer from "~/components/Footer";
 import Header from "~/components/Header";
 import { requireUser } from "~/server/session.server";
 import { makeApiRequestNullable } from "~/utils/api.server";
@@ -22,6 +23,7 @@ export default function Index() {
     <>
       <Header user={user} />
       <Outlet context={{ user, webhook }} />
+      <Footer />
     </>
   );
 }

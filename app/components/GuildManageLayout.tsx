@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "remix";
+import Footer from "./Footer";
 
 type GuildManageLayoutProps = {
   children?: React.ReactNode;
@@ -51,7 +52,10 @@ export default function GuildManageLayout({
           </Link> */}
         </div>
       </aside>
-      <main className="flex-1">{children}</main>
+      <main className="flex-1">
+        {children}
+        <Footer />
+      </main>
     </div>
   );
 }

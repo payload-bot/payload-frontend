@@ -1,4 +1,5 @@
 import { LoaderFunction, useLoaderData } from "remix";
+import Footer from "~/components/Footer";
 import SelectServer from "~/components/SelectServer";
 import { makeApiRequest } from "~/utils/api.server";
 import { ServerList } from "~/utils/contracts";
@@ -13,7 +14,7 @@ export default function Index() {
   const guilds = useLoaderData<ServerList[]>();
 
   return (
-    <div className="mt-3 py-4 pb-8">
+    <div className="mt-3">
       {guilds.length > 0 ? (
         <h1 className="text-center text-lg font-bold text-gray-700 dark:text-white md:text-2xl lg:text-3xl">
           Your Servers
@@ -37,13 +38,15 @@ export default function Index() {
         </div>
       )}
 
-      <main className="mx-auto mt-4 flex max-w-sm flex-col gap-5 sm:max-w-lg md:max-w-xl lg:max-w-4xl">
+      <main className="mx-auto mt-4 flex max-w-sm flex-col gap-5 sm:max-w-lg md:max-w-xl lg:max-w-4xl py-6">
         {guilds.length > 0
           ? guilds.map((guild) => (
               <SelectServer key={guild.id} server={guild} />
             ))
           : null}
       </main>
+
+      <Footer />
     </div>
   );
 }
