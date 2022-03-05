@@ -70,12 +70,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroicons/react@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "@heroicons/react@npm:1.0.5"
+"@heroicons/react@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@heroicons/react@npm:1.0.6"
   peerDependencies:
     react: ">= 16"
-  checksum: 12114af19c17f69140cc7338e4cd12fe38098ad3ed79f02762106160655cde3ebdba58a2b26f1067f720786187364fd9465bc72f02aad85b0ead8172d76aa51d
+  checksum: 372b1eda3ce735ef069777bc96304f70de585ebb71a6d1cedc121bb695f9bca235619112e3ee14e8779e95a03096813cbbe3b755927a54b7580d1ce084fa4096
   languageName: node
   linkType: hard
 
@@ -286,14 +286,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tailwindcss/forms@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@tailwindcss/forms@npm:0.4.0"
+"@tailwindcss/forms@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@tailwindcss/forms@npm:0.5.0"
   dependencies:
     mini-svg-data-uri: ^1.2.3
   peerDependencies:
     tailwindcss: ">=3.0.0 || >= 3.0.0-alpha.1"
-  checksum: 881a80b136f22b3da68323166ddfbcd844841f711d75ce4d64479302ae523ac7c1fe8a3bb57370216e6da69303640d70d543ecdb3ec2086f1ddf428a6c13566f
+  checksum: 3e57584871bc41947f2a1518deaf69894b75745dee959bb2ba475c819eadec2b86f8bf6e73a051ddab627df4c8c3ad1d18239d48b3a95211be3b11a04dee0511
   languageName: node
   linkType: hard
 
@@ -486,12 +486,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^17.0.12":
-  version: 17.0.12
-  resolution: "@types/react-dom@npm:17.0.12"
+"@types/react-dom@npm:^17.0.13":
+  version: 17.0.13
+  resolution: "@types/react-dom@npm:17.0.13"
   dependencies:
     "@types/react": "*"
-  checksum: 9754e1d0c0107310eab35a2eb1dad45f6ef0a41e562c23a29d6bf723a29c8a2036c4acd6a1a1422bf7cf956d431e41b154608dd917f6e69c7ab0d87720c5e27e
+  checksum: 62c42a54ac8961c23a0e74b9cdd8b0a78563757e462b1ab665b2aa365bfd8b86a73d3f6eafc09a4a80fb08659321db168f012aa597c41c0df36f645a94e9266b
   languageName: node
   linkType: hard
 
@@ -4103,17 +4103,17 @@ __metadata:
   resolution: "payloadtf@workspace:."
   dependencies:
     "@headlessui/react": ^1.5.0
-    "@heroicons/react": ^1.0.5
+    "@heroicons/react": ^1.0.6
     "@node-steam/id": ^1.2.0
     "@remix-run/dev": ^1.2.3
     "@remix-run/react": ^1.2.3
     "@remix-run/serve": ^1.2.3
     "@remix-run/vercel": ^1.2.3
     "@tailwindcss/aspect-ratio": ^0.4.0
-    "@tailwindcss/forms": ^0.4.0
+    "@tailwindcss/forms": ^0.5.0
     "@tailwindcss/typography": ^0.5.2
     "@types/react": ^17.0.39
-    "@types/react-dom": ^17.0.12
+    "@types/react-dom": ^17.0.13
     concurrently: ^7.0.0
     dotenv: ^16.0.0
     postcss: ^8.4.7
