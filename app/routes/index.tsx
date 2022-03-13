@@ -99,7 +99,7 @@ export default function Index() {
       </section>
 
       <section className="my-16 flex w-full flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-medium text-gray-200 dark:text-white md:text-4xl">
+        <h1 className="text-center px-2 text-2xl font-medium text-gray-200 dark:text-white md:text-4xl">
           What are you waiting for? Invite now!
         </h1>
         <a
