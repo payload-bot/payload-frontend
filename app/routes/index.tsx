@@ -28,7 +28,7 @@ export default function Index() {
           <a
             href="/invite"
             target="_blank"
-            className="w-full rounded-md bg-sky-400 py-2 text-lg font-semibold text-gray-700 shadow-md shadow-sky-400/40 transition duration-75 hover:bg-sky-500 md:w-max md:px-10"
+            className="w-full rounded-md bg-sky-400 py-2 text-lg font-semibold text-gray-700 shadow-lg shadow-sky-400/20 transition duration-75 hover:bg-sky-500 md:w-max md:px-10"
           >
             Invite Payload
           </a>
