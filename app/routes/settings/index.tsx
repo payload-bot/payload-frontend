@@ -95,7 +95,7 @@ export default function User() {
   };
 
   return (
-    <div className="mx-auto mt-8 max-w-5xl px-8">
+    <div className="min-h-[calc(100vh-60px)]  mx-auto mt-8 max-w-5xl px-8">
       <div className="my-4">
         {actionData?.success ? (
           <Alert type="success" message="Successfully saved user data" />
