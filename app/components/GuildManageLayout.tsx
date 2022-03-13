@@ -14,7 +14,7 @@ export default function GuildManageLayout({
   return (
     <div className="flex">
       <aside className="min-h-[calc(100vh-60px)] w-[240px] bg-slate-700">
-        <div className="flex h-full flex-col gap-2 p-4">
+        <div className="flex h-[calc(100vh-60px)] flex-col gap-2 p-4">
           <div className="sticky top-0">
             <Link to="." prefetch="intent">
               <div className="rounded-lg p-2 font-medium text-gray-700 transition duration-150 hover:bg-gray-500 dark:text-white dark:hover:bg-gray-600">
@@ -53,7 +53,7 @@ export default function GuildManageLayout({
         </div>
       </aside>
       <main className="flex-1">
-        {children}
+        <section className="min-h-[calc(100vh-60px)]">{children}</section>
         <Footer />
       </main>
     </div>
