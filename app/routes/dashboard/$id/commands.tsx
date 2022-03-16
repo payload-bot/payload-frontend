@@ -27,9 +27,9 @@ export default function Commands() {
 
   const submitting = transition.state !== "idle";
 
-  const [commandsToRestrict, setCommandsToRestrict] = useState<string[]>([
-    ...server.commands.restrictions,
-  ]);
+  const [commandsToRestrict, setCommandsToRestrict] = useState<string[]>(
+    server.commands.restrictions.filter(Boolean)
+  );
 
   const [saving, setSaving] = useState(false);
 
@@ -42,6 +42,7 @@ export default function Commands() {
       const elementsChecked = commandsToRestrict.filter(
         (cmd) => cmd !== cmdName
       );
+
       setCommandsToRestrict(elementsChecked);
     }
   }
@@ -53,7 +54,7 @@ export default function Commands() {
   }, [transition, submitting]);
 
   return (
-    <section className="mx-auto my-4 w-1/2 p-2">
+    <section className="relative mx-auto my-4 w-1/2 p-2">
       <h2 className="text-2xl font-semibold text-gray-600 dark:text-white">
         Commands
       </h2>
@@ -85,10 +86,11 @@ export default function Commands() {
         ))}
 
       {saving ? (
-        <div className="sticky inset-x-0 bottom-4 flex items-center rounded-lg bg-black px-2 py-4">
+        <div className="fixed inset-x-0 bottom-4 mx-auto flex max-w-screen-md items-center rounded-lg bg-black/90 px-2 py-4">
           <p className="text-md flex-1 font-medium text-gray-700 dark:text-white">
             Please save your changes!
           </p>
+          {/* I think I need to get a better version of this <button className="text-md mr-4 font-medium text-white">Reset</button> */}
           <Form replace method="post" className="flex gap-4">
             <input type="hidden" name="commands" value={commandsToRestrict} />
             <button
