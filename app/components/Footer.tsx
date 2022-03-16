@@ -2,14 +2,14 @@ import { Link } from "remix";
 
 export default function Footer() {
   return (
-    <footer className="static bottom-0 w-full left-0 flex flex-col divide-y divide-gray-700 overflow-y-hidden bg-gray-700 p-4 dark:divide-slate-500 dark:bg-slate-700">
+    <footer className="static bottom-0 left-0 flex w-full flex-col divide-y divide-gray-400 overflow-y-hidden bg-gray-300 p-4 dark:divide-slate-500 dark:bg-slate-700">
       {/* Top */}
       <div className="mb-4 grid grid-cols-2 gap-6 md:mx-auto md:w-3/4">
         {/* Left */}
         <div className="flex flex-col gap-4">
           <div className="flex flex-row items-center gap-2">
             <img src="/logo.svg" alt="payload logo svg" className="h-12 w-12" />
-            <p className="text-md font-medium dark:text-slate-400 lg:text-xl">
+            <p className="text-md font-medium text-gray-800 dark:text-slate-400 lg:text-xl">
               Payload
             </p>
           </div>
@@ -57,7 +57,7 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <p className="font-bold uppercase tracking-wide text-gray-600 dark:text-slate-400">
+            <p className="font-bold uppercase tracking-wide text-gray-700 dark:text-slate-400">
               Payload
             </p>
             <a
@@ -86,7 +86,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom */}
-      <div className="flex flex-col items-center justify-center gap-2 pt-4 text-sm text-gray-600 dark:text-slate-400">
+      <div className="flex flex-col items-center justify-center gap-2 pt-4 text-sm text-gray-500 dark:text-slate-400">
         &copy; {new Date().getFullYear()}, Payload. All rights reserved.
       </div>
     </footer>

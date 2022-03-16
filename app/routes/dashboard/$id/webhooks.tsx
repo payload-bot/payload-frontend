@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   ActionFunction,
   Form,
@@ -79,9 +80,18 @@ export default function Webhooks() {
   const transition = useTransition();
   const { server } = useGuild();
 
+  const [copied, setCopied] = useState(false);
+
   const copyToken = async () => {
     await navigator.clipboard.writeText(webhook.value);
+    setCopied(true);
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => setCopied(false), 1500);
+
+    return () => clearInterval(interval);
+  }, [copied]);
 
   const submitting = transition.state === "submitting";
 
@@ -90,7 +100,7 @@ export default function Webhooks() {
       <Avatar name={server.name} icon={server.icon} />
       <h1 className="mt-4 text-2xl font-bold dark:text-white">{server.name}</h1>
 
-      <div className="mt-10 w-1/2 rounded-lg bg-gray-600 p-6 dark:bg-slate-700">
+      <div className="mt-10 w-1/2 rounded-lg bg-gray-300 p-6 dark:bg-slate-700">
         {webhook?.id ? (
           <>
             <h2 className="text-center text-2xl font-bold text-gray-600 dark:text-white">
@@ -102,7 +112,7 @@ export default function Webhooks() {
                   onClick={copyToken}
                   className="rounded-lg border border-slate-800 bg-slate-500 px-1 py-2 font-medium text-slate-900 transition  duration-200 hover:bg-slate-600"
                 >
-                  Copy Token
+                  {copied ? "Copied!!" : "Copy Token"}
                 </button>
               </div>
 

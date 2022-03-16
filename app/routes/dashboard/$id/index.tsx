@@ -49,7 +49,7 @@ export default function Index() {
           {server.name}
         </h1>
 
-        <div className="mt-10 rounded-lg bg-gray-600 p-6 dark:bg-slate-700">
+        <div className="mt-10 rounded-lg bg-gray-500/20 p-6 dark:bg-slate-700">
           <h2 className="text-sm font-bold uppercase tracking-wide text-gray-600 dark:text-white sm:text-lg">
             Server Settings
           </h2>
