@@ -38,7 +38,7 @@ export default function Index() {
         </div>
       )}
 
-      <main className="mx-auto mt-4 flex min-h-[calc(100vh-60px)] max-w-sm flex-col gap-5 py-6 sm:max-w-lg md:max-w-xl lg:max-w-4xl">
+      <main className="mx-auto mt-4 flex min-h-[calc(100vh-60px)] max-w-lg flex-col gap-5 py-6 sm:max-w-lg md:max-w-xl lg:max-w-2xl">
         {guilds.length > 0
           ? guilds.map((guild) => (
               <SelectServer key={guild.id} server={guild} />
