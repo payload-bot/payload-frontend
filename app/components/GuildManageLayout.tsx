@@ -13,7 +13,7 @@ export default function GuildManageLayout({
 }: GuildManageLayoutProps) {
   return (
     <div className="flex">
-      <aside className="min-h-[calc(100vh-60px)] w-[240px] bg-gray-300 dark:bg-slate-700">
+      <aside className="min-h-[calc(100vh-60px)] hidden lg:block w-[240px] bg-gray-300 dark:bg-slate-700">
         <div className="flex h-[calc(100vh-60px)] flex-col gap-2 p-4">
           <div className="sticky flex flex-col gap-2 top-0">
             <Link to="." prefetch="intent">
