@@ -1,4 +1,5 @@
-import { Popover } from "@headlessui/react";
+import { Popover, Transition } from "@headlessui/react";
+import { Fragment } from "react";
 import { Link, NavLink } from "remix";
 import { User } from "~/utils/contracts";
 
@@ -23,46 +24,56 @@ export default function Header({ user }: HeaderProps) {
             <img
               src={user.avatar}
               alt={`${user.username}'s discord avatar`}
-              className="h-12 w-12 rounded-full ring-4 ring-inset ring-gray-500 cursor-pointer"
+              className="h-12 w-12 cursor-pointer rounded-full ring-4 ring-inset ring-gray-500"
             />
           </Popover.Button>
 
-          <Popover.Panel className="absolute left-3/4 z-10 mt-2 -translate-x-full transform bg-white sm:px-0 lg:max-w-3xl">
-            <div className="flex flex-col gap-2 rounded-md p-2">
-              <NavLink
-                to="/settings"
-                className={({ isActive }) =>
-                  `${
-                    isActive ? "text-blue-500" : "text-slate-500"
-                  } transition duration-150 hover:text-blue-300`
-                }
-              >
-                Settings
-              </NavLink>
-              <NavLink
-                to="/dashboard"
-                className={({ isActive }) =>
-                  `${
-                    isActive ? "text-blue-500" : "text-slate-500"
-                  } transition duration-150 hover:text-blue-300`
-                }
-              >
-                Dashboard
-              </NavLink>
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-200"
+            enterFrom="opacity-0 translate-y-1"
+            enterTo="opacity-100 translate-y-0"
+            leave="transition ease-in duration-150"
+            leaveFrom="opacity-100 translate-y-0"
+            leaveTo="opacity-0 translate-y-1"
+          >
+            <Popover.Panel className="absolute left-3/4 z-10 mt-2 w-32 -translate-x-full transform rounded-sm bg-white sm:px-0">
+              <div className="flex flex-col gap-2 rounded-md p-2">
+                <NavLink
+                  to="/settings"
+                  className={({ isActive }) =>
+                    `${
+                      isActive ? "text-sky-500" : "text-slate-600"
+                    } transition duration-150 hover:text-sky-300`
+                  }
+                >
+                  Settings
+                </NavLink>
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) =>
+                    `${
+                      isActive ? "text-sky-500" : "text-slate-600"
+                    } transition duration-150 hover:text-sky-300`
+                  }
+                >
+                  Dashboard
+                </NavLink>
 
-              <div className="h-[1px] bg-slate-300" />
+                <div className="h-[1px] bg-slate-300" />
 
-              <form
-                action="logout"
-                method="post"
-                className="rounded-sm transition duration-75 hover:bg-red-200"
-              >
-                <button className="w-full font-semibold text-red-700">
-                  Logout
-                </button>
-              </form>
-            </div>
-          </Popover.Panel>
+                <form
+                  action="logout"
+                  method="post"
+                  className="rounded-sm transition duration-150 hover:bg-red-200"
+                >
+                  <button className="w-full font-semibold text-red-700">
+                    Logout
+                  </button>
+                </form>
+              </div>
+            </Popover.Panel>
+          </Transition>
         </Popover>
       </div>
     </nav>
