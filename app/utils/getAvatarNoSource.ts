@@ -6,5 +6,5 @@ export default function getServerAvatarNoSrc(serverName: string) {
   for (const word of wordsWithSpaces) {
     avatarString += word[0];
   }
-  return avatarString;
+  return avatarString.slice(0, 3);
 }
