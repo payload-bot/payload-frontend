@@ -49,7 +49,7 @@ export default function Footer() {
               Terms
             </Link>
             <Link
-              to="/policy"
+              to="/privacy"
               className="font-medium text-gray-500 dark:text-slate-300"
             >
               Privacy Policy

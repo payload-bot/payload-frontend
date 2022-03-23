@@ -13,7 +13,9 @@
     "paths": {
       "~/*": ["./app/*"],
       "~/server*": ["./app/server/*"],
-      "~/utils*": ["./app/utils/*"]
+      "~/utils*": ["./app/utils/*"],
+      "~/components*": ["./app/components/*"],
+      "~/content*": ["./app/content/*"]
     },
 
     // Remix takes care of building everything in `remix build`.
