@@ -14,7 +14,7 @@ export default function SelectServer({ server }: SelectServerProps) {
   };
 
   return (
-    <div className="flex items-center justify-between gap-2 rounded-lg p-4 hover:bg-gray-200 dark:hover:bg-slate-600">
+    <div className="flex items-center justify-between gap-2 rounded-lg p-4 hover:bg-gray-200 dark:hover:bg-slate-700 transition duration-150">
       <div className="flex w-3/5 items-center gap-2 sm:flex-1">
         <ServerAvatar icon={server.icon} name={server.name} />
         <p className="w-1/2 truncate font-medium text-gray-600 dark:text-slate-200 sm:w-full">
@@ -26,7 +26,7 @@ export default function SelectServer({ server }: SelectServerProps) {
           <ChevronRightIcon
             height={40}
             width={40}
-            className="cursor-pointer rounded-full p-1 text-gray-400 hover:bg-gray-300 dark:text-slate-200 dark:hover:bg-slate-500"
+            className="cursor-pointer rounded-full p-1 text-gray-400 hover:bg-gray-300 dark:text-slate-200 dark:hover:bg-slate-500 transition duration-75"
           />
         </Link>
       ) : (
