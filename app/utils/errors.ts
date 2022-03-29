@@ -1,4 +1,8 @@
-import { ApiErrorResponse } from "./api.server";
+type ApiErrorResponse = {
+  statusCode: number;
+  message: string;
+  error: string;
+};
 
 export class ApiError extends Error {
   public statusCode: number;

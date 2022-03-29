@@ -2,7 +2,7 @@ import { LoaderFunction, Outlet, useLoaderData, useOutletContext } from "remix";
 import Footer from "~/components/Footer";
 import Header from "~/components/Header";
 import { requireUser } from "~/server/session.server";
-import { makeApiRequestNullable } from "~/utils/api.server";
+import { makeApiRequest } from "~/utils/api.server";
 import { User, Webhook } from "~/utils/contracts";
 
 type Context = { user: User; webhook: Webhook };
@@ -10,7 +10,9 @@ type Context = { user: User; webhook: Webhook };
 export const loader: LoaderFunction = async ({ request }) => {
   const [user, webhook] = await Promise.all([
     requireUser(request),
-    makeApiRequestNullable<Webhook>(request, "/v1/webhooks/users", "get"),
+    makeApiRequest<Webhook>(request, "/v1/webhooks/users", "get").catch(
+      () => null
+    ),
   ]);
 
   return { user, webhook };

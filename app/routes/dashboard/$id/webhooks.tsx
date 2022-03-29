@@ -2,16 +2,14 @@ import { useEffect, useState } from "react";
 import {
   ActionFunction,
   Form,
+  json,
   LoaderFunction,
+  useActionData,
   useFetcher,
   useLoaderData,
   useTransition,
 } from "remix";
-import {
-  BASE_URL,
-  makeApiRequest,
-  makeApiRequestNoContent,
-} from "~/utils/api.server";
+import { BASE_URL, makeApiRequest } from "~/utils/api.server";
 import { Webhook } from "~/utils/contracts";
 import getServerAvatarNoSrc from "~/utils/getAvatarNoSource";
 import { useGuild } from "../$id";
@@ -19,17 +17,13 @@ import { useGuild } from "../$id";
 export const loader: LoaderFunction = async ({ params, request }) => {
   const guildId = params.id;
 
-  try {
-    const guild = await makeApiRequest<Webhook>(
-      request,
-      `/v1/webhooks/guilds/${guildId}`,
-      "get"
-    );
+  const guild = await makeApiRequest<Webhook>(
+    request,
+    `/v1/webhooks/guilds/${guildId}`,
+    "get"
+  ).catch(() => null);
 
-    return guild;
-  } catch (err) {
-    return null;
-  }
+  return guild;
 };
 
 export const action: ActionFunction = async ({ request, params }) => {
@@ -41,20 +35,25 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   switch (_action) {
     case "create": {
-      return await makeApiRequest<Webhook>(
+      const response = await makeApiRequest<Webhook>(
         request,
         `/v1/webhooks/guilds/${guildId}`,
         "post",
         values
-      );
+      ).catch(() => null);
+
+      if (response === null) {
+        return json({
+          success: false,
+          errors: { channelId: "Failed to create webhook" },
+        });
+      }
+      
+      return response;
     }
 
     case "delete": {
-      await makeApiRequestNoContent(
-        request,
-        `/v1/webhooks/guilds/${guildId}`,
-        "delete"
-      );
+      await makeApiRequest(request, `/v1/webhooks/guilds/${guildId}`, "delete");
 
       return null;
     }
@@ -76,6 +75,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export default function Webhooks() {
   const webhook = useLoaderData<Webhook>();
+  const data = useActionData();
   const fetcher = useFetcher();
   const transition = useTransition();
   const { server } = useGuild();
@@ -155,11 +155,23 @@ export default function Webhooks() {
               </p>
             </div>
             <Form replace method="post" className="flex flex-col gap-4">
-              <select id="webhook-channel" name="channelId">
+              <select
+                id="webhook-channel"
+                name="channelId"
+                className={
+                  data?.errors?.channelId ? "border-2 border-red-700" : ""
+                }
+              >
                 {server.channels.map((c) => (
                   <option value={c.id} label={c.name} key={c.id} />
                 ))}
               </select>
+
+              {data?.errors?.channelId ? (
+                <p className="text-sm font-medium text-red-600 dark:text-red-600">
+                  Heyo, I can't post to that channel!
+                </p>
+              ) : null}
 
               <button
                 type="submit"

@@ -4,7 +4,7 @@ import {
   getSession,
   getUserInfo,
 } from "~/server/session.server";
-import { makeApiRequestNoContent } from "~/utils/api.server";
+import { makeApiRequest } from "~/utils/api.server";
 
 export const loader: LoaderFunction = () => {
   throw redirect("/");
@@ -14,7 +14,7 @@ export const action: ActionFunction = async ({ request }) => {
   const user = await getUserInfo(request);
 
   if (user) {
-    await makeApiRequestNoContent(request, "/auth/logout", "get");
+    await makeApiRequest(request, "/auth/logout", "get");
 
     const session = await getSession(request.headers.get("Cookie"));
 

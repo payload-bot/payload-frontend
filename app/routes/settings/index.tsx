@@ -8,11 +8,7 @@ import {
   useTransition,
 } from "remix";
 import Alert from "~/components/Alert";
-import {
-  BASE_URL,
-  makeApiRequest,
-  makeApiRequestNoContent,
-} from "~/utils/api.server";
+import { BASE_URL, makeApiRequest } from "~/utils/api.server";
 import { Webhook } from "~/utils/contracts";
 import { badRequest } from "~/utils/httpHelpers";
 import { validateSteamId } from "~/utils/steamid.server";
@@ -40,7 +36,7 @@ export const action: ActionFunction = async ({ request }) => {
     }
 
     case "delete": {
-      await makeApiRequestNoContent(request, `/v1/webhooks/users`, "delete");
+      await makeApiRequest(request, `/v1/webhooks/users`, "delete");
 
       return null;
     }
@@ -95,7 +91,7 @@ export default function User() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-60px)]  mx-auto mt-8 max-w-5xl px-8">
+    <div className="mx-auto  mt-8 min-h-[calc(100vh-60px)] max-w-5xl px-8">
       <div className="my-4">
         {actionData?.success ? (
           <Alert type="success" message="Successfully saved user data" />
