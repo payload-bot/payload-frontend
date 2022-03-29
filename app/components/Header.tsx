@@ -63,7 +63,7 @@ export default function Header({ user }: HeaderProps) {
                 <div className="h-[1px] bg-slate-300" />
 
                 <form
-                  action="logout"
+                  action="/logout"
                   method="post"
                   className="rounded-sm transition duration-150 hover:bg-red-200"
                 >
