@@ -17,7 +17,6 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     const match = params.id?.match(/^(?<id>\d{17,19})$/);
 
     if (match?.groups?.id == null) {
-      console.log("I shouldn't throw");
       throw new Response("Please enter a valid snowflake", { status: 404 });
     }
 
