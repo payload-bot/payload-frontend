@@ -98,8 +98,8 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="my-16 flex w-full flex-col items-center justify-center gap-4">
-        <h1 className="text-center px-2 text-2xl font-medium text-gray-200 dark:text-white md:text-4xl">
+      <section className="my-16 flex w-full flex-col items-center justify-center gap-4 py-24">
+        <h1 className="px-2 text-center text-2xl font-medium text-gray-200 dark:text-white md:text-4xl">
           What are you waiting for? Invite now!
         </h1>
         <a
@@ -118,7 +118,7 @@ export default function Index() {
       />
       <img
         src="/blob-secondary.svg"
-        className="absolute top-1/4 -left-1/4 -z-10 h-1/2 md:h-3/4 opacity-30 sm:-left-3/4"
+        className="absolute top-1/4 -left-1/4 -z-10 h-1/2 opacity-30 sm:-left-3/4 md:h-3/4"
       />
 
       <Footer />
