@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import {
   ActionFunction,
   Form,
@@ -84,11 +85,20 @@ export default function User() {
   const actionData = useActionData<ActionData>();
   const { user, webhook } = useUser();
 
+  const [copied, setCopied] = useState(false);
+
   const submitting = transition.state === "submitting";
 
   const copyToken = async () => {
     await navigator.clipboard.writeText(webhook.value);
+    setCopied(true);
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => setCopied(false), 1500);
+
+    return () => clearInterval(interval);
+  }, [copied]);
 
   return (
     <div className="mx-auto  mt-8 min-h-[calc(100vh-60px)] max-w-5xl px-8">
@@ -169,15 +179,13 @@ export default function User() {
 
         {webhook?.id ? (
           <>
-            <div className="mt-4 flex justify-center gap-2">
-              <div>
-                <button
-                  onClick={copyToken}
-                  className="rounded-lg border border-slate-800 bg-slate-500 px-1 py-2 font-medium text-slate-900 transition  duration-200 hover:bg-slate-600"
-                >
-                  Copy Token
-                </button>
-              </div>
+            <div className="mt-4 flex w-full flex-col gap-2 sm:flex-row sm:justify-center">
+              <button
+                onClick={copyToken}
+                className="h-max rounded-lg border border-slate-800 bg-slate-500 px-1 py-2 font-medium text-slate-900 transition duration-200 hover:bg-slate-600"
+              >
+                {copied ? "Copied token!" : "Copy Token"}
+              </button>
 
               <fetcher.Form replace method="post">
                 <input type="hidden" name="secret" value={webhook.value} />
@@ -186,7 +194,7 @@ export default function User() {
                   name="_action"
                   disabled={submitting}
                   value="test"
-                  className="rounded-lg border border-green-700 bg-green-500 px-1 py-2 font-medium text-green-900 transition  duration-200 hover:bg-green-600"
+                  className="w-full rounded-lg border border-green-700 bg-green-500 px-1 py-2 font-medium text-green-900 transition duration-200 hover:bg-green-600 disabled:cursor-not-allowed disabled:bg-green-800"
                 >
                   {fetcher.state === "submitting"
                     ? "Testing Webhook..."
@@ -200,7 +208,7 @@ export default function User() {
                   name="_action"
                   disabled={submitting}
                   value="delete"
-                  className="rounded-lg border border-red-700 px-1 py-2 font-medium text-red-700 transition duration-200 hover:bg-red-500/25"
+                  className="w-full rounded-lg border border-red-700 px-1 py-2 font-medium text-red-700 transition duration-200 hover:bg-red-500/25 disabled:cursor-not-allowed disabled:bg-red-700/50"
                 >
                   {submitting ? "Deleting Webhook" : "Delete Webhook"}
                 </button>
@@ -236,9 +244,10 @@ export default function User() {
         Quick Actions
       </h1>
       <div className="flex w-full flex-row-reverse flex-wrap gap-2 sm:flex-row sm:gap-4">
-        <button className="w-full rounded-md border border-red-600 bg-red-200 py-2 px-4 font-semibold text-red-600 transition duration-100 hover:bg-red-300 dark:bg-red-500/20 dark:text-red-500 dark:hover:bg-red-500/25 sm:w-max">
+        {/* We don't have the support here yet */}
+        {/* <button className="w-full rounded-md border border-red-600 bg-red-200 py-2 px-4 font-semibold text-red-600 transition duration-100 hover:bg-red-300 dark:bg-red-500/20 dark:text-red-500 dark:hover:bg-red-500/25 sm:w-max">
           Delete User Data
-        </button>
+        </button> */}
         <form action="/logout" method="post" className="w-full sm:w-max">
           <button className="w-full rounded-md border border-red-600 bg-transparent py-2 px-4 font-semibold text-red-600 transition duration-100 hover:bg-red-100 dark:text-red-800 dark:hover:bg-red-500/20 sm:w-max">
             Logout
