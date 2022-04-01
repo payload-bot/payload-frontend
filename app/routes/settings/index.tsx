@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useEffect, useState } from "react";
 import {
   ActionFunction,
@@ -8,10 +7,10 @@ import {
   useFetcher,
   useTransition,
 } from "remix";
+import { badRequest } from "remix-utils";
 import Alert from "~/components/Alert";
 import { BASE_URL, makeApiRequest } from "~/utils/api.server";
 import { Webhook } from "~/utils/contracts";
-import { badRequest } from "~/utils/httpHelpers";
 import { validateSteamId } from "~/utils/steamid.server";
 import { useUser } from "../settings";
 

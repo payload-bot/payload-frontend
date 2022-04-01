@@ -9,6 +9,7 @@ import {
   useLoaderData,
   useTransition,
 } from "remix";
+import { forbidden } from "remix-utils";
 import { BASE_URL, makeApiRequest } from "~/utils/api.server";
 import { Server, Webhook } from "~/utils/contracts";
 import getServerAvatarNoSrc from "~/utils/getAvatarNoSource";
@@ -48,7 +49,7 @@ export const action: ActionFunction = async ({ request, params }) => {
       ).catch(() => null);
 
       if (response === null) {
-        return json({
+        return forbidden({
           success: false,
           errors: { channelId: "Failed to create webhook" },
         });

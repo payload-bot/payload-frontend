@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ActionFunction, Form, json, useMatches, useTransition } from "remix";
+import { forbidden } from "remix-utils";
 import { makeApiRequest } from "~/utils/api.server";
 import { Server } from "~/utils/contracts";
 import getServerAvatarNoSrc from "~/utils/getAvatarNoSource";
@@ -23,14 +24,18 @@ export const action: ActionFunction = async ({ request, params }) => {
   const language = form.get("language");
   const snipePermissions = form.get("snipePermissions");
 
-  await makeApiRequest(request, `/v1/guilds/${guildId}`, "patch", {
-    botName,
-    prefix,
-    language,
-    snipePermissions,
-  });
+  try {
+    await makeApiRequest(request, `/v1/guilds/${guildId}`, "patch", {
+      botName,
+      prefix,
+      language,
+      snipePermissions,
+    });
 
-  return json({ success: true });
+    return json({ success: true });
+  } catch (err) {
+    throw forbidden({ success: false });
+  }
 };
 
 export default function Index() {

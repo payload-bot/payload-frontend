@@ -8,6 +8,7 @@ import {
   useLoaderData,
   useTransition,
 } from "remix";
+import { badRequest } from "remix-utils";
 import CommandToggle from "~/components/CommandToggle";
 import { makeApiRequest } from "~/utils/api.server";
 import { Server } from "~/utils/contracts";
@@ -35,7 +36,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
     return json({ success: true });
   } catch (err) {
-    return json({ success: false });
+    return badRequest({ success: false });
   }
 };
 
