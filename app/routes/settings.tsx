@@ -1,11 +1,11 @@
-import { LoaderFunction, Outlet, useLoaderData, useOutletContext } from "remix";
+import { json, LoaderFunction, Outlet, useLoaderData } from "remix";
 import Footer from "~/components/Footer";
 import Header from "~/components/Header";
 import { requireUser } from "~/server/session.server";
 import { makeApiRequest } from "~/utils/api.server";
 import { User, Webhook } from "~/utils/contracts";
 
-type Context = { user: User; webhook: Webhook };
+type LoaderData = { user: User; webhook: Webhook };
 
 export const loader: LoaderFunction = async ({ request }) => {
   const [user, webhook] = await Promise.all([
@@ -15,21 +15,17 @@ export const loader: LoaderFunction = async ({ request }) => {
     ),
   ]);
 
-  return { user, webhook };
+  return json({ user, webhook });
 };
 
 export default function Index() {
-  const { user, webhook } = useLoaderData<Context>();
+  const { user } = useLoaderData<LoaderData>();
 
   return (
     <>
       <Header user={user} />
-      <Outlet context={{ user, webhook }} />
+      <Outlet />
       <Footer />
     </>
   );
-}
-
-export function useUser() {
-  return useOutletContext<Context>();
 }

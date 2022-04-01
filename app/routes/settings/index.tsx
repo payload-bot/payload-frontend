@@ -7,18 +7,19 @@ import {
   useFetcher,
   useTransition,
 } from "remix";
-import { badRequest } from "remix-utils";
+import { badRequest, useRouteData } from "remix-utils";
 import Alert from "~/components/Alert";
 import { BASE_URL, makeApiRequest } from "~/utils/api.server";
-import { Webhook } from "~/utils/contracts";
+import { User, Webhook } from "~/utils/contracts";
 import { validateSteamId } from "~/utils/steamid.server";
-import { useUser } from "../settings";
 
 type ActionErrors = {
   steamId: string;
 };
 
 type ActionData = { success: boolean; errors: ActionErrors };
+
+type RouteData = { user: User; webhook: Webhook };
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
@@ -82,7 +83,8 @@ export default function User() {
   const transition = useTransition();
   const fetcher = useFetcher();
   const actionData = useActionData<ActionData>();
-  const { user, webhook } = useUser();
+
+  const { user, webhook } = useRouteData<RouteData>("/settings")!;
 
   const [copied, setCopied] = useState(false);
 

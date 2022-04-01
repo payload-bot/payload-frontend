@@ -1,4 +1,4 @@
-import { LoaderFunction, Outlet, useLoaderData, useOutletContext } from "remix";
+import { json, LoaderFunction, Outlet, useLoaderData } from "remix";
 import Header from "~/components/Header";
 import { requireUser } from "~/server/session.server";
 import { User } from "~/utils/contracts";
@@ -6,7 +6,7 @@ import { User } from "~/utils/contracts";
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUser(request);
 
-  return user;
+  return json(user);
 };
 
 export default function Index() {
@@ -15,11 +15,7 @@ export default function Index() {
   return (
     <>
       <Header user={user} />
-      <Outlet context={user} />
+      <Outlet />
     </>
   );
-}
-
-export function useUser() {
-  return useOutletContext<User>();
 }
