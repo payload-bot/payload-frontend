@@ -10,7 +10,7 @@ export let handleDataRequest: HandleDataRequestFunction = async (
   let isGet = request.method.toLowerCase() === "get";
 
   if (isPrefetch(request) && isGet) {
-    response.headers.set("Cache-Control", "private, max-age=10");
+    response.headers.set("Cache-Control", "private, max-age=5");
   }
 
   return response;
