@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ActionFunction, Form, json, useTransition } from "remix";
+import { ActionFunction, Form, json, useParams, useTransition } from "remix";
 import { forbidden, useRouteData } from "remix-utils";
 import { makeApiRequest } from "~/utils/api.server";
 import { Server } from "~/utils/contracts";
@@ -39,8 +39,9 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 export default function Index() {
+  const params = useParams();
   const { server } = useRouteData<{ server: Server }>(
-    "/dashboard/428020381413277706"
+    `/dashboard/${params.id}`
   )!;
 
   const transition = useTransition();
