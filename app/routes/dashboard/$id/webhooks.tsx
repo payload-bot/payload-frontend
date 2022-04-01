@@ -10,20 +10,25 @@ import {
   useTransition,
 } from "remix";
 import { BASE_URL, makeApiRequest } from "~/utils/api.server";
-import { Webhook } from "~/utils/contracts";
+import { Server, Webhook } from "~/utils/contracts";
 import getServerAvatarNoSrc from "~/utils/getAvatarNoSource";
-import { useGuild } from "../$id";
 
 export const loader: LoaderFunction = async ({ params, request }) => {
   const guildId = params.id;
 
-  const guild = await makeApiRequest<Webhook>(
+  const webhook = await makeApiRequest<Webhook>(
     request,
     `/v1/webhooks/guilds/${guildId}`,
     "get"
   ).catch(() => null);
 
-  return guild;
+  const { channels } = (await makeApiRequest<Server>(
+    request,
+    `/v1/guilds/${params.id}`,
+    "get"
+  )) as Server;
+
+  return json({ webhook, channels });
 };
 
 export const action: ActionFunction = async ({ request, params }) => {
@@ -48,7 +53,7 @@ export const action: ActionFunction = async ({ request, params }) => {
           errors: { channelId: "Failed to create webhook" },
         });
       }
-      
+
       return response;
     }
 
@@ -74,11 +79,13 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 export default function Webhooks() {
-  const webhook = useLoaderData<Webhook>();
+  const { webhook, channels } = useLoaderData<{
+    webhook: Webhook;
+    channels: Server["channels"];
+  }>();
   const data = useActionData();
   const fetcher = useFetcher();
   const transition = useTransition();
-  const { server } = useGuild();
 
   const [copied, setCopied] = useState(false);
 
@@ -97,9 +104,6 @@ export default function Webhooks() {
 
   return (
     <div className="mt-8 flex flex-col items-center justify-center">
-      <Avatar name={server.name} icon={server.icon} />
-      <h1 className="mt-4 text-2xl font-bold dark:text-white">{server.name}</h1>
-
       <div className="mt-10 w-1/2 rounded-lg bg-gray-300 p-6 dark:bg-slate-700">
         {webhook?.id ? (
           <>
@@ -162,7 +166,7 @@ export default function Webhooks() {
                   data?.errors?.channelId ? "border-2 border-red-700" : ""
                 }
               >
-                {server.channels.map((c) => (
+                {channels.map((c) => (
                   <option value={c.id} label={c.name} key={c.id} />
                 ))}
               </select>

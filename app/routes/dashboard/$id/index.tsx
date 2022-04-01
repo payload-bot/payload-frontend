@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ActionFunction, Form, json, useTransition } from "remix";
+import { ActionFunction, Form, json, useMatches, useTransition } from "remix";
 import { makeApiRequest } from "~/utils/api.server";
+import { Server } from "~/utils/contracts";
 import getServerAvatarNoSrc from "~/utils/getAvatarNoSource";
-import { useGuild } from "../$id";
 
 const LANGUAGES = {
   "en-US": "English",
@@ -34,7 +34,9 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 export default function Index() {
-  const { server } = useGuild();
+  const matches = useMatches();
+  const server = matches[2].data.server as Server;
+
   const transition = useTransition();
 
   const [prefix, setPrefix] = useState(server.prefix);
@@ -125,7 +127,7 @@ export default function Index() {
               <select
                 id="snipePermissions"
                 name="snipePermissions"
-                defaultValue={server.enableSnipeForEveryone.toString()}
+                defaultValue={server.enableSnipeForEveryone?.toString()}
               >
                 <option value="true">Everyone</option>
                 <option value="false">Admins Only</option>

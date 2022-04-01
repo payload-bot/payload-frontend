@@ -1,15 +1,8 @@
-import {
-  LoaderFunction,
-  Outlet,
-  useCatch,
-  useLoaderData,
-  useOutletContext,
-  useParams,
-} from "remix";
+import { json, LoaderFunction, Outlet, useCatch, useParams } from "remix";
 import GuildManageLayout from "~/components/GuildManageLayout";
 import { requireUser } from "~/server/session.server";
 import { makeApiRequest } from "~/utils/api.server";
-import { Server, User } from "~/utils/contracts";
+import { Server } from "~/utils/contracts";
 import { ApiError } from "~/utils/errors";
 
 export const loader: LoaderFunction = async ({ params, request }) => {
@@ -25,7 +18,9 @@ export const loader: LoaderFunction = async ({ params, request }) => {
       makeApiRequest<Server>(request, `/v1/guilds/${params.id}`, "get"),
     ]);
 
-    return { user, server };
+    const { channels, commands, webhook, ...rest } = server as Server;
+
+    return json({ user, server: rest });
   } catch (err) {
     // Possible bug in Remix - this doesn't hit my catch boundary :thinking:
     if (err instanceof ApiError) {
@@ -40,14 +35,10 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   }
 };
 
-type GuildContext = { user: User; server: Server };
-
 export default function Index() {
-  const data = useLoaderData<User>();
-
   return (
     <GuildManageLayout>
-      <Outlet context={data} />
+      <Outlet />
     </GuildManageLayout>
   );
 }
@@ -77,7 +68,9 @@ export function CatchBoundary() {
   );
 }
 
-export function ErrorBoundary() {
+export function ErrorBoundary(error: unknown) {
+  console.error(error);
+
   return (
     <div className="mt-24 text-center text-lg text-gray-800 dark:text-white sm:text-xl md:text-5xl lg:text-7xl">
       🤯 Something went wrong 🤯
@@ -87,8 +80,4 @@ export function ErrorBoundary() {
       </span>
     </div>
   );
-}
-
-export function useGuild() {
-  return useOutletContext<GuildContext>();
 }

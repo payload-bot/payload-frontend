@@ -1,9 +1,26 @@
 import { Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
-import { ActionFunction, Form, json, useTransition } from "remix";
+import {
+  ActionFunction,
+  Form,
+  json,
+  LoaderFunction,
+  useLoaderData,
+  useTransition,
+} from "remix";
 import CommandToggle from "~/components/CommandToggle";
 import { makeApiRequest } from "~/utils/api.server";
-import { useGuild } from "../$id";
+import { Server } from "~/utils/contracts";
+
+export const loader: LoaderFunction = async ({ params, request }) => {
+  const { commands } = (await makeApiRequest<Server>(
+    request,
+    `/v1/guilds/${params.id}`,
+    "get"
+  )) as Server;
+
+  return json(commands);
+};
 
 export const action: ActionFunction = async ({ request, params }) => {
   const guildId = params.id;
@@ -23,13 +40,14 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 export default function Commands() {
-  const { server } = useGuild();
+  const commands = useLoaderData<Server["commands"]>();
+
   const transition = useTransition();
 
   const submitting = transition.state !== "idle";
 
   const [commandsToRestrict, setCommandsToRestrict] = useState<string[]>(
-    server.commands.restrictions.filter(Boolean)
+    commands.restrictions.filter(Boolean)
   );
 
   const [saving, setSaving] = useState(false);
@@ -59,13 +77,13 @@ export default function Commands() {
       <h2 className="text-2xl font-semibold text-gray-600 dark:text-white">
         Commands
       </h2>
-      {server.commands.commands
+      {commands.commands
         .filter((cmd) => !["restrict", "unrestrict"].includes(cmd))
         .sort()
         .map((cmd) => (
           <CommandToggle
             key={cmd}
-            checked={server.commands.restrictions.includes(cmd)}
+            checked={commands.restrictions.includes(cmd)}
             name={cmd}
             notifyFunction={notifyFunction}
           />
@@ -74,13 +92,13 @@ export default function Commands() {
       <h2 className="my-4 text-2xl font-semibold text-gray-600 dark:text-white">
         Auto Responses
       </h2>
-      {server.commands.autoResponses
+      {commands.autoResponses
         .filter((cmd) => !["restrict", "unrestrict"].includes(cmd))
         .sort()
         .map((cmd) => (
           <CommandToggle
             key={cmd}
-            checked={server.commands.restrictions.includes(cmd)}
+            checked={commands.restrictions.includes(cmd)}
             name={cmd}
             notifyFunction={notifyFunction}
           />
