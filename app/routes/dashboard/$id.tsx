@@ -1,4 +1,11 @@
-import { json, LoaderFunction, Outlet, useCatch, useParams } from "remix";
+import {
+  json,
+  LoaderFunction,
+  MetaFunction,
+  Outlet,
+  useCatch,
+  useParams,
+} from "remix";
 import GuildManageLayout from "~/components/GuildManageLayout";
 import { requireUser } from "~/server/session.server";
 import { makeApiRequest } from "~/utils/api.server";
@@ -33,6 +40,12 @@ export const loader: LoaderFunction = async ({ params, request }) => {
       throw new Response("", { status: 404 });
     }
   }
+};
+
+export const meta: MetaFunction = ({ data }) => {
+  return {
+    title: `${data.server.name} - payload.tf`,
+  };
 };
 
 export default function Index() {
