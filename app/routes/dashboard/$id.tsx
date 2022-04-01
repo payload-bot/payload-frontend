@@ -6,6 +6,7 @@ import {
   useCatch,
   useParams,
 } from "remix";
+import { forbidden, notFound } from "remix-utils";
 import GuildManageLayout from "~/components/GuildManageLayout";
 import { requireUser } from "~/server/session.server";
 import { makeApiRequest } from "~/utils/api.server";
@@ -32,12 +33,12 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     // Possible bug in Remix - this doesn't hit my catch boundary :thinking:
     if (err instanceof ApiError) {
       if (err.statusCode === 404) {
-        throw new Response("", { status: 404 });
+        throw notFound({});
       } else if (err.statusCode === 403) {
-        throw new Response("", { status: 403 });
+        throw forbidden({});
       }
     } else {
-      throw new Response("", { status: 404 });
+      throw notFound({});
     }
   }
 };
