@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ActionFunction, Form, json, useMatches, useTransition } from "remix";
-import { forbidden } from "remix-utils";
+import { ActionFunction, Form, json, useTransition } from "remix";
+import { forbidden, useRouteData } from "remix-utils";
 import { makeApiRequest } from "~/utils/api.server";
 import { Server } from "~/utils/contracts";
 import getServerAvatarNoSrc from "~/utils/getAvatarNoSource";
@@ -39,8 +39,9 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 export default function Index() {
-  const matches = useMatches();
-  const server = matches[2].data.server as Server;
+  const { server } = useRouteData<{ server: Server }>(
+    "/dashboard/428020381413277706"
+  )!;
 
   const transition = useTransition();
 

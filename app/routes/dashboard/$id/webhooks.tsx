@@ -80,10 +80,8 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 export default function Webhooks() {
-  const { webhook, channels } = useLoaderData<{
-    webhook: Webhook;
-    channels: Server["channels"];
-  }>();
+  const { webhook, channels } = useLoaderData<LoaderData>();
+
   const data = useActionData();
   const fetcher = useFetcher();
   const transition = useTransition();
@@ -208,3 +206,8 @@ function Avatar({ icon, name }: { icon: string | null; name: string }) {
     </div>
   );
 }
+
+type LoaderData = {
+  webhook: Webhook;
+  channels: Server["channels"];
+};
