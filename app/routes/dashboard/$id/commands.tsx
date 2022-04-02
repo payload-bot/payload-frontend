@@ -1,5 +1,5 @@
 import { Transition } from "@headlessui/react";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import {
   ActionFunction,
   Form,
@@ -12,6 +12,11 @@ import { badRequest } from "remix-utils";
 import CommandToggle from "~/components/CommandToggle";
 import { makeApiRequest } from "~/utils/api.server";
 import { Server } from "~/utils/contracts";
+
+type CommandCheckMap = {
+  name: string;
+  checked: boolean;
+};
 
 export const loader: LoaderFunction = async ({ params, request }) => {
   const { commands } = (await makeApiRequest<Server>(
@@ -27,11 +32,15 @@ export const action: ActionFunction = async ({ request, params }) => {
   const guildId = params.id;
   const form = await request.formData();
 
-  const commands = form.get("commands") as string;
+  const commands = JSON.parse(
+    form.get("commands") as string
+  ) as unknown as CommandCheckMap[];
+
+  const toRestrict = commands.filter((c) => c.checked).map((c) => c.name);
 
   try {
     await makeApiRequest(request, `/v1/guilds/${guildId}`, "patch", {
-      commandRestrictions: commands?.split(",") ?? [],
+      commandRestrictions: toRestrict,
     });
 
     return json({ success: true });
@@ -47,24 +56,45 @@ export default function Commands() {
 
   const submitting = transition.state !== "idle";
 
-  const [commandsToRestrict, setCommandsToRestrict] = useState<string[]>(
-    commands.restrictions.filter(Boolean)
-  );
+  const mappedCmdToChecked = useMemo(() => mapCommandsToChecked(), [commands]);
+
+  const [checkedList, setCheckedList] =
+    useState<CommandCheckMap[]>(mappedCmdToChecked);
 
   const [saving, setSaving] = useState(false);
+
+  function mapCommandsToChecked() {
+    const regularCmds = commands.commands.map((c) => ({
+      name: c,
+      checked: commands.restrictions.includes(c),
+    }));
+
+    const autoCommands = commands.autoResponses.map((c) => ({
+      name: c,
+      checked: commands.restrictions.includes(c),
+    }));
+
+    return [...regularCmds, ...autoCommands];
+  }
 
   function notifyFunction(cmdName: string, checked: boolean) {
     setSaving(true);
 
-    if (checked) {
-      setCommandsToRestrict([...commandsToRestrict, cmdName]);
-    } else {
-      const elementsChecked = commandsToRestrict.filter(
-        (cmd) => cmd !== cmdName
-      );
+    setCheckedList((prev) =>
+      prev.map((c) => {
+        if (c.name === cmdName) {
+          return { ...c, checked };
+        }
 
-      setCommandsToRestrict(elementsChecked);
-    }
+        return c;
+      })
+    );
+  }
+
+  function handleReset() {
+    setCheckedList(mappedCmdToChecked);
+
+    setSaving(false);
   }
 
   useEffect(() => {
@@ -85,7 +115,7 @@ export default function Commands() {
         .map((cmd) => (
           <CommandToggle
             key={cmd}
-            checked={commands.restrictions.includes(cmd)}
+            checked={checkedList.find((c) => c.name === cmd)!.checked}
             name={cmd}
             notifyFunction={notifyFunction}
           />
@@ -94,13 +124,14 @@ export default function Commands() {
       <h2 className="my-4 text-lg font-semibold text-gray-600 dark:text-white sm:text-2xl">
         Auto Responses
       </h2>
+
       {commands.autoResponses
         .filter((cmd) => !["restrict", "unrestrict"].includes(cmd))
         .sort()
         .map((cmd) => (
           <CommandToggle
             key={cmd}
-            checked={commands.restrictions.includes(cmd)}
+            checked={checkedList.find((c) => c.name === cmd)!.checked}
             name={cmd}
             notifyFunction={notifyFunction}
           />
@@ -116,21 +147,32 @@ export default function Commands() {
         leaveFrom="opacity-100 translate-y-0"
         leaveTo="opacity-0 translate-y-6"
       >
-        <div className="fixed inset-x-0 bottom-4 mx-auto flex max-w-screen-md items-center rounded-lg bg-black/90 px-2 py-4">
-          <p className="md:text-md flex-1 text-sm font-medium text-gray-300 dark:text-white">
+        <div className="fixed inset-x-0 bottom-4 mx-auto flex max-w-screen-md flex-col items-center gap-4 rounded-lg bg-black/90 px-2 py-4 sm:flex-row sm:gap-0">
+          <p className="flex-1 text-lg font-medium text-gray-300 dark:text-white md:text-base">
             Please save your changes!
           </p>
-          {/* I think I need to get a better version of this <button className="text-md mr-4 font-medium text-white">Reset</button> */}
-          <Form replace method="post" className="flex gap-4">
-            <input type="hidden" name="commands" value={commandsToRestrict} />
+          <span className="flex items-center justify-center">
             <button
-              className="md:text-md rounded-md bg-green-400 py-1 px-3 text-sm font-medium text-green-800 transition duration-150 hover:bg-green-500 disabled:bg-green-500/30 dark:bg-green-500 dark:text-green-900 dark:hover:bg-green-600"
-              disabled={submitting}
-              type="submit"
+              className="text-md mr-4 font-medium text-white"
+              onClick={handleReset}
             >
-              {submitting ? "Saving your changes..." : "Save Changes"}
+              Reset
             </button>
-          </Form>
+            <Form replace method="post" className="flex gap-4">
+              <input
+                type="hidden"
+                name="commands"
+                value={JSON.stringify(checkedList)}
+              />
+              <button
+                className="md:text-md min-w-[15ch] rounded-md bg-green-400 py-1 px-3 text-sm font-medium text-green-800 transition duration-150 hover:bg-green-500 disabled:bg-green-500/30 dark:bg-green-500 dark:text-green-900 dark:hover:bg-green-600"
+                disabled={submitting}
+                type="submit"
+              >
+                {submitting ? "Saving..." : "Save Changes"}
+              </button>
+            </Form>
+          </span>
         </div>
       </Transition>
     </section>

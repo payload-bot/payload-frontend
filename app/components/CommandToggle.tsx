@@ -1,5 +1,5 @@
 import { Switch } from "@headlessui/react";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 
 type CommandToggleProps = {
   name: string;
@@ -14,6 +14,10 @@ export default function CommandToggle({
 }: CommandToggleProps) {
   const [isChecked, setIsChecked] = useState(!checked);
 
+  useEffect(() => {
+    setIsChecked(!checked);
+  }, [checked]);
+
   function changeHandler() {
     setIsChecked((prev) => !prev);
     notifyFunction(name, isChecked);
@@ -21,7 +25,7 @@ export default function CommandToggle({
 
   return (
     <div className="flex content-center items-center py-2">
-      <div className="flex-1 text-md sm:text-lg font-medium text-gray-600 dark:text-slate-200">
+      <div className="flex-1 text-lg font-medium text-gray-600 dark:text-slate-200">
         {name}
       </div>
       <Switch
