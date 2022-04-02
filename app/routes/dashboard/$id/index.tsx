@@ -57,6 +57,9 @@ export default function Index() {
         <h1 className="mt-4 text-2xl font-bold dark:text-white">
           {server.name}
         </h1>
+        <p className="text-sm font-light text-gray-600 dark:text-slate-500 md:text-lg">
+          Pushed a total of {server.pushcartPoints} units!
+        </p>
 
         <div className="mt-10 rounded-lg bg-gray-500/20 p-6 dark:bg-slate-700">
           <h2 className="text-sm font-bold uppercase tracking-wide text-gray-600 dark:text-white sm:text-lg">
