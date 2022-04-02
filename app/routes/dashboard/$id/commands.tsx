@@ -109,6 +109,8 @@ export default function Commands() {
         Commands
       </h2>
 
+      <hr className="my-6 divide-x-2 sm:my-4" />
+
       {commands.commands
         .filter((cmd) => !["restrict", "unrestrict"].includes(cmd))
         .sort()
@@ -121,9 +123,11 @@ export default function Commands() {
           />
         ))}
 
-      <h2 className="my-4 text-lg font-semibold text-gray-600 dark:text-white sm:text-2xl">
+      <h2 className="mt-8 text-lg font-semibold text-gray-600 dark:text-white sm:text-2xl">
         Auto Responses
       </h2>
+
+      <hr className="my-6 divide-x-2 sm:my-4" />
 
       {commands.autoResponses
         .filter((cmd) => !["restrict", "unrestrict"].includes(cmd))
@@ -136,6 +140,8 @@ export default function Commands() {
             notifyFunction={notifyFunction}
           />
         ))}
+
+      <div className="mb-16" />
 
       <Transition
         as={Fragment}
