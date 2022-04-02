@@ -41,9 +41,9 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 export default function Commands() {
-  const commands = useLoaderData<Server["commands"]>();
-
   const transition = useTransition();
+
+  const commands = useLoaderData<Server["commands"]>();
 
   const submitting = transition.state !== "idle";
 
@@ -78,6 +78,7 @@ export default function Commands() {
       <h2 className="text-lg font-semibold text-gray-600 dark:text-white sm:text-2xl">
         Commands
       </h2>
+
       {commands.commands
         .filter((cmd) => !["restrict", "unrestrict"].includes(cmd))
         .sort()
@@ -88,7 +89,7 @@ export default function Commands() {
             name={cmd}
             notifyFunction={notifyFunction}
           />
-        ))}1
+        ))}
 
       <h2 className="my-4 text-lg font-semibold text-gray-600 dark:text-white sm:text-2xl">
         Auto Responses
@@ -108,34 +109,29 @@ export default function Commands() {
       <Transition
         as={Fragment}
         show={saving}
-        enter="transition ease-out duration-200"
+        enter="transition ease-out duration-250"
         enterFrom="opacity-0 translate-y-6"
         enterTo="opacity-100 translate-y-0"
-        leave="transition ease-in duration-200"
+        leave="transition ease-in duration-250"
         leaveFrom="opacity-100 translate-y-0"
         leaveTo="opacity-0 translate-y-6"
       >
-        {saving ? (
-          <div className="fixed inset-x-0 bottom-4 mx-auto flex max-w-screen-md items-center rounded-lg bg-black/90 px-2 py-4">
-            <p className="md:text-md flex-1 text-sm font-medium text-gray-300 dark:text-white">
-              Please save your changes!
-            </p>
-            {/* I think I need to get a better version of this <button className="text-md mr-4 font-medium text-white">Reset</button> */}
-            <Form replace method="post" className="flex gap-4">
-              <input type="hidden" name="commands" value={commandsToRestrict} />
-              <button
-                className="md:text-md rounded-md bg-green-400 py-1 px-3 text-sm font-medium text-green-800 transition duration-150 hover:bg-green-500 disabled:bg-green-500/30 dark:bg-green-500 dark:text-green-900 dark:hover:bg-green-600"
-                disabled={submitting}
-                type="submit"
-              >
-                {submitting ? "Saving your changes..." : "Save Changes"}
-              </button>
-            </Form>
-          </div>
-        ) : (
-          // HACK
-          <></>
-        )}
+        <div className="fixed inset-x-0 bottom-4 mx-auto flex max-w-screen-md items-center rounded-lg bg-black/90 px-2 py-4">
+          <p className="md:text-md flex-1 text-sm font-medium text-gray-300 dark:text-white">
+            Please save your changes!
+          </p>
+          {/* I think I need to get a better version of this <button className="text-md mr-4 font-medium text-white">Reset</button> */}
+          <Form replace method="post" className="flex gap-4">
+            <input type="hidden" name="commands" value={commandsToRestrict} />
+            <button
+              className="md:text-md rounded-md bg-green-400 py-1 px-3 text-sm font-medium text-green-800 transition duration-150 hover:bg-green-500 disabled:bg-green-500/30 dark:bg-green-500 dark:text-green-900 dark:hover:bg-green-600"
+              disabled={submitting}
+              type="submit"
+            >
+              {submitting ? "Saving your changes..." : "Save Changes"}
+            </button>
+          </Form>
+        </div>
       </Transition>
     </section>
   );
