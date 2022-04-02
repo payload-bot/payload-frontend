@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ActionFunction, Form, json, useParams, useTransition } from "remix";
-import { forbidden, useRouteData } from "remix-utils";
+import { badRequest, useRouteData } from "remix-utils";
 import { makeApiRequest } from "~/utils/api.server";
 import { Server } from "~/utils/contracts";
 import getServerAvatarNoSrc from "~/utils/getAvatarNoSource";
@@ -19,8 +19,10 @@ export const action: ActionFunction = async ({ request, params }) => {
   const guildId = params.id;
   const form = await request.formData();
 
-  const botName = form.get("botName");
-  const prefix = form.get("prefix");
+  // FIXME: proper validation...
+  const botName = form.get("botName") || "payload-neo";
+  const prefix = form.get("prefix") || "pls ";
+
   const language = form.get("language");
   const snipePermissions = form.get("snipePermissions");
 
@@ -34,7 +36,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
     return json({ success: true });
   } catch (err) {
-    throw forbidden({ success: false });
+    throw badRequest({ success: false });
   }
 };
 
