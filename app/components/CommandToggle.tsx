@@ -21,7 +21,7 @@ export default function CommandToggle({
 
   return (
     <div className="flex content-center items-center py-2">
-      <div className="flex-1 text-lg font-medium text-gray-600 dark:text-slate-200">
+      <div className="flex-1 text-md sm:text-lg font-medium text-gray-600 dark:text-slate-200">
         {name}
       </div>
       <Switch

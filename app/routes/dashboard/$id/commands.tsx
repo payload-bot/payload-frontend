@@ -74,8 +74,8 @@ export default function Commands() {
   }, [transition, submitting]);
 
   return (
-    <section className="relative mx-auto my-4 w-1/2 p-2">
-      <h2 className="text-2xl font-semibold text-gray-600 dark:text-white">
+    <section className="relative mx-auto my-4 w-3/4 p-2 sm:w-1/2">
+      <h2 className="text-lg font-semibold text-gray-600 dark:text-white sm:text-2xl">
         Commands
       </h2>
       {commands.commands
@@ -88,9 +88,9 @@ export default function Commands() {
             name={cmd}
             notifyFunction={notifyFunction}
           />
-        ))}
+        ))}1
 
-      <h2 className="my-4 text-2xl font-semibold text-gray-600 dark:text-white">
+      <h2 className="my-4 text-lg font-semibold text-gray-600 dark:text-white sm:text-2xl">
         Auto Responses
       </h2>
       {commands.autoResponses
@@ -117,14 +117,14 @@ export default function Commands() {
       >
         {saving ? (
           <div className="fixed inset-x-0 bottom-4 mx-auto flex max-w-screen-md items-center rounded-lg bg-black/90 px-2 py-4">
-            <p className="text-md flex-1 font-medium text-gray-300 dark:text-white">
+            <p className="md:text-md flex-1 text-sm font-medium text-gray-300 dark:text-white">
               Please save your changes!
             </p>
             {/* I think I need to get a better version of this <button className="text-md mr-4 font-medium text-white">Reset</button> */}
             <Form replace method="post" className="flex gap-4">
               <input type="hidden" name="commands" value={commandsToRestrict} />
               <button
-                className="text-md rounded-md bg-green-400 py-1 px-3 font-medium text-green-800 transition duration-150 hover:bg-green-500 disabled:bg-green-500/30 dark:bg-green-500 dark:text-green-900 dark:hover:bg-green-600"
+                className="md:text-md rounded-md bg-green-400 py-1 px-3 text-sm font-medium text-green-800 transition duration-150 hover:bg-green-500 disabled:bg-green-500/30 dark:bg-green-500 dark:text-green-900 dark:hover:bg-green-600"
                 disabled={submitting}
                 type="submit"
               >
