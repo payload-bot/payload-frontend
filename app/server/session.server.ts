@@ -12,7 +12,7 @@ export let { getSession, commitSession, destroySession } =
   createCookieSessionStorage({
     cookie: {
       name: "__session",
-      secure: process.env.NODE_ENV === "production",
+      secure: ["production", "staging"].includes(process.env.NODE_ENV),
       secrets: [sessionSecret],
       sameSite: "lax",
       path: "/",

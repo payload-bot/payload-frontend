@@ -1,5 +1,6 @@
 import {
   json,
+  Link,
   LoaderFunction,
   MetaFunction,
   Outlet,
@@ -63,10 +64,12 @@ export function CatchBoundary() {
 
   let message = null;
 
-  if (caught.status === 401) {
+  if ([401, 403].includes(caught.status)) {
     message = "You do not have access to this guild!";
   } else if (caught.status === 404) {
     message = `Heyo! That guild, ${params.id}, doesn't exist!`;
+  } else if (caught.status === 400) {
+    message = `Woah there! You're sending invalid data 🤨.`;
   } else {
     throw new Error(`Unhandled error: ${caught.status}`);
   }
@@ -75,9 +78,23 @@ export function CatchBoundary() {
     <div className="mt-24 text-center text-lg text-gray-800 dark:text-white sm:text-xl md:text-3xl lg:text-5xl">
       {message}
       <br />
-      <span className="text-md sm:text-md text-center text-gray-600 dark:text-slate-200 md:text-xl lg:text-2xl">
-        You should double check your URL. Or perhaps you were revoked access 🤷
-      </span>
+      {[401, 403, 404].includes(caught.status) ? (
+        <span className="text-md sm:text-md text-center text-gray-600 dark:text-slate-200 md:text-xl lg:text-2xl">
+          You should double check your URL. Or perhaps you were revoked access
+          🤷
+        </span>
+      ) : (
+        <span className="text-md sm:text-md text-center text-gray-600 dark:text-slate-200 md:text-xl lg:text-2xl">
+          You'll want to report this in our{" "}
+          <Link
+            to="/discord"
+            className="underline decoration-blue-600 decoration-2 hover:text-gray-500 dark:hover:text-slate-300"
+          >
+            Discord
+          </Link>
+          . You're not supposed to see this.
+        </span>
+      )}
     </div>
   );
 }

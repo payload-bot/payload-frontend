@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ActionFunction, Form, json, useParams, useTransition } from "remix";
-import { forbidden, useRouteData } from "remix-utils";
+import { badRequest, useRouteData } from "remix-utils";
 import { makeApiRequest } from "~/utils/api.server";
 import { Server } from "~/utils/contracts";
 import getServerAvatarNoSrc from "~/utils/getAvatarNoSource";
@@ -19,8 +19,10 @@ export const action: ActionFunction = async ({ request, params }) => {
   const guildId = params.id;
   const form = await request.formData();
 
-  const botName = form.get("botName");
-  const prefix = form.get("prefix");
+  // FIXME: proper validation...
+  const botName = form.get("botName") || "payload-neo";
+  const prefix = form.get("prefix") || "pls ";
+
   const language = form.get("language");
   const snipePermissions = form.get("snipePermissions");
 
@@ -34,7 +36,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
     return json({ success: true });
   } catch (err) {
-    throw forbidden({ success: false });
+    throw badRequest({ success: false });
   }
 };
 
@@ -57,33 +59,34 @@ export default function Index() {
         <h1 className="mt-4 text-2xl font-bold dark:text-white">
           {server.name}
         </h1>
+        <p className="text-sm font-light text-gray-600 dark:text-slate-500 md:text-lg">
+          Pushed a total of {server.pushcartPoints} units!
+        </p>
 
-        <div className="mt-10 rounded-lg bg-gray-500/20 p-6 dark:bg-slate-700">
+        <div className="mt-10 w-full rounded-lg bg-gray-500/20 p-6 dark:bg-slate-700 sm:w-3/4 lg:w-1/2">
           <h2 className="text-sm font-bold uppercase tracking-wide text-gray-600 dark:text-white sm:text-lg">
             Server Settings
           </h2>
-          <Form replace method="post" className="grid gap-4 p-5 sm:grid-cols-3">
-            <span className="col-span-2">
-              <div className="flex flex-col gap-2">
-                <label
-                  htmlFor="botName"
-                  className="font-medium text-gray-500 dark:text-white"
-                >
-                  Bot Name
-                </label>
-                <input
-                  type="text"
-                  id="botName"
-                  name="botName"
-                  placeholder="payload-neo"
-                  maxLength={100}
-                  minLength={1}
-                  defaultValue={server.botName}
-                />
-              </div>
-            </span>
+          <Form replace method="post" className="grid grid-cols-3 gap-4 p-5">
+            <div className="col-span-3 flex flex-col gap-2 sm:col-span-2">
+              <label
+                htmlFor="botName"
+                className="font-medium text-gray-500 dark:text-white"
+              >
+                Bot Name
+              </label>
+              <input
+                type="text"
+                id="botName"
+                name="botName"
+                placeholder="payload-neo"
+                maxLength={100}
+                minLength={1}
+                defaultValue={server.botName}
+              />
+            </div>
 
-            <div className="flex flex-col gap-2">
+            <div className="col-span-3 flex flex-col gap-2 sm:col-span-1">
               <label
                 htmlFor="prefix"
                 className="font-medium text-gray-500 dark:text-white"
@@ -105,7 +108,7 @@ export default function Index() {
               </p>
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div className="col-span-3 flex flex-col gap-2 sm:col-span-1">
               <label
                 htmlFor="language"
                 className="max-w-[20ch] font-medium text-gray-500 dark:text-white"
@@ -124,7 +127,8 @@ export default function Index() {
                 ))}
               </select>
             </div>
-            <div className="flex flex-col gap-2">
+
+            <div className="col-span-3 flex flex-col gap-2 sm:col-span-1">
               <label
                 htmlFor="snipePermissions"
                 className="font-medium text-gray-500 dark:text-white"

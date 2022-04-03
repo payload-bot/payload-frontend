@@ -1,5 +1,5 @@
 import { Switch } from "@headlessui/react";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 
 type CommandToggleProps = {
   name: string;
@@ -13,6 +13,10 @@ export default function CommandToggle({
   notifyFunction,
 }: CommandToggleProps) {
   const [isChecked, setIsChecked] = useState(!checked);
+
+  useEffect(() => {
+    setIsChecked(!checked);
+  }, [checked]);
 
   function changeHandler() {
     setIsChecked((prev) => !prev);
