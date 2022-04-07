@@ -1,5 +1,6 @@
 import { LoaderFunction, redirect } from "remix";
 import { getUserInfo } from "~/server/session.server";
+import { BASE_URL } from "~/utils/api.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUserInfo(request);
@@ -7,10 +8,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   if (user) {
     throw redirect("/dashboard");
   } else {
-    throw redirect(
-      process.env.BASE_API_URL
-        ? process.env.BASE_API_URL + "/api/auth"
-        : "http://localhost:8080/api/auth"
-    );
+    throw redirect(BASE_URL + "/auth");
   }
 };
