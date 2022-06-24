@@ -1,6 +1,7 @@
 import { renderToString } from "react-dom/server";
-import { HandleDataRequestFunction, RemixServer } from "remix";
-import type { EntryContext } from "remix";
+import type { EntryContext } from "@remix-run/node";
+import { HandleDataRequestFunction } from "@remix-run/node";
+import { RemixServer } from "@remix-run/react";
 import { isPrefetch } from "remix-utils";
 
 export let handleDataRequest: HandleDataRequestFunction = async (

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ActionFunction, Form, json, useParams, useTransition } from "remix";
+import { ActionFunction, json } from "@remix-run/node";
+import { Form, useParams, useTransition } from "@remix-run/react";
 import { badRequest, useRouteData } from "remix-utils";
 import { makeApiRequest } from "~/utils/api.server";
 import { Server } from "~/utils/contracts";

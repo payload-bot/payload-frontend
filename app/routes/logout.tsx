@@ -1,4 +1,4 @@
-import { ActionFunction, LoaderFunction, redirect } from "remix";
+import { ActionFunction, LoaderFunction, redirect } from "@remix-run/node";
 import {
   destroySession,
   getSession,

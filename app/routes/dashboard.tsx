@@ -1,4 +1,5 @@
-import { json, LoaderFunction, Outlet, useLoaderData } from "remix";
+import { json, LoaderFunction } from "@remix-run/node";
+import { Outlet, useLoaderData } from "@remix-run/react";
 import Header from "~/components/Header";
 import { requireUser } from "~/server/session.server";
 import { User } from "~/utils/contracts";

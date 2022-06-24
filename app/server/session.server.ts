@@ -1,4 +1,4 @@
-import { createCookieSessionStorage, redirect } from "remix";
+import { createCookieSessionStorage, redirect } from "@remix-run/node";
 import { makeApiRequest } from "~/utils/api.server";
 import { User } from "~/utils/contracts";
 

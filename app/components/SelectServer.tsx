@@ -2,7 +2,7 @@ import React from "react";
 import { ChevronRightIcon } from "@heroicons/react/outline";
 import { ServerList } from "~/utils/contracts";
 import ServerAvatar from "./ServerAvatar";
-import { Link } from "remix";
+import { Link } from "@remix-run/react";
 
 type SelectServerProps = {
   server: ServerList;

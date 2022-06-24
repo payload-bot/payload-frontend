@@ -1,4 +1,5 @@
-import { json, LoaderFunction, useLoaderData } from "remix";
+import { json, LoaderFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import { notFound } from "remix-utils";
 import Footer from "~/components/Footer";
 import SelectServer from "~/components/SelectServer";

@@ -1,6 +1,6 @@
 import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { Link, NavLink } from "remix";
+import { Link, NavLink } from "@remix-run/react";
 import { User } from "~/utils/contracts";
 
 type HeaderProps = {
