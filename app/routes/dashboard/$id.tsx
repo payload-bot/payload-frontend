@@ -1,12 +1,5 @@
-import {
-  json,
-  Link,
-  LoaderFunction,
-  MetaFunction,
-  Outlet,
-  useCatch,
-  useParams,
-} from "remix";
+import { json, LoaderFunction, MetaFunction } from "@remix-run/node";
+import { Link, Outlet, useCatch, useParams } from "@remix-run/react";
 import { forbidden, notFound } from "remix-utils";
 import GuildManageLayout from "~/components/GuildManageLayout";
 import { requireUser } from "~/server/session.server";

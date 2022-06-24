@@ -1,4 +1,4 @@
-import { LoaderFunction, redirect } from "remix";
+import { LoaderFunction, redirect } from "@remix-run/node";
 import { getUserInfo } from "~/server/session.server";
 import { BASE_URL } from "~/utils/api.server";
 

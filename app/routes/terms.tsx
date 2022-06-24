@@ -1,4 +1,4 @@
-import { MetaFunction } from "remix";
+import { MetaFunction } from "@remix-run/node";
 import Footer from "~/components/Footer";
 import Component from "~/content/legal/terms.mdx";
 

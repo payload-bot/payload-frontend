@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import {
-  ActionFunction,
   Form,
-  json,
   useActionData,
   useFetcher,
   useTransition,
-} from "remix";
+} from "@remix-run/react";
+import { json, type ActionFunction } from "@remix-run/node";
 import { badRequest, useRouteData } from "remix-utils";
 import Alert from "~/components/Alert";
 import { BASE_URL, makeApiRequest } from "~/utils/api.server";

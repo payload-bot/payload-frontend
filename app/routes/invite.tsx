@@ -1,4 +1,4 @@
-import { LoaderFunction, redirect } from "remix";
+import { LoaderFunction, redirect } from "@remix-run/node";
 
 export const loader: LoaderFunction = () => {
   const inviteLink = process.env.INVITE_URL;
