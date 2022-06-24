@@ -3,11 +3,9 @@ node_modules
 .cache
 .env
 !.example.env
-.vercel
-.output
 
 public/build
-api/_build
+build/
 /app/tailwind.css
 
 # Yarn
