@@ -1,11 +1,5 @@
 import { LoaderFunction, redirect } from "@remix-run/node";
 
 export const loader: LoaderFunction = () => {
-  const inviteLink = process.env.INVITE_URL;
-
-  if (!inviteLink) {
-    throw new Response("", { status: 404 });
-  }
-
-  return redirect(inviteLink, { status: 301 });
+  return redirect("https://discord.com/api/oauth2/authorize?client_id=644333502870978564&permissions=2214980672&scope=bot%20applications.commands", { status: 301 });
 };
