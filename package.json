@@ -30,7 +30,7 @@
     "morgan": "^1.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "remix-utils": "^3.3.0"
+    "remix-utils": "2.11.1"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.6.1",

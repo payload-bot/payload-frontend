@@ -7430,9 +7430,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remix-utils@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "remix-utils@npm:3.3.0"
+"remix-utils@npm:2.11.1":
+  version: 2.11.1
+  resolution: "remix-utils@npm:2.11.1"
   dependencies:
     intl-parse-accept-language: ^1.0.0
     is-ip: ^3.1.0
@@ -7442,8 +7442,8 @@ __metadata:
   peerDependencies:
     "@remix-run/react": ^1.1.1
     "@remix-run/server-runtime": ^1.1.1
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 478322e0f0982f7c9e75175e3a52347d5f97e7e4b2f06b58b111cf6c0e74ac321ad66c65f95e7482beb0b7ba5db7eb5f6a34068e6481cb2c75b43260b02a1d0b
+    react: ^17.0.2
+  checksum: 9aef9fa672827dd206eab8c6445728a1383a850151c4da8eaf815103f40d5be71383b5d1a5a1b6537e44c5ca97fc3a5e825b44bbda2d74d31d196979bf534c11
   languageName: node
   linkType: hard
 
@@ -7626,7 +7626,7 @@ __metadata:
     prettier-plugin-tailwindcss: ^0.1.11
     react: ^18.2.0
     react-dom: ^18.2.0
-    remix-utils: ^3.3.0
+    remix-utils: 2.11.1
     tailwindcss: ^3.1.4
     typescript: ^4.7.4
   languageName: unknown
