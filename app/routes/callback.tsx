@@ -5,8 +5,6 @@ import { LOGIN_URL, makeApiRequest } from "~/utils/api.server";
 export const loader: LoaderFunction = async ({ request }) => {
   const searchParams = new URL(request.url).searchParams;
 
-  console.log(searchParams.has("code"));
-
   if (searchParams.has("code")) {
     try {
       const data = await makeApiRequest(request, "/oauth/callback", "POST", {
