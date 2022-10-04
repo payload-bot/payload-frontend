@@ -14,6 +14,7 @@ export async function makeApiRequest<TData = any>(
   const response = await fetch(BASE_URL + endpoint, {
     method,
     body,
+    credentials: 'include',
     headers: {
       "Content-Type": "application/json",
       Cookie: request.headers.get("cookie") ?? "",
