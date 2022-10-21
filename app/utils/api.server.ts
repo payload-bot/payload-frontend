@@ -1,6 +1,7 @@
 import { ApiError } from "./errors";
 
 export const BASE_URL = process.env.BASE_API_URL ?? "http://localhost:8080/api";
+export const LOGIN_URL = process.env.LOGIN_URL;
 
 export async function makeApiRequest<TData = any>(
   request: Request,
@@ -13,6 +14,7 @@ export async function makeApiRequest<TData = any>(
   const response = await fetch(BASE_URL + endpoint, {
     method,
     body,
+    credentials: 'include',
     headers: {
       "Content-Type": "application/json",
       Cookie: request.headers.get("cookie") ?? "",

@@ -1,6 +1,6 @@
 import { LoaderFunction, redirect } from "@remix-run/node";
 import { getUserInfo } from "~/server/session.server";
-import { BASE_URL } from "~/utils/api.server";
+import { LOGIN_URL } from "~/utils/api.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUserInfo(request);
@@ -8,6 +8,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   if (user) {
     throw redirect("/dashboard");
   } else {
-    throw redirect(BASE_URL + "/auth");
+    throw redirect(LOGIN_URL!);
   }
 };
