@@ -14,7 +14,7 @@ export async function makeApiRequest<TData = any>(
   const response = await fetch(BASE_URL + endpoint, {
     method,
     body,
-    credentials: 'include',
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
       Cookie: request.headers.get("cookie") ?? "",
@@ -50,7 +50,7 @@ export async function makeApiRequestWithHeaders<TData = any>(
   const response = await fetch(BASE_URL + endpoint, {
     method,
     body,
-    credentials: 'include',
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
       Cookie: request.headers.get("cookie") ?? "",
@@ -63,14 +63,14 @@ export async function makeApiRequestWithHeaders<TData = any>(
 
   // No content response - no JSON!
   if (response.status === 204) {
-    return {data: null, headers: response.headers};
+    return { data: null, headers: response.headers };
   }
 
   const json = (await response.json()) as TData;
 
   if (!json) {
-    return { data: null, headers: response.headers};
+    return { data: null, headers: response.headers };
   } else {
-    return { data: json, headers: response.headers};
+    return { data: json, headers: response.headers };
   }
 }
