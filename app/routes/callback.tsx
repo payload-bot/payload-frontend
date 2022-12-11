@@ -17,12 +17,12 @@ export const loader: LoaderFunction = async ({ request }) => {
 
       const cookie = headers.get("set-cookie");
 
-      throw redirect("/dashboard", {
+      return redirect("/dashboard", {
         headers: { "Set-Cookie": cookie! },
       });
     } catch {
       // @TODO: login failure
-      throw redirect("/");
+      return redirect("/");
     }
   }
 };
