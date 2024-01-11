@@ -58,7 +58,7 @@ export default function Footer() {
               rel="noreferrer"
               className="font-medium text-gray-500 dark:text-slate-300"
             >
-              Support
+              Donate
             </a>
             <a
               href="https://discord.com/api/oauth2/authorize?client_id=644333502870978564&permissions=2214980672&scope=bot%20applications.commands"
