@@ -9,31 +9,24 @@ export default function Footer() {
         <div className="flex flex-col gap-4">
           <div className="flex flex-row items-center gap-2">
             <img src="/logo.svg" alt="payload logo svg" className="h-12 w-12" />
-            <p className="text-md font-medium text-gray-800 dark:text-slate-400 lg:text-xl">
-              Payload
-            </p>
+            <a href="/">
+              <p className="text-md font-medium text-gray-800 dark:text-slate-400 lg:text-xl">
+                Payload
+              </p>
+            </a>
           </div>
           <div className="flex gap-2">
             <a href="https://github.com/payload-bot" rel="noreferrer">
               <img src="/thirdparty/github.svg" className="h-[32px] w-[32px]" />
             </a>
 
-            <Link to="/discord">
+            <a href="https://discord.com/invite/gYnnMYz">
               <img
                 src="/thirdparty/discord.svg"
                 className="h-[32px] w-[32px]"
               />
-            </Link>
+            </a>
           </div>
-          <a
-            href="https://vercel.com/?utm_source=payload&utm_compaign=os"
-            target="_blank"
-          >
-            <img
-              src="/thirdparty/vercel-logo.svg"
-              className="h-[65px] w-[200px]"
-            />
-          </a>
         </div>
 
         {/* Right */}
@@ -61,13 +54,6 @@ export default function Footer() {
               Payload
             </p>
             <a
-              href="https://w.supra.tf/b/LmzrWQviWCRcGxywq/payload"
-              rel="noreferrer"
-              className="font-medium text-gray-500 dark:text-slate-300"
-            >
-              Feature Board
-            </a>
-            <a
               href="https://www.patreon.com/c43721"
               rel="noreferrer"
               className="font-medium text-gray-500 dark:text-slate-300"
@@ -75,11 +61,11 @@ export default function Footer() {
               Donate
             </a>
             <a
-              href="https://status.payload.tf"
+              href="https://discord.com/api/oauth2/authorize?client_id=644333502870978564&permissions=2214980672&scope=bot%20applications.commands"
               rel="noreferrer"
               className="font-medium text-gray-500 dark:text-slate-300"
             >
-              System Status
+              Invite to Server
             </a>
           </div>
         </div>
