@@ -9,9 +9,11 @@ export default function Footer() {
         <div className="flex flex-col gap-4">
           <div className="flex flex-row items-center gap-2">
             <img src="/logo.svg" alt="payload logo svg" className="h-12 w-12" />
-            <p className="text-md font-medium text-gray-800 dark:text-slate-400 lg:text-xl">
-              Payload
-            </p>
+            <a href="/">
+              <p className="text-md font-medium text-gray-800 dark:text-slate-400 lg:text-xl">
+                Payload
+              </p>
+            </a>
           </div>
           <div className="flex gap-2">
             <a href="https://github.com/payload-bot" rel="noreferrer">

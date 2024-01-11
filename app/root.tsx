@@ -56,7 +56,6 @@ export default function Root() {
       <body className="dark:bg-gray-800">
         <Outlet />
         <ScrollRestoration />
-        <Scripts />
         <LiveReload />
       </body>
     </html>
