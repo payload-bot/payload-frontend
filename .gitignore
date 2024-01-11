@@ -7,7 +7,6 @@ node_modules
 
 public/build
 /build
-/app/tailwind.css
 
 # Yarn
 .pnp.*
