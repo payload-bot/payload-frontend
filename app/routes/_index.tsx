@@ -2,9 +2,9 @@ import Footer from "~/components/Footer";
 
 export default function Index() {
   return (
-    <div className=" min-h-max">
+    <div className="min-h-max">
       <main className="mx-auto my-10 flex max-w-md flex-col items-center justify-center gap-7 px-2 text-center md:max-w-2xl">
-        <h1 className="text-3xl font-bold text-gray-700 dark:text-slate-200 sm:text-4xl md:text-5xl">
+        <h1 className="text-5xl font-bold text-gray-700 dark:text-slate-200 sm:text-4xl md:text-5xl">
           TF2 Integration with <span className="text-sky-600">Payload</span>
         </h1>
         <p className="text-md text-gray-500 dark:text-gray-100 md:text-lg">
@@ -68,13 +68,13 @@ export default function Index() {
           What are you waiting for? Invite now!
         </h1>
         <a
-          href="https://discord.com/api/oauth2/authorize?client_id=644333502870978564&permissions=2214980672&scope=bot%20applications.commands"
-          rel="noreferrer"
-          target="_blank"
-          className=" rounded-md bg-slate-500 px-4 py-2 text-lg font-semibold text-gray-800 transition duration-200 hover:bg-slate-600"
-        >
-          Invite Payload
-        </a>
+            href="https://discord.com/api/oauth2/authorize?client_id=644333502870978564&permissions=2214980672&scope=bot%20applications.commands"
+            rel="noreferrer"
+            target="_blank"
+            className="w-full rounded-md bg-sky-400 py-4 text-lg font-semibold text-gray-700 shadow-lg shadow-sky-400/20 transition duration-75 hover:bg-sky-500 md:w-max md:px-10"
+          >
+            Invite Payload
+          </a>
       </section>
 
       <img
