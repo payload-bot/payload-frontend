@@ -1,4 +1,4 @@
-import { unstable_vitePlugin as remix } from "@remix-run/dev";
+import { vitePlugin as remix } from "@remix-run/dev";
 import mdx from "@mdx-js/rollup";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
@@ -10,11 +10,11 @@ installGlobals();
 
 export default defineConfig({
   plugins: [
-    remix({
-      unstable_ssr: false,
-    }),
     mdx({
       remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+    }),
+    remix({
+      ssr: false,
     }),
     tsconfigPaths(),
   ],

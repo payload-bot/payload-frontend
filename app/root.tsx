@@ -1,6 +1,5 @@
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -56,7 +55,6 @@ export default function Root() {
       <body className="dark:bg-gray-800">
         <Outlet />
         <ScrollRestoration />
-        <LiveReload />
       </body>
     </html>
   );
