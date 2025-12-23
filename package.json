@@ -9,9 +9,6 @@
     "build": "remix vite:build"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.18",
-    "@heroicons/react": "^2.1.1",
-    "@node-steam/id": "^1.2.0",
     "@remix-run/node": "^2.8.1",
     "@remix-run/react": "^2.8.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
@@ -19,8 +16,7 @@
     "@tailwindcss/typography": "^0.5.10",
     "isbot": "^4.4.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "remix-utils": "7.5.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@mdx-js/rollup": "^3.0.1",
