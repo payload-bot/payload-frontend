@@ -20,7 +20,7 @@ export default function Footer() {
               <img src="/thirdparty/github.svg" className="h-[32px] w-[32px]" />
             </a>
 
-            <a href="https://discord.com/invite/gYnnMYz">
+            <a href="https://payload.tf/discord">
               <img
                 src="/thirdparty/discord.svg"
                 className="h-[32px] w-[32px]"
@@ -54,14 +54,7 @@ export default function Footer() {
               Payload
             </p>
             <a
-              href="https://www.patreon.com/c43721"
-              rel="noreferrer"
-              className="font-medium text-gray-500 dark:text-slate-300"
-            >
-              Donate
-            </a>
-            <a
-              href="https://discord.com/api/oauth2/authorize?client_id=644333502870978564&permissions=2214980672&scope=bot%20applications.commands"
+              href="https://payload.tf/invite"
               rel="noreferrer"
               className="font-medium text-gray-500 dark:text-slate-300"
             >

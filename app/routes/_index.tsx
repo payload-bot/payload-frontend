@@ -13,7 +13,7 @@ export default function Index() {
         </p>
         <section className="flex w-full flex-col justify-center gap-3 md:flex-row md:gap-5">
           <a
-            href="https://discord.com/api/oauth2/authorize?client_id=644333502870978564&permissions=2214980672&scope=bot%20applications.commands"
+            href="https://payload.tf/invite"
             rel="noreferrer"
             target="_blank"
             className="w-full rounded-md bg-sky-400 py-4 text-lg font-semibold text-gray-700 shadow-lg shadow-sky-400/20 transition duration-75 hover:bg-sky-500 md:w-max md:px-10"
@@ -68,13 +68,13 @@ export default function Index() {
           What are you waiting for? Invite now!
         </h1>
         <a
-            href="https://discord.com/api/oauth2/authorize?client_id=644333502870978564&permissions=2214980672&scope=bot%20applications.commands"
-            rel="noreferrer"
-            target="_blank"
-            className="w-full rounded-md bg-sky-400 py-4 text-lg font-semibold text-gray-700 shadow-lg shadow-sky-400/20 transition duration-75 hover:bg-sky-500 md:w-max md:px-10"
-          >
-            Invite Payload
-          </a>
+          href="https://payload.tf/invite"
+          rel="noreferrer"
+          target="_blank"
+          className="w-full rounded-md bg-sky-400 py-4 text-lg font-semibold text-gray-700 shadow-lg shadow-sky-400/20 transition duration-75 hover:bg-sky-500 md:w-max md:px-10"
+        >
+          Invite Payload
+        </a>
       </section>
 
       <img
