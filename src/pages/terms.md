@@ -1,7 +1,7 @@
 ---
-meta:
-  title: Payload's Terms of Service
-  description: Payload's terms of service
+layout: ../layouts/LegalLayout.astro
+title: Payload's Terms of Service
+description: Payload's terms of service
 ---
 
 # Terms of Service
