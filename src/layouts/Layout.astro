@@ -1,10 +1,11 @@
  ---
+  const props = Astro.props;
  import '../styles/global.css';
  import Header from "../components/Header.astro"
  ---
 
     <html lang="en" class="dark">
-      <Header />
+      <Header {...props} />
       <body class="dark:bg-gray-800">
         <slot />
       </body>
