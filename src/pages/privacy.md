@@ -1,7 +1,7 @@
 ---
-meta:
-  title: Payload's Privacy Policy
-  description: Payload's privacy policy, including how to contact the owners and your rights in regards to your data.
+layout: ../layouts/LegalLayout.astro
+title: Payload's Privacy Policy
+description: Payload's privacy policy, including how to contact the owners and your rights in regards to your data.
 ---
 
 # Privacy Policy
