@@ -1,4 +1,5 @@
 {
+  "name": "payload-frontend",
   "private": true,
   "description": "Payload's dashboard written in TypeScript using Remix",
   "license": "MIT",
