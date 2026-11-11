@@ -4,9 +4,8 @@ node_modules
 .env
 !.example.env
 .output
-
-public/build
-/build
+dist/
+.astro/
 
 # Yarn
 .pnp.*
