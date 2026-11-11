@@ -1,12 +1,12 @@
 import { MetaFunction } from "@remix-run/node";
-import Footer from "~/components/Footer";
-import Component from "~/content/legal/terms.mdx";
+import Footer from "src/components/Footer";
+import Component from "~/content/legal/privacy.mdx";
 
 export function MetaFunction() {
   return [
-   { title: "Terms of Service - payload.tf" },
-   { description: "Payload's terms of service" },
-  ]
+    { title: "Privacy Policy - payload.tf" },
+    { description: "Payload's privacy policy" },
+  ];
 }
 
 export default function Privacy() {

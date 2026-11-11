@@ -1,7 +1,15 @@
 {
-  "include": ["env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ES2019"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2019"
+    ],
     "isolatedModules": true,
     "esModuleInterop": true,
     "module": "ESNext",
@@ -12,11 +20,21 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"],
-      "~/server*": ["./app/server/*"],
-      "~/utils*": ["./app/utils/*"],
-      "~/components*": ["./app/components/*"],
-      "~/content*": ["./app/content/*"]
+      "~/*": [
+        "src/*"
+      ],
+      "~/server*": [
+        "src/server/*"
+      ],
+      "~/utils*": [
+        "src/utils/*"
+      ],
+      "~/components*": [
+        "src/components/*"
+      ],
+      "~/content*": [
+        "src/content/*"
+      ]
     },
     "noEmit": true,
     "allowJs": true,
